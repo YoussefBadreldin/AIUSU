@@ -17,7 +17,7 @@
                 <p><strong>الكلية:</strong> {{ committeeInfo.faculty }}</p>
                 <p><strong>الرقم الجامعي:</strong> {{ committeeInfo.universityNumber }}</p>
                 <p><strong>المستوى:</strong> {{ committeeInfo.level }}</p>
-                <p><strong>{{ committeeInfo.committeeLocation }}:</strong> مكان اللجنة</p>
+                <p>{{ committeeInfo.committeeLocation }}:</strong> مكان اللجنة<strong></p>
                 <p><strong>رقمك في الكشف:</strong> {{ committeeInfo.listNumber }}</p>
                 
                 <br>
