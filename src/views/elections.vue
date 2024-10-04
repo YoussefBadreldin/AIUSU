@@ -5,7 +5,7 @@
             <h2 class="text-center my-4">ابحث عن لجنتك الانتخابية</h2>
             <form @submit.prevent="findCommittee">
                 <div class="mb-3">
-                    <label for="universityNumber" class="form-label"> :رقمك الجامعي</label>
+                    <label for="universityNumber" class="form-label"><strong>:رقمك الجامعي</strong></label>
                     <input type="text" v-model="universityNumber" class="form-control" id="universityNumber" required />
                 </div>
                 <button type="submit" class="btn btn-primary">إبحث</button>
@@ -13,12 +13,12 @@
             <div v-if="errorMessage" class="alert alert-danger mt-4">{{ errorMessage }}</div> <!-- Error message -->
             <div v-if="committeeInfo" class="mt-4">
                 <h4><strong>معلومات لجنتك</strong></h4> <!-- Bolded title -->
-                <p>الاسم: {{ committeeInfo.name }}</p>
-                <p>الكلية: {{ committeeInfo.faculty }}</p>
-                <p>الرقم الجامعي: {{ committeeInfo.universityNumber }}</p>
-                <p>المستوى: {{ committeeInfo.level }}</p>
-                <p> {{ committeeInfo.committeeLocation }} :مكان اللجنة</p>
-                <p>رقمك في الكشف: {{ committeeInfo.listNumber }}</p>
+                <p><strong>الاسم:</strong> {{ committeeInfo.name }}</p>
+                <p><strong>الكلية:</strong> {{ committeeInfo.faculty }}</p>
+                <p><strong>الرقم الجامعي:</strong> {{ committeeInfo.universityNumber }}</p>
+                <p><strong>المستوى:</strong> {{ committeeInfo.level }}</p>
+                <p><strong>{{ committeeInfo.committeeLocation }}:</strong> مكان اللجنة</p>
+                <p><strong>رقمك في الكشف:</strong> {{ committeeInfo.listNumber }}</p>
                 
                 <br>
                 <h4>المرشحون الذين لك الحق في انتخابهم</h4>
