@@ -26,16 +26,7 @@ export default {
     this.updateVisitorCount();
   },
   methods: {
-    async updateVisitorCount() {
-      try {
-        const response = await fetch('https://nuft-website-backend.vercel.app/api/visitor-count');
-        const data = await response.json();
-        const formattedCount = data.count.toLocaleString();
-        document.getElementById('visitor-count').innerText = formattedCount;
-      } catch (error) {
-        console.error('Error fetching visitor count:', error);
-      }
-    }
+    
   }
 }
 </script>
