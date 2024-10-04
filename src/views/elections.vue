@@ -12,17 +12,17 @@
             </form>
             <div v-if="errorMessage" class="alert alert-danger mt-4">{{ errorMessage }}</div> <!-- Error message -->
             <div v-if="committeeInfo" class="mt-4">
-                <h4><strong>معلومات لجنتك</strong></h4> <!-- Bolded title -->
+                <h4><strong>معلومات لجنتك</strong></h4>
                 <p><strong>الاسم:</strong> {{ committeeInfo.name }}</p>
                 <p><strong>الكلية:</strong> {{ committeeInfo.faculty }}</p>
                 <p><strong>الرقم الجامعي:</strong> {{ committeeInfo.universityNumber }}</p>
                 <p><strong>المستوى:</strong> {{ committeeInfo.level }}</p>
-                <p>{{ committeeInfo.committeeLocation }}: <strong>مكان اللجنة</strong></p>
+                <p><strong>مكان اللجنة:</strong> {{ committeeInfo.committeeLocation }}</p>
                 <p><strong>رقمك في الكشف:</strong> {{ committeeInfo.listNumber }}</p>
-                
+
                 <br>
                 <h4><strong>المرشحون الذين لك الحق في انتخابهم</strong></h4>
-                
+
                 <!-- Container for each committee -->
                 <div v-for="(committee, index) in committees" :key="index" class="committee-container mb-4">
                     <h6>{{ committee.name }}</h6>
@@ -38,11 +38,10 @@
                         </li>
                     </ul>
                 </div>
-                
+
                 <!-- Election Guidelines Section -->
                 <div class="election-guidelines mt-4">
-                    <h4><strong>إرشادات هامة</strong> </h4>
-                                        <!-- Video Section from local files -->
+                    <h4><strong>إرشادات هامة</strong></h4>
                     <div class="video-container mt-4">
                         <h5>شاهد فيديو إرشادات الانتخابات:</h5>
                         <video width="560" height="315" controls>
@@ -52,7 +51,7 @@
                     </div>
                     <h5>نظام الانتخابات:</h5>
                     <ul>
-                        <li>أنت، كطالب في دفعتك، ستقوم بانتخاب 14 عضوًا لسبع لجان.</li>
+                        <li>ستقوم بانتخاب 14 عضوًا لسبع لجان.</li>
                         <li>تأكد من أن جميع الأعضاء الذين تختارهم هم من نفس السنة الدراسية، بغض النظر عن الكلية.</li>
                         <li>ستتكون كل لجنة من 2 ممثلين من كل سنة دراسية.</li>
                         <li>بعد الانتخابات، سيتم اختيار أمين وأمين مساعد من الأعضاء المنتخبين، ثم سيقوم الأمناء والأمناء المساعدون باختيار رئيس ونائب رئيس الاتحاد.</li>
@@ -61,14 +60,13 @@
                     <ol>
                         <li>قم بالتوقيع في كشف الحضور قبل أن تبدأ بالتصويت.</li>
                         <li>ستتلقى ورقة انتخابية مخصصة لك.</li>
-                        <li>اكتب أسماء 14 مرشحًا من دفعتك، بحيث يكون لكل اثنين في لجنة معينة. تأكد من أن جميع المرشحين من نفس سنتك الدراسية، حتى لو كانوا من كليات مختلفة.</li>
+                        <li>اكتب أسماء 14 مرشحًا من دفعتك، بحيث يكون لكل اثنين في لجنة معينة.</li>
                         <li>تأكد من كتابة 14 اسمًا فقط، لأن أي ورقة تحتوي على أقل من 14 اسمًا أو علامات غير صحيحة ستعتبر باطلة.</li>
                     </ol>
                     <h5>ملاحظات مهمة:</h5>
                     <ul>
                         <li>يمكنك انتخاب المرشحين فقط من نفس سنتك الدراسية، ولا يمكنك انتخاب طلاب في سنوات دراسية مختلفة.</li>
                     </ul>
-                    
                 </div>
             </div>
         </div>
@@ -91,8 +89,7 @@ export default {
             universityNumber: '',
             committeeInfo: null,
             errorMessage: '', // Variable to hold error messages
-            // Updated committees data with new faculties
-            committees: [
+            committees: [ // Updated committees data with new faculties
                 { 
                     name: "لجنة الأسر", 
                     candidates: [{ id: 1, name: "علي مصطفى", photo: "../../images/candidates/candidate1.jpg", faculty: "صيدلة" }] 
@@ -133,7 +130,7 @@ export default {
             const validUniversityNumbers = ["20100294", "20100297", "20100357", "21100837", "21100796", "21100822"]; // Example valid IDs
             
             if (!validUniversityNumbers.includes(this.universityNumber)) {
-                this.errorMessage = 'الرقم  الذي ادخلتة غير صحيح، يرجى التحقق منه'; // Error message if ID is wrong
+                this.errorMessage = 'الرقم الذي أدخلته غير صحيح، يرجى التحقق منه'; // Error message if ID is wrong
                 return; // Exit the method if ID is invalid
             }
 
