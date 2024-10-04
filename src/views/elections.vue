@@ -115,7 +115,10 @@ export default {
             };
             this.committeeInfo = exampleData;
         }
-    }
+    },
+  mounted() {
+    window.scrollTo(0, 0);
+  }
 };
 </script>
 

@@ -55,7 +55,10 @@ export default {
     components: {
         HeaderComponent,
         FooterComponent,
-    }
+    },
+  mounted() {
+    window.scrollTo(0, 0);
+  }
 };
 </script>
 
