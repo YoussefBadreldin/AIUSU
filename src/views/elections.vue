@@ -44,10 +44,7 @@
                     <h4><strong>إرشادات هامة</strong></h4>
                     <div class="video-container mt-4">
                         <h5>شاهد فيديو إرشادات الانتخابات:</h5>
-                        <video width="560" height="315" controls>
-                            <source src="../../images/videos/instructions.mp4" type="video/mp4">
-                            متصفحك لا يدعم تشغيل الفيديو.
-                        </video>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
                     </div>
                     <h5>نظام الانتخابات:</h5>
                     <ul>
