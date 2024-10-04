@@ -48,7 +48,9 @@
     </head>
     <nav class="navbar">
       <div class="logo-container">
-        <img :src="logoSrc" alt="AIUSU Logo" class="logo" />
+        <router-link to="/">
+          <img :src="logoSrc" alt="AIUSU Logo" class="logo" />
+        </router-link>
       </div>
     </nav>
   </div>
