@@ -17,7 +17,7 @@
                 <p><strong>الكلية:</strong> {{ committeeInfo.faculty }}</p>
                 <p><strong>الرقم الجامعي:</strong> {{ committeeInfo.universityNumber }}</p>
                 <p><strong>المستوى:</strong> {{ committeeInfo.level }}</p>
-                <p> {{ committeeInfo.committeeLocation }} <strong>مكان اللجنة:</strong></p>
+                <p> {{ committeeInfo.committeeLocation }} <strong> :مكان اللجنة</strong></p>
                 <p><strong>رقمك في الكشف:</strong> {{ committeeInfo.listNumber }}</p>
 
                 <br>
@@ -43,7 +43,7 @@
                 <div class="election-guidelines mt-4">
                     <h4><strong>إرشادات هامة</strong></h4>
                     <div class="video-container mt-4">
-                        <iframe width="300" height="157" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+                        <iframe width="300" height="157" src="https://www.youtube.com/embed/87vnQi8zsiQ?si=IzZF8lzwKqUViH7e" frameborder="0" allowfullscreen></iframe>
                     </div>
                     <h5> :نظام الانتخابات</h5>
                     <ul>
