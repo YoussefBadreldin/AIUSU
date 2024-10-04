@@ -43,8 +43,7 @@
                 <div class="election-guidelines mt-4">
                     <h4><strong>إرشادات هامة</strong></h4>
                     <div class="video-container mt-4">
-                        <h5>شاهد فيديو إرشادات الانتخابات:</h5>
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+                        <iframe width="280" height="157" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
                     </div>
                     <h5>نظام الانتخابات:</h5>
                     <ul>
