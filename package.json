@@ -23,6 +23,7 @@
     "vue": "^3.2.13",
     "vue-browser-geolocation": "^1.8.0",
     "vue-google-autocomplete": "^1.1.4",
+    "vue-meta": "^2.4.0",
     "vue-router": "^4.0.3",
     "vue-scrollama": "^2.0.6",
     "vuex": "^4.0.0"
