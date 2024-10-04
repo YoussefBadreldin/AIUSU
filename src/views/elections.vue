@@ -21,7 +21,7 @@
                 <p><strong>رقمك في الكشف:</strong> {{ committeeInfo.listNumber }}</p>
                 
                 <br>
-                <h4>المرشحون الذين لك الحق في انتخابهم</h4>
+                <h4><strong>المرشحون الذين لك الحق في انتخابهم</strong></h4>
                 
                 <!-- Container for each committee -->
                 <div v-for="(committee, index) in committees" :key="index" class="committee-container mb-4">
@@ -41,7 +41,15 @@
                 
                 <!-- Election Guidelines Section -->
                 <div class="election-guidelines mt-4">
-                    <h4>إرشادات الانتخابات لك</h4>
+                    <h4><strong>إرشادات هامة</strong> </h4>
+                                        <!-- Video Section from local files -->
+                    <div class="video-container mt-4">
+                        <h5>شاهد فيديو إرشادات الانتخابات:</h5>
+                        <video width="560" height="315" controls>
+                            <source src="../../images/videos/instructions.mp4" type="video/mp4">
+                            متصفحك لا يدعم تشغيل الفيديو.
+                        </video>
+                    </div>
                     <h5>نظام الانتخابات:</h5>
                     <ul>
                         <li>أنت، كطالب في دفعتك، ستقوم بانتخاب 14 عضوًا لسبع لجان.</li>
@@ -61,14 +69,6 @@
                         <li>يمكنك انتخاب المرشحين فقط من نفس سنتك الدراسية، ولا يمكنك انتخاب طلاب في سنوات دراسية مختلفة.</li>
                     </ul>
                     
-                    <!-- Video Section from local files -->
-                    <div class="video-container mt-4">
-                        <h5>شاهد فيديو إرشادات الانتخابات:</h5>
-                        <video width="560" height="315" controls>
-                            <source src="../../images/videos/instructions.mp4" type="video/mp4">
-                            متصفحك لا يدعم تشغيل الفيديو.
-                        </video>
-                    </div>
                 </div>
             </div>
         </div>
