@@ -61,10 +61,13 @@
                         <li>يمكنك انتخاب المرشحين فقط من نفس سنتك الدراسية، ولا يمكنك انتخاب طلاب في سنوات دراسية مختلفة.</li>
                     </ul>
                     
-                    <!-- Video Section -->
+                    <!-- Video Section from local files -->
                     <div class="video-container mt-4">
                         <h5>شاهد فيديو إرشادات الانتخابات:</h5>
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+                        <video width="560" height="315" controls>
+                            <source src="../../videos/your-video-file.mp4" type="video/mp4">
+                            متصفحك لا يدعم تشغيل الفيديو.
+                        </video>
                     </div>
                 </div>
             </div>
@@ -195,6 +198,6 @@ export default {
     margin-top: 20px; /* Margin for alert message */
 }
 .video-container {
-    margin-top: 20px; /* Space above the video */
+    margin-top: 20px; /* Margin for video container */
 }
 </style>
