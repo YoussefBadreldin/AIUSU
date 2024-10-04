@@ -12,7 +12,7 @@
             </form>
             <div v-if="errorMessage" class="alert alert-danger mt-4">{{ errorMessage }}</div> <!-- Error message -->
             <div v-if="committeeInfo" class="mt-4">
-                <h4>معلومات لجنتك</h4>
+                <h4><strong>معلومات لجنتك</strong></h4> <!-- Bolded title -->
                 <p>الاسم: {{ committeeInfo.name }}</p>
                 <p>الكلية: {{ committeeInfo.faculty }}</p>
                 <p>الرقم الجامعي: {{ committeeInfo.universityNumber }}</p>
