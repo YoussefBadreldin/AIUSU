@@ -101,7 +101,7 @@ export default {
             const validUniversityNumbers = ["20100294", "20100297", "20100357", "21100837", "21100796", "21100822"]; // Example valid IDs
             
             if (!validUniversityNumbers.includes(this.universityNumber)) {
-                this.errorMessage = 'رقمك الجامعي غير صحيح، يرجى التحقق من الرقم.'; // Error message if ID is wrong
+                this.errorMessage = 'رقمك الجامعي غير صحيح، يرجى التحقق من الرقم'; // Error message if ID is wrong
                 return; // Exit the method if ID is invalid
             }
 
