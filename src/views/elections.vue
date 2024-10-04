@@ -1,4 +1,4 @@
-<template> 
+<template>
     <div>
         <HeaderComponent />
         <div class="container">
@@ -37,6 +37,35 @@
                             </div>
                         </li>
                     </ul>
+                </div>
+                
+                <!-- Election Guidelines Section -->
+                <div class="election-guidelines mt-4">
+                    <h4>إرشادات الانتخابات لك</h4>
+                    <h5>نظام الانتخابات:</h5>
+                    <ul>
+                        <li>أنت، كطالب في دفعتك، ستقوم بانتخاب 14 عضوًا لسبع لجان.</li>
+                        <li>تأكد من أن جميع الأعضاء الذين تختارهم هم من نفس السنة الدراسية، بغض النظر عن الكلية.</li>
+                        <li>ستتكون كل لجنة من 2 ممثلين من كل سنة دراسية.</li>
+                        <li>بعد الانتخابات، سيتم اختيار أمين وأمين مساعد من الأعضاء المنتخبين، ثم سيقوم الأمناء والأمناء المساعدون باختيار رئيس ونائب رئيس الاتحاد.</li>
+                    </ul>
+                    <h5>خطوات التصويت:</h5>
+                    <ol>
+                        <li>قم بالتوقيع في كشف الحضور قبل أن تبدأ بالتصويت.</li>
+                        <li>ستتلقى ورقة انتخابية مخصصة لك.</li>
+                        <li>اكتب أسماء 14 مرشحًا من دفعتك، بحيث يكون لكل اثنين في لجنة معينة. تأكد من أن جميع المرشحين من نفس سنتك الدراسية، حتى لو كانوا من كليات مختلفة.</li>
+                        <li>تأكد من كتابة 14 اسمًا فقط، لأن أي ورقة تحتوي على أقل من 14 اسمًا أو علامات غير صحيحة ستعتبر باطلة.</li>
+                    </ol>
+                    <h5>ملاحظات مهمة:</h5>
+                    <ul>
+                        <li>يمكنك انتخاب المرشحين فقط من نفس سنتك الدراسية، ولا يمكنك انتخاب طلاب في سنوات دراسية مختلفة.</li>
+                    </ul>
+                    
+                    <!-- Video Section -->
+                    <div class="video-container mt-4">
+                        <h5>شاهد فيديو إرشادات الانتخابات:</h5>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+                    </div>
                 </div>
             </div>
         </div>
@@ -116,9 +145,9 @@ export default {
             this.committeeInfo = exampleData;
         }
     },
-  mounted() {
-    window.scrollTo(0, 0);
-  }
+    mounted() {
+        window.scrollTo(0, 0);
+    }
 };
 </script>
 
@@ -164,5 +193,8 @@ export default {
 }
 .alert {
     margin-top: 20px; /* Margin for alert message */
+}
+.video-container {
+    margin-top: 20px; /* Space above the video */
 }
 </style>
