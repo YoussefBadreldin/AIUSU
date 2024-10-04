@@ -2,10 +2,11 @@
     <div>
         <HeaderComponent />
         <div class="container">
+            <div class="video-container mt-4">
+                <iframe width="300" height="157" src="https://www.youtube.com/embed/h_i07JhOqq4?si=W2a_c18FlrxTk7kn" frameborder="0" allowfullscreen></iframe>
+            </div>
+
             <h2 class="text-center my-4">عن اتحاد الطلاب </h2>
-                                <div class="video-container mt-4">
-                        <iframe width="300" height="157" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
-                    </div>
             <p>
                 يعد اتحاد الطلاب أحد أركان الحياة الجامعية في مصر. يهدف إلى تفعيل مشاركة الطلاب في الأنشطة المختلفة، وتنمية قدراتهم في القيادة، والمسؤولية، والعمل الجماعي. يعمل الاتحاد وفقاً لقوانين ولوائح وزارة التعليم العالي والبحث العلمي.
             </p>
