@@ -348,98 +348,51 @@ this.committees = await this.fetchCommitteesByLevel(exampleData.level);
     }
 };
 </script>
+
 <style scoped>
 .container {
-    max-width: 800px; /* Centering the container */
-    margin: 0 auto; /* Auto margins for centering */
-    padding: 20px; /* Space inside the container */
+    padding: 20px;
 }
-
-.text-center {
-    text-align: center; /* Center text */
-}
-
-.my-4 {
-    margin-top: 1.5rem; /* Space above the element */
-    margin-bottom: 1.5rem; /* Space below the element */
-}
-
-.form-label {
-    font-weight: bold; /* Make labels bold */
-}
-
-.form-control {
-    border: 1px solid #ccc; /* Light grey border */
-    border-radius: 0.25rem; /* Rounded corners */
-    padding: 10px; /* Padding inside input fields */
-    width: 100%; /* Full width */
-}
-
-.btn-primary {
-    background-color: #007bff; /* Bootstrap primary color */
-    color: #fff; /* White text */
-    border: none; /* No border */
-    padding: 10px 20px; /* Padding inside the button */
-    border-radius: 0.25rem; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor */
-}
-
-.btn-primary:hover {
-    background-color: #0056b3; /* Darker shade on hover */
-}
-
-.alert {
-    padding: 10px; /* Padding inside alert */
-    border-radius: 0.25rem; /* Rounded corners */
-}
-
 .committee-container {
-    border: 1px solid #eee; /* Light border for committee containers */
-    border-radius: 0.25rem; /* Rounded corners */
-    padding: 15px; /* Padding inside committee container */
-    background-color: #f9f9f9; /* Light background color */
-    margin-bottom: 20px; /* Space below committee containers */
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
 }
-
+.committee-container h6 {
+    margin-bottom: 10px;
+    font-size: 1.5em; /* Larger font size for committee name */
+    font-weight: bold; /* Bold the committee name */
+}
+.committee-container ul {
+    list-style: none;
+    padding-left: 0;
+}
 .candidate-item {
-    display: flex; /* Flexbox for alignment */
-    align-items: center; /* Center items vertically */
-    padding: 10px 0; /* Padding above and below candidate items */
+    display: flex;
+    flex-direction: column; /* Stack the elements vertically */
+    align-items: center; /* Center align items */
+    margin-bottom: 15px; /* Space between candidates */
 }
-
 .candidate-photo img {
-    width: 50px; /* Set width of candidate photo */
-    height: 50px; /* Set height of candidate photo */
-    border-radius: 50%; /* Circular photos */
-    margin-right: 10px; /* Space between photo and text */
+    width: 70px; /* Adjust width as needed */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 50%; /* Optional: make photo circular */
 }
-
-.candidate-details {
-    display: flex; /* Flexbox for alignment */
-    flex-direction: column; /* Stack name and faculty */
+.candidate-name {
+    font-weight: bold; /* Bold text for name */
+    margin-top: 5px; /* Space between photo and name */
+    font-size: 1em; /* Default font size for candidate name */
 }
-
-.election-guidelines {
-    background-color: #f1f1f1; /* Light grey background */
-    border-radius: 0.25rem; /* Rounded corners */
-    padding: 15px; /* Padding inside election guidelines */
+.candidate-faculty {
+    color: #555; /* Optional: different color for faculty */
+    margin-top: 2px; /* Space between name and faculty */
+    display: block; /* Ensure faculty is on a new line */
+    font-size: 0.9em; /* Slightly smaller font size for faculty */
 }
-
+.alert {
+    margin-top: 20px; /* Margin for alert message */
+}
 .video-container {
-    display: flex; /* Flexbox for alignment */
-    justify-content: center; /* Center video */
-    margin: 20px 0; /* Space around video */
-}
-
-h4, h5, h6 {
-    color: #333; /* Darker color for headings */
-}
-
-ol, ul {
-    padding-left: 20px; /* Indent lists */
-}
-
-ol li, ul li {
-    margin-bottom: 10px; /* Space between list items */
+    margin-top: 20px; /* Margin for video container */
 }
 </style>
