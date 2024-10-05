@@ -348,7 +348,6 @@ this.committees = await this.fetchCommitteesByLevel(exampleData.level);
     }
 };
 </script>
-
 <style scoped>
 .container {
     padding: 20px;
@@ -366,12 +365,17 @@ this.committees = await this.fetchCommitteesByLevel(exampleData.level);
 .committee-container ul {
     list-style: none;
     padding-left: 0;
+    display: flex; /* Use flexbox for the list */
+    flex-wrap: wrap; /* Allow wrapping to the next line if needed */
+    justify-content: space-between; /* Space out items evenly */
 }
 .candidate-item {
     display: flex;
     flex-direction: column; /* Stack the elements vertically */
     align-items: center; /* Center align items */
-    margin-bottom: 15px; /* Space between candidates */
+    margin: 15px; /* Space between candidates */
+    flex: 0 1 calc(33.333% - 30px); /* Allow a maximum of 3 items per row */
+    box-sizing: border-box; /* Ensure padding and margin are included in width */
 }
 .candidate-photo img {
     width: 70px; /* Adjust width as needed */
