@@ -3,6 +3,7 @@ import MainComponent from "../views/home.vue";
 import Elections from "../views/elections.vue";
 import Join from "../views/join.vue";
 import About from "../views/about.vue";
+import portfolio from "../views/portfolio.vue";
 
 const routes = [
   {
@@ -30,7 +31,11 @@ const routes = [
     name: "About",
     component: About,
   },
-  
+  {
+    path: '/portfolio',
+    name: "portfolio",
+    component: portfolio,
+  },
 ];
 
 const router = createRouter({
