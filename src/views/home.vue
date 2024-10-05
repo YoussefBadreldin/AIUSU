@@ -23,16 +23,16 @@
                         <h2>الخدمات</h2>
                     </div>
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-lg-6 col-md-4 mb-3">
                             <button class="custom-btn btn-lg btn-block" @click="navigateToPage('/about')">تعرّف على الإتحاد</button>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-lg-6 col-md-4 mb-3">
                             <button class="custom-btn btn-lg btn-block" @click="navigateToPage('/portfolio')">لائحة الاتحاد</button>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-lg-6 col-md-4 mb-3">
                             <button class="custom-btn btn-lg btn-block" @click="navigateToPage('/join')">إنضم إلى الاتحاد الآن</button>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-lg-6 col-md-4 mb-3">
                             <button class="custom-btn btn-lg btn-block" @click="navigateToPage('/elections')">إبحث عن لجنتك الانتخابية</button>
                         </div>
                     </div>
