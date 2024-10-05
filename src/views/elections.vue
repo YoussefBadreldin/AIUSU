@@ -10,14 +10,14 @@
                 </div>
                 <button type="submit" class="btn btn-primary">إبحث</button>
             </form>
-            <div v-if="errorMessage" class="alert alert-danger mt-4">{{ errorMessage }}</div>
+            <div v-if="errorMessage" class="alert alert-danger mt-4">{{ errorMessage }}</div> <!-- Error message -->
             <div v-if="committeeInfo" class="mt-4">
                 <h4><strong>معلومات لجنتك</strong></h4>
                 <p><strong>الاسم:</strong> {{ committeeInfo.name }}</p>
                 <p><strong>الكلية:</strong> {{ committeeInfo.faculty }}</p>
                 <p><strong>الرقم الجامعي:</strong> {{ committeeInfo.universityNumber }}</p>
                 <p><strong>المستوى:</strong> {{ committeeInfo.level }}</p>
-                <p>{{ committeeInfo.committeeLocation }} <strong> :مكان اللجنة</strong></p>
+                <p> {{ committeeInfo.committeeLocation }} <strong> :مكان اللجنة</strong></p>
                 <p><strong>رقمك في الكشف:</strong> {{ committeeInfo.listNumber }}</p>
 
                 <br>
@@ -26,8 +26,8 @@
                 <!-- Container for each committee -->
                 <div v-for="(committee, index) in committees" :key="index" class="committee-container mb-4">
                     <h6>{{ committee.name }}</h6>
-                    <div class="candidates-row">
-                        <div v-for="candidate in committee.candidates" :key="candidate.id" class="candidate-item">
+                    <ul>
+                        <li v-for="candidate in committee.candidates" :key="candidate.id" class="candidate-item">
                             <div class="candidate-photo">
                                 <img :src="candidate.photo" alt="مرشح" />
                             </div>
@@ -35,8 +35,8 @@
                                 <span class="candidate-name">{{ candidate.name }}</span>
                                 <span class="candidate-faculty">{{ candidate.faculty }}</span>
                             </div>
-                        </div>
-                    </div>
+                        </li>
+                    </ul>
                 </div>
 
                 <!-- Election Guidelines Section -->
@@ -45,20 +45,23 @@
                     <div class="video-container mt-4">
                         <iframe width="300" height="157" src="https://www.youtube.com/embed/87vnQi8zsiQ?si=IzZF8lzwKqUViH7e" frameborder="0" allowfullscreen></iframe>
                     </div>
-                    <h5>:نظام الانتخابات</h5>
+                    <h5> :نظام الانتخابات</h5>
                     <ul>
                         <li>(اي 2 في كل لجنة) ستقوم بانتخاب 14 عضوًا لسبع لجان</li>
                     </ul>
-                    <h5>:خطوات التصويت</h5>
+                    <h5> :خطوات التصويت</h5>
                     <ol>
                         <li>قم بالتوقيع في كشف الحضور قبل أن تبدأ بالتصويت</li>
+                        <br>
                         <li>ستتلقى ورقة انتخابية مخصصة لك</li>
-                        <li>اكتب أسماء 14 مرشحًا، بحيث يكون لكل اثنين في لجنة</li>
+                        <br>
+                        <li>اكتب أسماء 14 مرشحًا، بحيث يكون لكل اثنين في لجنة </li>
+                        <br>
                         <li>تأكد من كتابة 14 اسمًا، لأن أي ورقة تحتوي على أقل او أكثر من 14 اسمًا أو اي علامات ستعتبر باطلة</li>
                     </ol>
-                    <h5>:ملاحظات هامة</h5>
+                    <h5> :ملاحظات هامة</h5>
                     <ul>
-                        <li>يمكنك انتخاب المرشحين المذكورين في القائمة اعلاه فقط، ولا يمكنك انتخاب طلاب اخرين</li>
+                        <li>يمكنك انتخاب المرشحين المذكورين في القائمة اعلاه فقط، ولا يمكنك انتخاب طلاب اخري</li>
                     </ul>
                 </div>
             </div>
@@ -345,60 +348,98 @@ this.committees = await this.fetchCommitteesByLevel(exampleData.level);
     }
 };
 </script>
-
 <style scoped>
+.container {
+    max-width: 800px; /* Centering the container */
+    margin: 0 auto; /* Auto margins for centering */
+    padding: 20px; /* Space inside the container */
+}
+
+.text-center {
+    text-align: center; /* Center text */
+}
+
+.my-4 {
+    margin-top: 1.5rem; /* Space above the element */
+    margin-bottom: 1.5rem; /* Space below the element */
+}
+
+.form-label {
+    font-weight: bold; /* Make labels bold */
+}
+
+.form-control {
+    border: 1px solid #ccc; /* Light grey border */
+    border-radius: 0.25rem; /* Rounded corners */
+    padding: 10px; /* Padding inside input fields */
+    width: 100%; /* Full width */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Bootstrap primary color */
+    color: #fff; /* White text */
+    border: none; /* No border */
+    padding: 10px 20px; /* Padding inside the button */
+    border-radius: 0.25rem; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+.alert {
+    padding: 10px; /* Padding inside alert */
+    border-radius: 0.25rem; /* Rounded corners */
+}
+
 .committee-container {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin: 10px 0;
+    border: 1px solid #eee; /* Light border for committee containers */
+    border-radius: 0.25rem; /* Rounded corners */
+    padding: 15px; /* Padding inside committee container */
+    background-color: #f9f9f9; /* Light background color */
+    margin-bottom: 20px; /* Space below committee containers */
 }
 
 .candidate-item {
-    display: flex;
-    align-items: center;
-}
-
-.candidate-photo {
-    margin-right: 10px;
+    display: flex; /* Flexbox for alignment */
+    align-items: center; /* Center items vertically */
+    padding: 10px 0; /* Padding above and below candidate items */
 }
 
 .candidate-photo img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+    width: 50px; /* Set width of candidate photo */
+    height: 50px; /* Set height of candidate photo */
+    border-radius: 50%; /* Circular photos */
+    margin-right: 10px; /* Space between photo and text */
 }
 
 .candidate-details {
-    display: flex;
-    flex-direction: column;
+    display: flex; /* Flexbox for alignment */
+    flex-direction: column; /* Stack name and faculty */
 }
 
-.candidate-name {
-    font-weight: bold;
+.election-guidelines {
+    background-color: #f1f1f1; /* Light grey background */
+    border-radius: 0.25rem; /* Rounded corners */
+    padding: 15px; /* Padding inside election guidelines */
 }
 
-.candidate-faculty {
-    font-size: 12px;
-    color: #666;
+.video-container {
+    display: flex; /* Flexbox for alignment */
+    justify-content: center; /* Center video */
+    margin: 20px 0; /* Space around video */
 }
 
-<style scoped>
-.candidates-row {
-    display: flex;
-    flex-wrap: wrap; /* Wraps candidates to the next line if they don't fit */
-    gap: 20px; /* Space between candidates */
-    justify-content: center; /* Center align candidates */
+h4, h5, h6 {
+    color: #333; /* Darker color for headings */
 }
 
-.candidate-item {
-    text-align: center; /* Center-align text within each candidate item */
-    width: 150px; /* Fixed width for candidate items */
+ol, ul {
+    padding-left: 20px; /* Indent lists */
 }
 
-.candidate-photo img {
-    width: 100%; /* Ensure the photo fits the container */
-    height: auto; /* Maintain aspect ratio */
-    border-radius: 50%; /* Optional: round the candidate photos */
+ol li, ul li {
+    margin-bottom: 10px; /* Space between list items */
 }
-
 </style>
