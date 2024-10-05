@@ -27,6 +27,9 @@
                             <button class="custom-btn btn-lg btn-block" @click="navigateToPage('/about')">تعرّف على الإتحاد</button>
                         </div>
                         <div class="col-md-4">
+                            <button class="custom-btn btn-lg btn-block" @click="navigateToPage('/portfolio')">لائحة الاتحاد</button>
+                        </div>
+                        <div class="col-md-4">
                             <button class="custom-btn btn-lg btn-block" @click="navigateToPage('/join')">إنضم إلى الاتحاد الآن</button>
                         </div>
                         <div class="col-md-4">
