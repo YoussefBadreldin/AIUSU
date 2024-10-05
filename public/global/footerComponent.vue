@@ -23,7 +23,7 @@
 export default {
   name: 'FooterComponent',
   mounted() {
-    this.updateVisitorCount();
+
   },
   methods: {
     

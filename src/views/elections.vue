@@ -43,8 +43,9 @@
                 <div class="election-guidelines mt-4">
                     <h4><strong>إرشادات هامة</strong></h4>
                     <div class="video-container mt-4">
-                        <iframe width="300" height="157" src="https://www.youtube.com/embed/87vnQi8zsiQ?si=IzZF8lzwKqUViH7e" frameborder="0" allowfullscreen></iframe>
+                        <iframe width="350" height="180" src="https://www.youtube.com/embed/87vnQi8zsiQ?si=IzZF8lzwKqUViH7e" frameborder="0" allowfullscreen></iframe>
                     </div>
+                    <br>
                     <h5> :نظام الانتخابات</h5>
                     <ul>
                         <li>(اي 2 في كل لجنة) ستقوم بانتخاب 14 عضوًا لسبع لجان</li>
