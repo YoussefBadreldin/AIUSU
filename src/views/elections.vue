@@ -10,14 +10,14 @@
                 </div>
                 <button type="submit" class="btn btn-primary">إبحث</button>
             </form>
-            <div v-if="errorMessage" class="alert alert-danger mt-4">{{ errorMessage }}</div> <!-- Error message -->
+            <div v-if="errorMessage" class="alert alert-danger mt-4">{{ errorMessage }}</div>
             <div v-if="committeeInfo" class="mt-4">
                 <h4><strong>معلومات لجنتك</strong></h4>
                 <p><strong>الاسم:</strong> {{ committeeInfo.name }}</p>
                 <p><strong>الكلية:</strong> {{ committeeInfo.faculty }}</p>
                 <p><strong>الرقم الجامعي:</strong> {{ committeeInfo.universityNumber }}</p>
                 <p><strong>المستوى:</strong> {{ committeeInfo.level }}</p>
-                <p> {{ committeeInfo.committeeLocation }} <strong> :مكان اللجنة</strong></p>
+                <p>{{ committeeInfo.committeeLocation }} <strong> :مكان اللجنة</strong></p>
                 <p><strong>رقمك في الكشف:</strong> {{ committeeInfo.listNumber }}</p>
 
                 <br>
@@ -26,8 +26,8 @@
                 <!-- Container for each committee -->
                 <div v-for="(committee, index) in committees" :key="index" class="committee-container mb-4">
                     <h6>{{ committee.name }}</h6>
-                    <ul>
-                        <li v-for="candidate in committee.candidates" :key="candidate.id" class="candidate-item">
+                    <div class="candidates-row">
+                        <div v-for="candidate in committee.candidates" :key="candidate.id" class="candidate-item">
                             <div class="candidate-photo">
                                 <img :src="candidate.photo" alt="مرشح" />
                             </div>
@@ -35,8 +35,8 @@
                                 <span class="candidate-name">{{ candidate.name }}</span>
                                 <span class="candidate-faculty">{{ candidate.faculty }}</span>
                             </div>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Election Guidelines Section -->
@@ -45,23 +45,20 @@
                     <div class="video-container mt-4">
                         <iframe width="300" height="157" src="https://www.youtube.com/embed/87vnQi8zsiQ?si=IzZF8lzwKqUViH7e" frameborder="0" allowfullscreen></iframe>
                     </div>
-                    <h5> :نظام الانتخابات</h5>
+                    <h5>:نظام الانتخابات</h5>
                     <ul>
                         <li>(اي 2 في كل لجنة) ستقوم بانتخاب 14 عضوًا لسبع لجان</li>
                     </ul>
-                    <h5> :خطوات التصويت</h5>
+                    <h5>:خطوات التصويت</h5>
                     <ol>
                         <li>قم بالتوقيع في كشف الحضور قبل أن تبدأ بالتصويت</li>
-                        <br>
                         <li>ستتلقى ورقة انتخابية مخصصة لك</li>
-                        <br>
-                        <li>اكتب أسماء 14 مرشحًا، بحيث يكون لكل اثنين في لجنة </li>
-                        <br>
+                        <li>اكتب أسماء 14 مرشحًا، بحيث يكون لكل اثنين في لجنة</li>
                         <li>تأكد من كتابة 14 اسمًا، لأن أي ورقة تحتوي على أقل او أكثر من 14 اسمًا أو اي علامات ستعتبر باطلة</li>
                     </ol>
-                    <h5> :ملاحظات هامة</h5>
+                    <h5>:ملاحظات هامة</h5>
                     <ul>
-                        <li>يمكنك انتخاب المرشحين المذكورين في القائمة اعلاه فقط، ولا يمكنك انتخاب طلاب اخري</li>
+                        <li>يمكنك انتخاب المرشحين المذكورين في القائمة اعلاه فقط، ولا يمكنك انتخاب طلاب اخرين</li>
                     </ul>
                 </div>
             </div>
@@ -384,4 +381,24 @@ this.committees = await this.fetchCommitteesByLevel(exampleData.level);
     font-size: 12px;
     color: #666;
 }
+
+<style scoped>
+.candidates-row {
+    display: flex;
+    flex-wrap: wrap; /* Wraps candidates to the next line if they don't fit */
+    gap: 20px; /* Space between candidates */
+    justify-content: center; /* Center align candidates */
+}
+
+.candidate-item {
+    text-align: center; /* Center-align text within each candidate item */
+    width: 150px; /* Fixed width for candidate items */
+}
+
+.candidate-photo img {
+    width: 100%; /* Ensure the photo fits the container */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 50%; /* Optional: round the candidate photos */
+}
+
 </style>
