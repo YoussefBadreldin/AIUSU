@@ -103,6 +103,7 @@ const studentData = {
     "20100294": {
         name: "يوسف محمد جمال الدين سامي بدر الدين",
         faculty: "علوم وهندسة الحاسب",
+        universityNumber: "20100294",
         level: "الرابع",
         committeeLocation: "B10-145",
         listNumber: "33",
@@ -110,6 +111,7 @@ const studentData = {
     "20100295": {
         name: "علي محمد علي",
         faculty: "صيدلة",
+        universityNumber: "20100295",
         level: "الثالث",
         committeeLocation: "B10-150",
         listNumber: "12",
@@ -117,6 +119,7 @@ const studentData = {
     "20100296": {
         name: "حمراوي أحمد",
         faculty: "طب الأسنان",
+        universityNumber: "20100296",
         level: "الثاني",
         committeeLocation: "B10-155",
         listNumber: "25",
@@ -124,6 +127,7 @@ const studentData = {
     "20100297": {
         name: "محمد سعيد",
         faculty: "علوم أساسية",
+        universityNumber: "20100297",
         level: "الأول",
         committeeLocation: "B10-160",
         listNumber: "45",
@@ -131,6 +135,7 @@ const studentData = {
     "20100298": {
         name: "شهاد عادل",
         faculty: "صحة عامة",
+        universityNumber: "20100298",
         level: "الخامس",
         committeeLocation: "B10-165",
         listNumber: "22",
