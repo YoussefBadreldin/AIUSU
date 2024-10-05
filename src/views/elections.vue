@@ -127,8 +127,13 @@ export default {
                     "الثاني": [{ id: 2, name: "محمود حسين", photo: "../../images/candidates/candidate2.jpg", faculty: "اسنان" }]
                 },
                 "اللجنة الرياضية": {
-                    "الرابع": [{ id: 3, name: "سارة أحمد", photo: "../../images/candidates/candidate3.jpg", faculty: "صحة عامة" }],
-                    "الثاني": [{ id: 4, name: "أحمد ناصر", photo: "../../images/candidates/candidate4.jpg", faculty: "علوم اساسية" }]
+                    [
+                { id: 33, name: "نور الدين سامي", photo: "../../images/candidates/candidate33.jpg", faculty: "علاج طبيعي" },
+                { id: 34, name: "عبد العزيز أحمد", photo: "../../images/candidates/candidate34.jpg", faculty: "اعمال" },
+                { id: 35, name: "إيمان علي", photo: "../../images/candidates/candidate35.jpg", faculty: "علوم وهندسة الحاسب" },
+                { id: 36, name: "محمد سيد", photo: "../../images/candidates/candidate36.jpg", faculty: "فنون وتصميم" }
+            ],
+            "الثاني": [{ id: 4, name: "أحمد ناصر", photo: "../../images/candidates/candidate4.jpg", faculty: "علوم اساسية" }]
                 },
                 "اللجنة الثقافية": {
                     "الرابع": [{ id: 5, name: "خالد محمود", photo: "../../images/candidates/candidate5.jpg", faculty: "علاج طبيعي" }],
