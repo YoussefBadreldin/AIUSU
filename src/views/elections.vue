@@ -85,36 +85,7 @@ export default {
             universityNumber: '',
             committeeInfo: null,
             errorMessage: '', // Variable to hold error messages
-            committees: [ // Updated committees data with new faculties
-                { 
-                    name: "لجنة الأسر", 
-                    candidates: [{ id: 1, name: "علي مصطفى", photo: "../../images/candidates/candidate1.jpg", faculty: "صيدلة" }] 
-                },
-                { 
-                    name: "اللجنة الرياضية", 
-                    candidates: [{ id: 2, name: "سارة أحمد", photo: "../../images/candidates/candidate2.jpg", faculty: "اسنان" }] 
-                },
-                { 
-                    name: "اللجنة الثقافية", 
-                    candidates: [{ id: 3, name: "خالد محمود", photo: "../../images/candidates/candidate3.jpg", faculty: "صحة عامة" }] 
-                },
-                { 
-                    name: "اللجنة الاجتماعية", 
-                    candidates: [{ id: 4, name: "أحمد ناصر", photo: "../../images/candidates/candidate4.jpg", faculty: "علوم اساسية" }] 
-                },
-                { 
-                    name: "لجنة الجوالة والخدمة العامة", 
-                    candidates: [{ id: 5, name: "منى إبراهيم", photo: "../../images/candidates/candidate5.jpg", faculty: "علاج طبيعي" }] 
-                },
-                { 
-                    name: "اللجنة العلمية والتكنولوجية", 
-                    candidates: [{ id: 6, name: "محمود سيد", photo: "../../images/candidates/candidate6.jpg", faculty: "اعمال" }] 
-                },
-                { 
-                    name: "اللجنة الفنية", 
-                    candidates: [{ id: 7, name: "جمال الدين", photo: "../../images/candidates/candidate7.jpg", faculty: "فنون وتصميم" }] 
-                },
-            ]
+            committees: [] // Committees list based on student's level
         };
     },
     methods: {
@@ -122,23 +93,69 @@ export default {
             // Clear previous error message
             this.errorMessage = '';
             
-            // Simulate database fetching logic
-            const validUniversityNumbers = ["20100294", "20100297", "20100357", "21100837", "21100796", "21100822"]; // Example valid IDs
+            // Fetch student info from the 'students' database
+            const studentData = await this.fetchStudentInfo(this.universityNumber);
             
-            if (!validUniversityNumbers.includes(this.universityNumber)) {
+            if (!studentData) {
                 this.errorMessage = 'الرقم الذي أدخلته غير صحيح، يرجى التحقق منه'; // Error message if ID is wrong
                 return; // Exit the method if ID is invalid
             }
 
-            const exampleData = {
-                name: "يوسف محمد جمال الدين سامي بدر الدين",
-                faculty: "علوم وهندسة الحاسب",
-                universityNumber: this.universityNumber,
-                level: "الرابع",
-                committeeLocation: "B10-145",
-                listNumber: "33",
+            // Fetch committee data based on the student's level
+            const committeesData = await this.fetchCommitteesByLevel(studentData.level);
+
+            this.committeeInfo = studentData;
+            this.committees = committeesData;
+        },
+
+        async fetchStudentInfo(universityNumber) {
+            // Simulate fetching data from the 'students' database
+            const studentsDatabase = {
+                "20100294": { name: "يوسف محمد جمال الدين سامي بدر الدين", faculty: "علوم وهندسة الحاسب", universityNumber: "20100294", level: "الرابع", committeeLocation: "B10-145", listNumber: "33" },
+                "20100297": { name: "علي مصطفى", faculty: "صيدلة", universityNumber: "20100297", level: "الثاني", committeeLocation: "B10-148", listNumber: "11" },
+                // Add more students as needed
             };
-            this.committeeInfo = exampleData;
+            
+            return studentsDatabase[universityNumber] || null;
+        },
+
+        async fetchCommitteesByLevel(level) {
+            // Simulate fetching data from 7 different databases named after the committees
+            const committeesData = {
+                "لجنة الأسر": {
+                    "الرابع": [{ id: 1, name: "علي مصطفى", photo: "../../images/candidates/candidate1.jpg", faculty: "صيدلة" }],
+                    "الثاني": [{ id: 2, name: "محمود حسين", photo: "../../images/candidates/candidate2.jpg", faculty: "اسنان" }]
+                },
+                "اللجنة الرياضية": {
+                    "الرابع": [{ id: 3, name: "سارة أحمد", photo: "../../images/candidates/candidate3.jpg", faculty: "صحة عامة" }],
+                    "الثاني": [{ id: 4, name: "أحمد ناصر", photo: "../../images/candidates/candidate4.jpg", faculty: "علوم اساسية" }]
+                },
+                "اللجنة الثقافية": {
+                    "الرابع": [{ id: 5, name: "خالد محمود", photo: "../../images/candidates/candidate5.jpg", faculty: "علاج طبيعي" }],
+                    "الثاني": [{ id: 6, name: "منى إبراهيم", photo: "../../images/candidates/candidate6.jpg", faculty: "اعمال" }]
+                },
+                "اللجنة الاجتماعية": {
+                    "الرابع": [{ id: 7, name: "جمال الدين", photo: "../../images/candidates/candidate7.jpg", faculty: "فنون وتصميم" }],
+                    "الثاني": [{ id: 8, name: "محمد سيد", photo: "../../images/candidates/candidate8.jpg", faculty: "اعمال" }]
+                },
+                "لجنة الجوالة والخدمة العامة": {
+                    "الرابع": [{ id: 9, name: "أحمد طه", photo: "../../images/candidates/candidate9.jpg", faculty: "علوم وهندسة الحاسب" }],
+                    "الثاني": [{ id: 10, name: "إبراهيم علي", photo: "../../images/candidates/candidate10.jpg", faculty: "اسنان" }]
+                },
+                "اللجنة العلمية والتكنولوجية": {
+                    "الرابع": [{ id: 11, name: "محمود سيد", photo: "../../images/candidates/candidate11.jpg", faculty: "اعمال" }],
+                    "الثاني": [{ id: 12, name: "سامي جمال", photo: "../../images/candidates/candidate12.jpg", faculty: "علاج طبيعي" }]
+                },
+                "اللجنة الفنية": {
+                    "الرابع": [{ id: 13, name: "ياسمين فؤاد", photo: "../../images/candidates/candidate13.jpg", faculty: "فنون وتصميم" }],
+                    "الثاني": [{ id: 14, name: "أميرة سامي", photo: "../../images/candidates/candidate14.jpg", faculty: "صيدلة" }]
+                }
+            };
+
+            return Object.keys(committeesData).map(committee => ({
+                name: committee,
+                candidates: committeesData[committee][level] || []
+            }));
         }
     },
     mounted() {
