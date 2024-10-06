@@ -33,8 +33,7 @@
                             </div>
                             <div class="candidate-details">
                                 <span class="candidate-name">{{ candidate.candidate_name }}</span>
-                                <span class="candidate-faculty">{{ candidate.candidate_falculty }}</span>
-                                <span class="candidate-level">{{ candidate.candidate_level }}</span>
+                                <span class="candidate-faculty">{{ candidate.candidate_faculty }}</span>
                             </div>
                         </li>
                     </ul>
@@ -150,7 +149,7 @@ export default {
                     .filter(candidate => candidate.candidate_level === level)
                     .map(candidate => ({
                         ...candidate,
-                        photo: `../../images/candidates/${candidate.id}.jpg`, // Set the photo path
+                        photo: `../../images/candidates/${candidate.candidate_id}.jpg`, // Set the photo path
                     }));
 
                 // Use the mapping to get the correct committee name
