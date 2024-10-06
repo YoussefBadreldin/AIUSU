@@ -89,7 +89,11 @@ export default {
             committees: [],
             loading: false,
             cache: {}, // Cache for committee data
+            studentsMap: {}, // A hash map for fast student lookup
         };
+    },
+    mounted() {
+        this.loadStudentData(); // Load student data on component mount
     },
     methods: {
         // Debounced findCommittee method to reduce unnecessary API calls
@@ -98,7 +102,7 @@ export default {
             this.errorMessage = '';
             this.findplace = null; // Hide previous data
 
-            const studentData = await this.fetchStudentData(this.universityNumber);
+            const studentData = this.studentsMap[this.universityNumber];
 
             if (!studentData) {
                 this.errorMessage = 'الرقم الذي أدخلته غير صحيح، يرجى التحقق منه';
@@ -113,12 +117,20 @@ export default {
             this.loading = false;  // Stop loading
         }, 300), // Debounce with 300ms delay
 
-        async fetchStudentData(universityNumber) {
-            const response = await fetch('https://aiusu-backend.vercel.app/students');
-            if (!response.ok) return null;
-            const students = await response.json();
-
-            return students.find(student => student.student_id === universityNumber) || null;
+        async loadStudentData() {
+            try {
+                const response = await fetch('https://aiusu-backend.vercel.app/students');
+                if (!response.ok) throw new Error('Failed to fetch student data');
+                const students = await response.json();
+                
+                // Create a hash map for faster lookups
+                this.studentsMap = students.reduce((map, student) => {
+                    map[student.student_id] = student;
+                    return map;
+                }, {});
+            } catch (error) {
+                console.error('Error loading student data:', error);
+            }
         },
 
         async fetchCommitteesByLevel(level) {
