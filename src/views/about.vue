@@ -3,7 +3,7 @@
         <HeaderComponent />
         <div class="container">
             <div class="video-container mt-4">
-                <iframe width="350" height="180" src="https://www.youtube.com/embed/h_i07JhOqq4?si=W2a_c18FlrxTk7kn" frameborder="0" allowfullscreen></iframe>
+            <iframe width="350" height="180" src="https://www.youtube.com/embed/h_i07JhOqq4?si=QGQ1iOwr-trBwPmn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
             <h2 class="text-center my-4">عن اتحاد الطلاب </h2>
             <p>
