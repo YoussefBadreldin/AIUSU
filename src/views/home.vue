@@ -30,10 +30,10 @@
                     <button class="custom-btn btn-lg btn-block" @click="navigateToPage('/portfolio')">لائحة الاتحاد</button>
                 </div>
                 <div class="col-lg-6 col-md-4 mb-3">
-                    <button class="custom-btn btn-lg btn-block" @click="navigateToPage('/current-members')">اعضاء الاتحاد</button>
+                    <button class="custom-btn btn-lg btn-block" @click="navigateToPage('/members')">اعضاء الاتحاد</button>
                 </div>
                                 <div class="col-lg-6 col-md-4 mb-3">
-                    <button class="custom-btn btn-lg btn-block" @click="navigateToPage('/current-members')">الاشتراك في انشطة الاتحاد</button>
+                    <button class="custom-btn btn-lg btn-block" @click="navigateToPage('/activities')">الاشتراك في انشطة الاتحاد</button>
                 </div>
                 <div class="col-lg-6 col-md-4 mb-3">
                     <button class="custom-btn btn-lg btn-block" @click="navigateToPage('/join')">الانضمام الي الاتحاد</button>
