@@ -16,36 +16,35 @@
             </div>
         </div>
 
-<div class="About-Us"  dir="rtl">
-    <div class="inner-lay">
-        <div class="container">
-            <div class="row session-title">
-                <h2>الخدمات</h2>
-            </div>
-            <div class="row">
-                                <div class="col-lg-6 col-md-4 mb-3">
-                    <button class="custom-btn btn-lg btn-block" @click="navigateToPage('/about')">معلومات عن الإتحاد</button>
-                </div>
-                <div class="col-lg-6 col-md-4 mb-3">
-                    <button class="custom-btn btn-lg btn-block" @click="navigateToPage('/rules')">لائحة الاتحاد</button>
-                </div>
-                <div class="col-lg-6 col-md-4 mb-3">
-                    <button class="custom-btn btn-lg btn-block" @click="navigateToPage('/members')">اعضاء الاتحاد</button>
-                </div>
-                                <div class="col-lg-6 col-md-4 mb-3">
-                    <button class="custom-btn btn-lg btn-block" @click="navigateToPage('/activities')">الاشتراك في انشطة الاتحاد</button>
-                </div>
-                <div class="col-lg-6 col-md-4 mb-3">
-                    <button class="custom-btn btn-lg btn-block" @click="navigateToPage('/join')">الانضمام الي الاتحاد</button>
-                </div>
-                <div class="col-lg-6 col-md-4 mb-3">
-                    <button class="custom-btn btn-lg btn-block" @click="navigateToPage('/elections')">معرفة لجنتك الانتخابية</button>
+        <div class="About-Us" dir="rtl">
+            <div class="inner-lay">
+                <div class="container">
+                    <div class="row session-title">
+                        <h2>الخدمات</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-4 mb-3">
+                            <button class="custom-btn btn-lg btn-block" @click="navigateToPage('/about')">معلومات عن الإتحاد</button>
+                        </div>
+                        <div class="col-lg-6 col-md-4 mb-3">
+                            <button class="custom-btn btn-lg btn-block" @click="navigateToPage('/rules')">لائحة الاتحاد</button>
+                        </div>
+                        <div class="col-lg-6 col-md-4 mb-3">
+                            <button class="custom-btn btn-lg btn-block" @click="navigateToPage('/members')">اعضاء الاتحاد</button>
+                        </div>
+                        <div class="col-lg-6 col-md-4 mb-3">
+                            <button class="custom-btn btn-lg btn-block" @click="redirectToLink">الاشتراك في انشطة الاتحاد</button>
+                        </div>
+                        <div class="col-lg-6 col-md-4 mb-3">
+                            <button class="custom-btn btn-lg btn-block" @click="navigateToPage('/join')">الانضمام الي الاتحاد</button>
+                        </div>
+                        <div class="col-lg-6 col-md-4 mb-3">
+                            <button class="custom-btn btn-lg btn-block" @click="navigateToPage('/elections')">معرفة لجنتك الانتخابية</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-
 
         <FooterComponent />
     </div>
@@ -69,13 +68,18 @@ export default {
             router.push(path); // Use router to navigate
         };
 
+        const redirectToLink = () => {
+            window.location.href = 'https://linktr.ee/aiustudentunion';
+        };
+
         return {
             navigateToPage,
+            redirectToLink, // Ensure redirectToLink is returned
         };
     },
-  mounted() {
-    window.scrollTo(0, 0);
-  }
+    mounted() {
+        window.scrollTo(0, 0); // Scroll to top on mount
+    },
 };
 </script>
 
@@ -92,11 +96,6 @@ export default {
 
 .About-Us .session-title {
     text-align: center;
-}
-
-.About-Us .numb {
-    text-align: center;
-    margin-bottom: 20px;
 }
 
 /* Custom Button Styles */
