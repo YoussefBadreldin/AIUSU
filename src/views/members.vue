@@ -24,7 +24,7 @@
                 </div>
             </div>
 
-            <h2 class="text-center my-4">اللجان التنفيذية للأنشطة</h2>
+            <h2 class="text-center my-4">المكاتب التنفيذية للجان الأنشطة</h2>
             <div class="executive-committee">
                 <div class="committee-box" v-for="(committee, index) in committees" :key="index">
                     <div class="committee-title">{{ committee.name }}</div>
