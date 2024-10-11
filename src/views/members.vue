@@ -131,7 +131,6 @@ export default {
                         { id: 2, name: 'سامية أحمد', image: '../../images/members/Test.jpg' },
                         { id: 3, name: 'فاطمة كمال', image: '../../images/members/Test.jpg' },
                         { id: 4, name: 'حسن لطفي', image: '../../images/members/Test.jpg' },
-                        { id: 5, name: 'منى صبري', image: '../../images/members/Test.jpg' },
                     ],
                 },
                 {
@@ -145,7 +144,6 @@ export default {
                         { id: 2, name: 'جميلة يوسف', image: '../../images/members/Test.jpg' },
                         { id: 3, name: 'خالد محمد', image: '../../images/members/Test.jpg' },
                         { id: 4, name: 'سارة صلاح', image: '../../images/members/Test.jpg' },
-                        { id: 5, name: 'ياسر أحمد', image: '../../images/members/Test.jpg' },
                     ],
                 },
                 {
@@ -159,7 +157,6 @@ export default {
                         { id: 2, name: 'علي حسن', image: '../../images/members/Test.jpg' },
                         { id: 3, name: 'لينا طارق', image: '../../images/members/Test.jpg' },
                         { id: 4, name: 'نور الدين', image: '../../images/members/Test.jpg' },
-                        { id: 5, name: 'هالة أحمد', image: '../../images/members/Test.jpg' },
                     ],
                 },
                 {
@@ -173,7 +170,6 @@ export default {
                         { id: 2, name: 'علياء نبيل', image: '../../images/members/Test.jpg' },
                         { id: 3, name: 'فؤاد حمدي', image: '../../images/members/Test.jpg' },
                         { id: 4, name: 'رنا عادل', image: '../../images/members/Test.jpg' },
-                        { id: 5, name: 'أميرة علي', image: '../../images/members/Test.jpg' },
                     ],
                 },
                 {
@@ -187,7 +183,6 @@ export default {
                         { id: 2, name: 'عبد الله فؤاد', image: '../../images/members/Test.jpg' },
                         { id: 3, name: 'مريم عبد الرحمن', image: '../../images/members/Test.jpg' },
                         { id: 4, name: 'صلاح جلال', image: '../../images/members/Test.jpg' },
-                        { id: 5, name: 'أحمد شوقي', image: '../../images/members/Test.jpg' },
                     ],
                 },
                 {
@@ -201,7 +196,6 @@ export default {
                         { id: 2, name: 'فاطمة عبد الله', image: '../../images/members/Test.jpg' },
                         { id: 3, name: 'سلام عادل', image: '../../images/members/Test.jpg' },
                         { id: 4, name: 'فرح عبد الرحمن', image: '../../images/members/Test.jpg' },
-                        { id: 5, name: 'أمجد سليمان', image: '../../images/members/Test.jpg' },
                     ],
                 },
                 {
@@ -215,7 +209,6 @@ export default {
                         { id: 2, name: 'علياء فؤاد', image: '../../images/members/Test.jpg' },
                         { id: 3, name: 'سامح خليل', image: '../../images/members/Test.jpg' },
                         { id: 4, name: 'مرام سمير', image: '../../images/members/Test.jpg' },
-                        { id: 5, name: 'أحمد عماد', image: '../../images/members/Test.jpg' },
                     ],
                 },
             ],
