@@ -1,153 +1,156 @@
 <template>
-  <div class="pdf-container" ref="scrollContainer">
-    <div ref="pdfViewer" class="pdf-viewer"></div>
-    <div v-if="error" class="error-message">Unable to load the PDF. Please check the file path or the PDF itself.</div>
-  </div>
+    <div>
+        <HeaderComponent />
+        <div class="container">
+            <h2 class="text-center my-4">مجلس الاتحاد</h2>
+            <div class="organization-chart">
+                <div class="position president">
+                    <div class="title">رئيس الاتحاد</div>
+                    <div class="subordinates">
+                        <div class="position vice-president">
+                            <div class="title">نائب رئيس الاتحاد</div>
+                            <div class="subordinates">
+                                <div class="position head" v-for="(committee, index) in committees" :key="index">
+                                    <div class="title">أمين {{ committee.name }}</div>
+                                    <div class="subordinates">
+                                        <div class="position vice-head">
+                                            <div class="title">أمين مساعد {{ committee.name }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="text-center my-4">اللجان التنفيذية للأنشطة</h2>
+            <div class="executive-committee">
+                <div class="committee-box" v-for="(committee, index) in committees" :key="index">
+                    <div class="committee-title">{{ committee.name }}</div>
+                    <div class="committee-content">
+                        <div class="position head">
+                            <div class="title">أمين اللجنة</div>
+                            <div class="subordinates">
+                                <div class="position vice-head">
+                                    <div class="title">أمين مساعد اللجنة</div>
+                                    <div class="members">
+                                        <div class="member" v-for="memberIndex in 8" :key="memberIndex">
+                                            <div class="title">عضو باللجنة</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <FooterComponent />
+    </div>
 </template>
 
 <script>
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+import HeaderComponent from '../../public/global/headerComponent.vue';
+import FooterComponent from '../../public/global/footerComponent.vue';
 
 export default {
-  name: 'PortfolioView',
-  setup() {
-    const pdfViewer = ref(null);
-    const scrollContainer = ref(null);
-    const error = ref(false);
-    const pdfUrl = '/images/rules.pdf'; // Path to your PDF file
-    let pdf = null;
-    let renderedPages = new Set();
-    let observer = null;
-
-    onMounted(() => {
-      if (!pdfViewer.value) return;
-
-      // Load PDF.js from CDN
-      const script = document.createElement('script');
-      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js';
-      script.onload = () => {
-        const pdfjsLib = window.pdfjsLib;
-        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
-
-        const loadingTask = pdfjsLib.getDocument(pdfUrl);
-        loadingTask.promise.then(
-          loadedPdf => {
-            pdf = loadedPdf;
-            initializeObserver(); // Initialize lazy loading
-          },
-          reason => {
-            console.error(reason);
-            error.value = true;
-          }
-        );
-      };
-      document.head.appendChild(script);
-    });
-
-    const renderPage = (pageNumber) => {
-      if (!pdf || renderedPages.has(pageNumber)) return;
-
-      pdf.getPage(pageNumber).then(page => {
-        const viewport = page.getViewport({ scale: 1.5 }); // Adjust scale as needed
-        const canvas = document.createElement('canvas');
-        const context = canvas.getContext('2d');
-        const devicePixelRatio = window.devicePixelRatio || 1;
-
-        // Set canvas dimensions for high quality
-        canvas.width = viewport.width * devicePixelRatio;
-        canvas.height = viewport.height * devicePixelRatio;
-        context.scale(devicePixelRatio, devicePixelRatio);
-
-        // Append canvas to viewer
-        pdfViewer.value.appendChild(canvas);
-
-        const renderContext = {
-          canvasContext: context,
-          viewport: viewport,
+    name: 'JoinUnion',
+    components: {
+        HeaderComponent,
+        FooterComponent,
+    },
+    data() {
+        return {
+            committees: [
+                { name: 'لجنة الأسر' },
+                { name: 'اللجنة الرياضية' },
+                { name: 'اللجنة الثقافية والإعلامية' },
+                { name: 'اللجنة الفنية' },
+                { name: 'لجنة الجوالة والخدمة العامة' },
+                { name: 'اللجنة الاجتماعية والرحلات' },
+                { name: 'اللجنة العلمية والتكنولوجية' },
+            ],
         };
-
-        page.render(renderContext).promise.then(() => {
-          console.log(`Page ${pageNumber} rendered`);
-          renderedPages.add(pageNumber); // Mark page as rendered
-        }).catch(renderError => {
-          console.error(`Error rendering page ${pageNumber}:`, renderError);
-          error.value = true;
-        });
-      }).catch(pageError => {
-        console.error(`Error fetching page ${pageNumber}:`, pageError);
-        error.value = true;
-      });
-    };
-
-    const initializeObserver = () => {
-      observer = new IntersectionObserver(handleIntersection, {
-        root: scrollContainer.value,
-        rootMargin: '0px',
-        threshold: 0.1, // Adjust this threshold to balance performance
-      });
-
-      // Add observer to each page placeholder (initially invisible)
-      for (let i = 1; i <= pdf.numPages; i++) {
-        const pagePlaceholder = document.createElement('div');
-        pagePlaceholder.setAttribute('data-page-number', i);
-        pagePlaceholder.style.height = '800px'; // Adjust based on page height
-        pagePlaceholder.style.width = '100%';
-        pdfViewer.value.appendChild(pagePlaceholder);
-        observer.observe(pagePlaceholder); // Observe each placeholder
-      }
-    };
-
-    const handleIntersection = (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const pageNumber = parseInt(entry.target.getAttribute('data-page-number'));
-          renderPage(pageNumber); // Render page when it is in view
-          observer.unobserve(entry.target); // Stop observing once the page is rendered
-          entry.target.remove(); // Remove placeholder after rendering
-        }
-      });
-    };
-
-    onBeforeUnmount(() => {
-      if (observer) {
-        observer.disconnect(); // Clean up observer when the component is destroyed
-      }
-    });
-
-    return {
-      pdfViewer,
-      scrollContainer,
-      error
-    };
-  },
+    },
+    mounted() {
+        window.scrollTo(0, 0);
+    }
 };
 </script>
 
 <style scoped>
-.pdf-container {
-  height: 100vh; /* Full height to take up the screen */
-  display: flex;
-  justify-content: center;
-  align-items: flex-start; /* Align to start to allow scrolling */
-  position: relative;
-  overflow: auto; /* Allow scrolling if content exceeds viewport */
+.container {
+    padding: 20px;
+    direction: rtl; /* Set the text direction to RTL */
 }
-
-.pdf-viewer {
-  display: flex;
-  flex-direction: column; /* Stack pages vertically */
-  width: 100%;
+.organization-chart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
 }
-
-.error-message {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: red;
-  text-align: center;
-  padding: 10px;
-  background: rgba(255, 255, 255, 0.8); /* Slight background to improve readability */
-  border-radius: 5px; /* Optional: add rounded corners for better look */
+.position {
+    margin: 10px 0;
+    text-align: center;
+}
+.title {
+    font-weight: bold;
+    padding: 5px;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+}
+.subordinates {
+    display: flex;
+    justify-content: center;
+}
+.executive-committee {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping to create multiple rows */
+    justify-content: space-between; /* Distribute space between committee boxes */
+    gap: 10px; /* Optional: Add some spacing between boxes */
+}
+.committee-box {
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 10px;
+    width: calc(33.33% - 20px); /* 3 boxes per row minus margin */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+.committee-title {
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.committee-content {
+    display: flex;
+    flex-direction: column;
+}
+.members {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.member {
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+}
+@media (max-width: 768px) {
+    .committee-box {
+        width: calc(50% - 20px); /* 2 boxes per row on tablets */
+    }
+}
+@media (max-width: 576px) {
+    .committee-box {
+        width: 100%; /* 1 box per row on mobile */
+    }
+    .title {
+        font-size: 0.8rem; /* Reduce font size on small screens */
+    }
 }
 </style>
