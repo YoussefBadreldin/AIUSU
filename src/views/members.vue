@@ -127,10 +127,14 @@ export default {
                     faculty: 'صيدلة',
                     level: 5,
                     members: [
-                        { id: 1, name: 'علي محمود', image: '../../images/members/Test.jpg' },
-                        { id: 2, name: 'سامية أحمد', image: '../../images/members/Test.jpg' },
-                        { id: 3, name: 'فاطمة كمال', image: '../../images/members/Test.jpg' },
-                        { id: 4, name: 'حسن لطفي', image: '../../images/members/Test.jpg' },
+                        { id: 1, name: 'رأفت شريف', image: '../../images/members/Test.jpg' },
+                        { id: 2, name: 'علياء فؤاد', image: '../../images/members/Test.jpg' },
+                        { id: 3, name: 'سامح خليل', image: '../../images/members/Test.jpg' },
+                        { id: 4, name: 'مرام سمير', image: '../../images/members/Test.jpg' },
+                        { id: 5, name: 'رأفت شريف', image: '../../images/members/Test.jpg' },
+                        { id: 6, name: 'علياء فؤاد', image: '../../images/members/Test.jpg' },
+                        { id: 7, name: 'سامح خليل', image: '../../images/members/Test.jpg' },
+                        { id: 8, name: 'مرام سمير', image: '../../images/members/Test.jpg' },
                     ],
                 },
                 {
@@ -140,10 +144,14 @@ export default {
                     faculty: 'علوم أساسية',
                     level: 4,
                     members: [
-                        { id: 1, name: 'محمود رضا', image: '../../images/members/Test.jpg' },
-                        { id: 2, name: 'جميلة يوسف', image: '../../images/members/Test.jpg' },
-                        { id: 3, name: 'خالد محمد', image: '../../images/members/Test.jpg' },
-                        { id: 4, name: 'سارة صلاح', image: '../../images/members/Test.jpg' },
+                        { id: 1, name: 'رأفت شريف', image: '../../images/members/Test.jpg' },
+                        { id: 2, name: 'علياء فؤاد', image: '../../images/members/Test.jpg' },
+                        { id: 3, name: 'سامح خليل', image: '../../images/members/Test.jpg' },
+                        { id: 4, name: 'مرام سمير', image: '../../images/members/Test.jpg' },
+                        { id: 5, name: 'رأفت شريف', image: '../../images/members/Test.jpg' },
+                        { id: 6, name: 'علياء فؤاد', image: '../../images/members/Test.jpg' },
+                        { id: 7, name: 'سامح خليل', image: '../../images/members/Test.jpg' },
+                        { id: 8, name: 'مرام سمير', image: '../../images/members/Test.jpg' },
                     ],
                 },
                 {
@@ -153,10 +161,14 @@ export default {
                     faculty: 'صحة عامة',
                     level: 3,
                     members: [
-                        { id: 1, name: 'منى كريم', image: '../../images/members/Test.jpg' },
-                        { id: 2, name: 'علي حسن', image: '../../images/members/Test.jpg' },
-                        { id: 3, name: 'لينا طارق', image: '../../images/members/Test.jpg' },
-                        { id: 4, name: 'نور الدين', image: '../../images/members/Test.jpg' },
+                        { id: 1, name: 'رأفت شريف', image: '../../images/members/Test.jpg' },
+                        { id: 2, name: 'علياء فؤاد', image: '../../images/members/Test.jpg' },
+                        { id: 3, name: 'سامح خليل', image: '../../images/members/Test.jpg' },
+                        { id: 4, name: 'مرام سمير', image: '../../images/members/Test.jpg' },
+                        { id: 5, name: 'رأفت شريف', image: '../../images/members/Test.jpg' },
+                        { id: 6, name: 'علياء فؤاد', image: '../../images/members/Test.jpg' },
+                        { id: 7, name: 'سامح خليل', image: '../../images/members/Test.jpg' },
+                        { id: 8, name: 'مرام سمير', image: '../../images/members/Test.jpg' },
                     ],
                 },
                 {
@@ -166,10 +178,14 @@ export default {
                     faculty: 'فنون وتصميم',
                     level: 4,
                     members: [
-                        { id: 1, name: 'طارق يوسف', image: '../../images/members/Test.jpg' },
-                        { id: 2, name: 'علياء نبيل', image: '../../images/members/Test.jpg' },
-                        { id: 3, name: 'فؤاد حمدي', image: '../../images/members/Test.jpg' },
-                        { id: 4, name: 'رنا عادل', image: '../../images/members/Test.jpg' },
+                        { id: 1, name: 'رأفت شريف', image: '../../images/members/Test.jpg' },
+                        { id: 2, name: 'علياء فؤاد', image: '../../images/members/Test.jpg' },
+                        { id: 3, name: 'سامح خليل', image: '../../images/members/Test.jpg' },
+                        { id: 4, name: 'مرام سمير', image: '../../images/members/Test.jpg' },
+                        { id: 5, name: 'رأفت شريف', image: '../../images/members/Test.jpg' },
+                        { id: 6, name: 'علياء فؤاد', image: '../../images/members/Test.jpg' },
+                        { id: 7, name: 'سامح خليل', image: '../../images/members/Test.jpg' },
+                        { id: 8, name: 'مرام سمير', image: '../../images/members/Test.jpg' },
                     ],
                 },
                 {
@@ -179,10 +195,14 @@ export default {
                     faculty: 'صحة عامة',
                     level: 3,
                     members: [
-                        { id: 1, name: 'سمية محمد', image: '../../images/members/Test.jpg' },
-                        { id: 2, name: 'عبد الله فؤاد', image: '../../images/members/Test.jpg' },
-                        { id: 3, name: 'مريم عبد الرحمن', image: '../../images/members/Test.jpg' },
-                        { id: 4, name: 'صلاح جلال', image: '../../images/members/Test.jpg' },
+                        { id: 1, name: 'رأفت شريف', image: '../../images/members/Test.jpg' },
+                        { id: 2, name: 'علياء فؤاد', image: '../../images/members/Test.jpg' },
+                        { id: 3, name: 'سامح خليل', image: '../../images/members/Test.jpg' },
+                        { id: 4, name: 'مرام سمير', image: '../../images/members/Test.jpg' },
+                        { id: 5, name: 'رأفت شريف', image: '../../images/members/Test.jpg' },
+                        { id: 6, name: 'علياء فؤاد', image: '../../images/members/Test.jpg' },
+                        { id: 7, name: 'سامح خليل', image: '../../images/members/Test.jpg' },
+                        { id: 8, name: 'مرام سمير', image: '../../images/members/Test.jpg' },
                     ],
                 },
                 {
@@ -192,10 +212,14 @@ export default {
                     faculty: 'أعمال',
                     level: 5,
                     members: [
-                        { id: 1, name: 'عادل جلال', image: '../../images/members/Test.jpg' },
-                        { id: 2, name: 'فاطمة عبد الله', image: '../../images/members/Test.jpg' },
-                        { id: 3, name: 'سلام عادل', image: '../../images/members/Test.jpg' },
-                        { id: 4, name: 'فرح عبد الرحمن', image: '../../images/members/Test.jpg' },
+                        { id: 1, name: 'رأفت شريف', image: '../../images/members/Test.jpg' },
+                        { id: 2, name: 'علياء فؤاد', image: '../../images/members/Test.jpg' },
+                        { id: 3, name: 'سامح خليل', image: '../../images/members/Test.jpg' },
+                        { id: 4, name: 'مرام سمير', image: '../../images/members/Test.jpg' },
+                        { id: 5, name: 'رأفت شريف', image: '../../images/members/Test.jpg' },
+                        { id: 6, name: 'علياء فؤاد', image: '../../images/members/Test.jpg' },
+                        { id: 7, name: 'سامح خليل', image: '../../images/members/Test.jpg' },
+                        { id: 8, name: 'مرام سمير', image: '../../images/members/Test.jpg' },
                     ],
                 },
                 {
@@ -209,6 +233,10 @@ export default {
                         { id: 2, name: 'علياء فؤاد', image: '../../images/members/Test.jpg' },
                         { id: 3, name: 'سامح خليل', image: '../../images/members/Test.jpg' },
                         { id: 4, name: 'مرام سمير', image: '../../images/members/Test.jpg' },
+                        { id: 5, name: 'رأفت شريف', image: '../../images/members/Test.jpg' },
+                        { id: 6, name: 'علياء فؤاد', image: '../../images/members/Test.jpg' },
+                        { id: 7, name: 'سامح خليل', image: '../../images/members/Test.jpg' },
+                        { id: 8, name: 'مرام سمير', image: '../../images/members/Test.jpg' },
                     ],
                 },
             ],
@@ -282,11 +310,15 @@ export default {
 }
 .members {
     display: flex;
-    justify-content: space-around; /* Space between members */
     flex-wrap: wrap; /* Allow members to wrap to the next line */
+    justify-content: space-around; /* Center members with space around */
 }
+
 .member {
-    width: 60px; /* Adjust size as necessary */
+    width: 25%; /* 4 members per row */
+    margin-bottom: 10px; /* Add some space between rows */
+    box-sizing: border-box; /* Include padding and borders in width */
+    text-align: center; /* Center member details */
 }
 @media (max-width: 768px) {
     .committee-box {
@@ -300,5 +332,19 @@ export default {
     .title {
         font-size: 0.8rem; /* Reduce font size on small screens */
     }
+    .committee-box {
+        width: 100%; /* 1 box per row on mobile */
+    }
+    .title, .name, .committee-title {
+        font-size: 0.45rem; /* Reduce font size on small screens */
+    }
+    
+    h2 {
+        font-size: 1.8rem; /* Reduce heading size on mobile */
+    }
+    .details {
+        font-size: 0.45rem; /* Reduce overall details font size */
+    }
 }
+
 </style>
