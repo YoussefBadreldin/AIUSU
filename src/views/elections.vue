@@ -19,7 +19,7 @@
                 <p><strong>الاسم:</strong> {{ findplace.student_name }}</p>
                 <p><strong>الكلية:</strong> {{ findplace.student_faculty }}</p>
                 <p><strong>الرقم الجامعي:</strong> {{ findplace.student_id }}</p>
-                <p><strong>المستوى:</strong> {{ findplace.student_level }}</p>
+                <p><strong>المستوى:</strong> {{ studentLevelLastWord }}</p>
                 <p>{{ findplace.student_location }} <strong> :مكان اللجنة</strong></p>
                 <p><strong>رقم الكشف:</strong> {{ findplace.student_number }}</p>
 
@@ -34,7 +34,7 @@
                                 <img :src="`../../images/candidates/${candidate.candidate_id}.jpg`" alt="مرشح" loading="lazy" />
                             </div>
                             <div class="candidate-details">
-                                <span class="candidate-name">{{ candidate.candidate_name }}</span>
+                                <span class="candidate-name">{{ formatCandidateName(candidate.candidate_name) }}</span>
                                 <span class="candidate-faculty">{{ candidate.candidate_faculty }}</span>
                             </div>
                         </li>
@@ -50,18 +50,20 @@
                     <br>
                     <h5>: نظام الانتخابات</h5>
                     <ul>
-                        <li>(أي 2 في كل لجنة) ستقوم بانتخاب 14 عضوًا لسبع لجان</li>
+                        <li>(اثنين في كل لجنة) ستقوم بانتخاب 14 عضوًا لسبع لجان -</li>
                     </ul>
+                    <br>
                     <h5>: خطوات التصويت</h5>
                     <ol>
-                        <li>قم بالتوقيع في كشف الحضور قبل أن تبدأ بالتصويت</li>
-                        <li>ستتلقى ورقة انتخابية مخصصة لك</li>
-                        <li>اكتب أسماء 14 مرشحًا، بحيث يكون لكل اثنين في لجنة</li>
-                        <li>تأكد من كتابة 14 اسمًا، لأن أي ورقة تحتوي على أقل أو أكثر من 14 اسمًا أو أي علامات ستعتبر باطلة</li>
+                        <li>قم بالتوقيع في كشف الحضور قبل أن تبدأ بالتصويت -</li>
+                        <li>ستتلقى ورقة انتخابية مخصصة لك -</li>
+                        <li>اكتب أسماء 14 مرشحًا، بحيث يكون لكل لجنة اثنين  -</li>
+                        <li>تأكد من كتابة 14 اسمًا، لأن أي ورقة تحتوي على أقل أو أكثر من 14 اسمًا أو أي علامات ستعتبر باطلة -</li>
                     </ol>
+                    <br>
                     <h5>: ملاحظات هامة</h5>
                     <ul>
-                        <li>يمكنك انتخاب المرشحين المذكورين في القائمة أعلاه فقط، ولا يمكنك انتخاب طلاب آخرين</li>
+                        <li>يمكنك انتخاب المرشحين المذكورين في القائمة أعلاه فقط، ولا يمكنك انتخاب طلاب آخرين -</li>
                     </ul>
                 </div>
             </div>
@@ -69,7 +71,6 @@
         <FooterComponent />
     </div>
 </template>
-
 <script>
 import HeaderComponent from '../../public/global/headerComponent.vue';
 import FooterComponent from '../../public/global/footerComponent.vue';
@@ -95,7 +96,23 @@ export default {
     mounted() {
         this.loadStudentData(); // Load student data on component mount
     },
+    computed: {
+        // New computed property to get the last word of student_level
+        studentLevelLastWord() {
+            return this.findplace && this.findplace.student_level 
+                ? this.findplace.student_level.split(' ').pop() 
+                : ''; // Returns last word or empty string if not available
+        }
+    },
     methods: {
+        // New method to extract the first and last words from candidate names
+        formatCandidateName(name) {
+            if (!name) return '';
+            const words = name.split(' ');
+            if (words.length === 1) return words[0]; // Return if there's only one word
+            return `${words[0]} ${words[words.length - 1]}`; // Return first and last words
+        },
+
         // Debounced findCommittee method to reduce unnecessary API calls
         findCommittee: _.debounce(async function() {
             this.loading = true;  // Start loading

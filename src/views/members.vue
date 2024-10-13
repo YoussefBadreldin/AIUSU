@@ -2,105 +2,126 @@
     <div>
         <HeaderComponent />
         <div class="container">
-            <h2 class="text-center my-4">مجلس الاتحاد</h2>
+            <h2 class="text-center my-4">أعضاء الاتحاد</h2>
             <div class="organization-chart">
                 <div class="position president">
                     <div class="profile">
-                        <img src="../../images/members/Test.jpg" alt="رئيس الاتحاد" class="circle-photo" />
+                        <img :src="`../../images/members/${president.member_id}.jpg`" :alt="president.member_name" class="circle-photo" v-if="president.member_id" />
                     </div>
                     <div class="details">
-                        <div class="name">أحمد علي</div>
+                        <div class="name">{{ formatmemberName(president.member_name) || 'جاري التحميل..' }}</div>
                         <div class="title">رئيس الاتحاد</div>
-                        <div class="faculty"> صيدلة</div>
-                        <div class="level">المستوى 5</div>
+                        <div class="faculty">{{ president.member_faculty || 'جاري التحميل..' }}</div>
+                        <div class="level">{{ president.member_level || 'جاري التحميل..' }}</div>
                     </div>
                     <div class="subordinates">
                         <div class="position vice-president">
                             <div class="profile">
-                                <img src="../../images/members/Test.jpg" alt="نائب رئيس الاتحاد" class="circle-photo" />
+                                <img :src="`../../images/members/${vicePresident.member_id}.jpg`" :alt="vicePresident.member_name" class="circle-photo" v-if="vicePresident.member_id" />
                             </div>
                             <div class="details">
-                                <div class="name">محمد حسن</div>
+                                <div class="name">{{ formatmemberName(vicePresident.member_name) || 'جاري التحميل..' }}</div>
                                 <div class="title">نائب رئيس الاتحاد</div>
-                                <div class="faculty"> علوم أساسية</div>
-                                <div class="level">المستوى 4</div>
-                            </div>
-                            <div class="subordinates">
-                                <div class="position head" v-for="(committee, index) in committees" :key="index">
-                                    <div class="profile">
-                                        <img src="../../images/members/Test.jpg" alt="أمين {{ committee.name }}" class="circle-photo" />
-                                    </div>
-                                    <div class="details">
-                                        <div class="name">حمودة</div>
-                                        <div class="title">أمين {{ committee.name }}</div>
-                                        <div class="faculty"> {{ committee.faculty }}</div>
-                                        <div class="level">المستوى {{ committee.level }}</div>
-                                    </div>
-                                    <div class="subordinates">
-                                        <div class="position vice-head">
-                                            <div class="profile">
-                                                <img src="../../images/members/Test.jpg" alt="أمين مساعد {{ committee.name }}" class="circle-photo" />
-                                            </div>
-                                            <div class="details">
-                                                <div class="name">شدودة</div>
-                                                <div class="title">أمين مساعد {{ committee.name }}</div>
-                                                <div class="faculty"> {{ committee.faculty }}</div>
-                                                <div class="level">المستوى {{ committee.level }}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                   
-                                </div>
+                                <div class="faculty">{{ vicePresident.member_faculty || 'جاري التحميل..' }}</div>
+                                <div class="level">{{ vicePresident.member_level || 'جاري التحميل..' }}</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <h2 class="text-center my-4">المكاتب التنفيذية للجان الأنشطة</h2>
             <div class="executive-committee">
-                <div class="committee-box" v-for="(committee, index) in committees" :key="index">
-                    <div class="committee-title">{{ committee.name }}</div>
+                <!-- Committee for Scouts -->
+                <div class="committee-box">
+                    <div class="committee-title">لجنة الجوالة والخدمة العامة</div>
                     <div class="committee-content">
                         <div class="position head">
                             <div class="profile">
-                                <img src="../../images/members/Test.jpg" alt="أمين اللجنة" class="circle-photo" />
+                                <img :src="`../../images/members/${heads['Head_Scout'].member_id}.jpg`" :alt="heads['Head_Scout'].member_name" class="circle-photo" v-if="heads['Head_Scout'].member_id" />
                             </div>
                             <div class="details">
-                                <div class="name">حسونة</div>
+                                <div class="name">{{ formatmemberName(heads['Head_Scout'].member_name) || 'جاري التحميل..' }}</div>
                                 <div class="title">أمين اللجنة</div>
-                                <div class="faculty"> {{ committee.faculty }}</div>
-                                <div class="level">المستوى {{ committee.level }}</div>
+                                <div class="faculty">{{ heads['Head_Scout'].member_faculty || 'جاري التحميل..' }}</div>
+                                <div class="level">{{ heads['Head_Scout'].member_level || 'جاري التحميل..' }}</div>
                             </div>
                             <div class="subordinates">
                                 <div class="position vice-head">
                                     <div class="profile">
-                                        <img src="../../images/members/Test.jpg" alt="أمين مساعد اللجنة" class="circle-photo" />
+                                        <img :src="`../../images/members/${viceHeads['Vice_Scout'].member_id}.jpg`" :alt="viceHeads['Vice_Scout'].member_name" class="circle-photo" v-if="viceHeads['Vice_Scout'].member_id" />
                                     </div>
                                     <div class="details">
-                                        <div class="name">فتوحة</div>
+                                        <div class="name">{{ formatmemberName(viceHeads['Vice_Scout'].member_name) || 'جاري التحميل..' }}</div>
                                         <div class="title">أمين مساعد اللجنة</div>
-                                        <div class="faculty"> {{ committee.faculty }}</div>
-                                        <div class="level">المستوى {{ committee.level }}</div>
+                                        <div class="faculty">{{ viceHeads['Vice_Scout'].member_faculty || 'جاري التحميل..' }}</div>
+                                        <div class="level">{{ viceHeads['Vice_Scout'].member_level || 'جاري التحميل..' }}</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="members">
-                            <div class="member" v-for="member in committee.members" :key="member.id">
+                            <div class="member" v-for="member in members['Member_Scout']" :key="member.member_id">
                                 <div class="profile">
-                                    <img src="../../images/members/Test.jpg" alt="عضو باللجنة" class="circle-photo" />
+                                    <img :src="`../../images/members/${member.member_id}.jpg`" :alt="member.member_name" class="circle-photo" v-if="member.member_id" />
                                 </div>
                                 <div class="details">
-                                    <div class="name">{{ member.name }}</div>
+                                    <div class="name">{{ formatmemberName(member.member_name) || 'جاري التحميل..' }}</div>
                                     <div class="title">عضو باللجنة</div>
-                                    <div class="faculty"> {{ committee.faculty }}</div>
-                                    <div class="level">المستوى {{ committee.level }}</div>
+                                    <div class="faculty">{{ member.member_faculty || 'جاري التحميل..' }}</div>
+                                    <div class="level">{{ member.member_level || 'جاري التحميل..' }}</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- Repeat similar blocks for other committees, changing the titles and properties accordingly -->
+                <!-- Example for Scientific Committee -->
+                <div class="committee-box">
+                    <div class="committee-title">لجنة العلمية</div>
+                    <div class="committee-content">
+                        <div class="position head">
+                            <div class="profile">
+                                <img :src="`../../images/members/${heads['Head_Scientific'].member_id}.jpg`" :alt="heads['Head_Scientific'].member_name" class="circle-photo" v-if="heads['Head_Scientific'].member_id" />
+                            </div>
+                            <div class="details">
+                                <div class="name">{{ formatmemberName(heads['Head_Scientific'].member_name) || 'جاري التحميل..' }}</div>
+                                <div class="title">أمين اللجنة</div>
+                                <div class="faculty">{{ heads['Head_Scientific'].member_faculty || 'جاري التحميل..' }}</div>
+                                <div class="level">{{ heads['Head_Scientific'].member_level || 'جاري التحميل..' }}</div>
+                            </div>
+                            <div class="subordinates">
+                                <div class="position vice-head">
+                                    <div class="profile">
+                                        <img :src="`../../images/members/${viceHeads['Vice_Scientific'].member_id}.jpg`" :alt="viceHeads['Vice_Scientific'].member_name" class="circle-photo" v-if="viceHeads['Vice_Scientific'].member_id" />
+                                    </div>
+                                    <div class="details">
+                                        <div class="name">{{ formatmemberName(viceHeads['Vice_Scientific'].member_name) || 'جاري التحميل..' }}</div>
+                                        <div class="title">أمين مساعد اللجنة</div>
+                                        <div class="faculty">{{ viceHeads['Vice_Scientific'].member_faculty || 'جاري التحميل..' }}</div>
+                                        <div class="level">{{ viceHeads['Vice_Scientific'].member_level || 'جاري التحميل..' }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="members">
+                            <div class="member" v-for="member in members['Member_Scientific']" :key="member.member_id">
+                                <div class="profile">
+                                    <img :src="`../../images/members/${member.member_id}.jpg`" :alt="member.member_name" class="circle-photo" v-if="member.member_id" />
+                                </div>
+                                <div class="details">
+                                    <div class="name">{{ formatmemberName(member.member_name) || 'جاري التحميل..' }}</div>
+                                    <div class="title">عضو باللجنة</div>
+                                    <div class="faculty">{{ member.member_faculty || 'جاري التحميل..' }}</div>
+                                    <div class="level">{{ member.member_level || 'جاري التحميل..' }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Repeat for other committees like Cultural, Clubs, etc. -->
+                
             </div>
         </div>
         <FooterComponent />
@@ -112,239 +133,262 @@ import HeaderComponent from '../../public/global/headerComponent.vue';
 import FooterComponent from '../../public/global/footerComponent.vue';
 
 export default {
-    name: 'JoinUnion',
+    name: 'FindCommittee',
     components: {
         HeaderComponent,
         FooterComponent,
     },
     data() {
         return {
-            committees: [
-                {
-                    name: 'لجنة الأسر',
-                    headImage: '../../images/members/Test.jpg',
-                    viceHeadImage: '../../images/members/Test.jpg',
-                    faculty: 'صيدلة',
-                    level: 5,
-                    members: [
-                        { id: 1, name: 'رأفت شريف', image: '../../images/members/Test.jpg' },
-                        { id: 2, name: 'علياء فؤاد', image: '../../images/members/Test.jpg' },
-                        { id: 3, name: 'سامح خليل', image: '../../images/members/Test.jpg' },
-                        { id: 4, name: 'مرام سمير', image: '../../images/members/Test.jpg' },
-                        { id: 5, name: 'رأفت شريف', image: '../../images/members/Test.jpg' },
-                        { id: 6, name: 'علياء فؤاد', image: '../../images/members/Test.jpg' },
-                        { id: 7, name: 'سامح خليل', image: '../../images/members/Test.jpg' },
-                        { id: 8, name: 'مرام سمير', image: '../../images/members/Test.jpg' },
-                    ],
-                },
-                {
-                    name: 'اللجنة الرياضية',
-                    headImage: '../../images/members/Test.jpg',
-                    viceHeadImage: '../../images/members/Test.jpg',
-                    faculty: 'علوم أساسية',
-                    level: 4,
-                    members: [
-                        { id: 1, name: 'رأفت شريف', image: '../../images/members/Test.jpg' },
-                        { id: 2, name: 'علياء فؤاد', image: '../../images/members/Test.jpg' },
-                        { id: 3, name: 'سامح خليل', image: '../../images/members/Test.jpg' },
-                        { id: 4, name: 'مرام سمير', image: '../../images/members/Test.jpg' },
-                        { id: 5, name: 'رأفت شريف', image: '../../images/members/Test.jpg' },
-                        { id: 6, name: 'علياء فؤاد', image: '../../images/members/Test.jpg' },
-                        { id: 7, name: 'سامح خليل', image: '../../images/members/Test.jpg' },
-                        { id: 8, name: 'مرام سمير', image: '../../images/members/Test.jpg' },
-                    ],
-                },
-                {
-                    name: 'اللجنة الثقافية والإعلامية',
-                    headImage: '../../images/members/Test.jpg',
-                    viceHeadImage: '../../images/members/Test.jpg',
-                    faculty: 'صحة عامة',
-                    level: 3,
-                    members: [
-                        { id: 1, name: 'رأفت شريف', image: '../../images/members/Test.jpg' },
-                        { id: 2, name: 'علياء فؤاد', image: '../../images/members/Test.jpg' },
-                        { id: 3, name: 'سامح خليل', image: '../../images/members/Test.jpg' },
-                        { id: 4, name: 'مرام سمير', image: '../../images/members/Test.jpg' },
-                        { id: 5, name: 'رأفت شريف', image: '../../images/members/Test.jpg' },
-                        { id: 6, name: 'علياء فؤاد', image: '../../images/members/Test.jpg' },
-                        { id: 7, name: 'سامح خليل', image: '../../images/members/Test.jpg' },
-                        { id: 8, name: 'مرام سمير', image: '../../images/members/Test.jpg' },
-                    ],
-                },
-                {
-                    name: 'اللجنة الفنية',
-                    headImage: '../../images/members/Test.jpg',
-                    viceHeadImage: '../../images/members/Test.jpg',
-                    faculty: 'فنون وتصميم',
-                    level: 4,
-                    members: [
-                        { id: 1, name: 'رأفت شريف', image: '../../images/members/Test.jpg' },
-                        { id: 2, name: 'علياء فؤاد', image: '../../images/members/Test.jpg' },
-                        { id: 3, name: 'سامح خليل', image: '../../images/members/Test.jpg' },
-                        { id: 4, name: 'مرام سمير', image: '../../images/members/Test.jpg' },
-                        { id: 5, name: 'رأفت شريف', image: '../../images/members/Test.jpg' },
-                        { id: 6, name: 'علياء فؤاد', image: '../../images/members/Test.jpg' },
-                        { id: 7, name: 'سامح خليل', image: '../../images/members/Test.jpg' },
-                        { id: 8, name: 'مرام سمير', image: '../../images/members/Test.jpg' },
-                    ],
-                },
-                {
-                    name: 'لجنة الجوالة والخدمة العامة',
-                    headImage: '../../images/members/Test.jpg',
-                    viceHeadImage: '../../images/members/Test.jpg',
-                    faculty: 'صحة عامة',
-                    level: 3,
-                    members: [
-                        { id: 1, name: 'رأفت شريف', image: '../../images/members/Test.jpg' },
-                        { id: 2, name: 'علياء فؤاد', image: '../../images/members/Test.jpg' },
-                        { id: 3, name: 'سامح خليل', image: '../../images/members/Test.jpg' },
-                        { id: 4, name: 'مرام سمير', image: '../../images/members/Test.jpg' },
-                        { id: 5, name: 'رأفت شريف', image: '../../images/members/Test.jpg' },
-                        { id: 6, name: 'علياء فؤاد', image: '../../images/members/Test.jpg' },
-                        { id: 7, name: 'سامح خليل', image: '../../images/members/Test.jpg' },
-                        { id: 8, name: 'مرام سمير', image: '../../images/members/Test.jpg' },
-                    ],
-                },
-                {
-                    name: 'اللجنة الاجتماعية والرحلات',
-                    headImage: '../../images/members/Test.jpg',
-                    viceHeadImage: '../../images/members/Test.jpg',
-                    faculty: 'أعمال',
-                    level: 5,
-                    members: [
-                        { id: 1, name: 'رأفت شريف', image: '../../images/members/Test.jpg' },
-                        { id: 2, name: 'علياء فؤاد', image: '../../images/members/Test.jpg' },
-                        { id: 3, name: 'سامح خليل', image: '../../images/members/Test.jpg' },
-                        { id: 4, name: 'مرام سمير', image: '../../images/members/Test.jpg' },
-                        { id: 5, name: 'رأفت شريف', image: '../../images/members/Test.jpg' },
-                        { id: 6, name: 'علياء فؤاد', image: '../../images/members/Test.jpg' },
-                        { id: 7, name: 'سامح خليل', image: '../../images/members/Test.jpg' },
-                        { id: 8, name: 'مرام سمير', image: '../../images/members/Test.jpg' },
-                    ],
-                },
-                {
-                    name: 'اللجنة العلمية والتكنولوجية',
-                    headImage: '../../images/members/Test.jpg',
-                    viceHeadImage: '../../images/members/Test.jpg',
-                    faculty: 'علوم أساسية',
-                    level: 4,
-                    members: [
-                        { id: 1, name: 'رأفت شريف', image: '../../images/members/Test.jpg' },
-                        { id: 2, name: 'علياء فؤاد', image: '../../images/members/Test.jpg' },
-                        { id: 3, name: 'سامح خليل', image: '../../images/members/Test.jpg' },
-                        { id: 4, name: 'مرام سمير', image: '../../images/members/Test.jpg' },
-                        { id: 5, name: 'رأفت شريف', image: '../../images/members/Test.jpg' },
-                        { id: 6, name: 'علياء فؤاد', image: '../../images/members/Test.jpg' },
-                        { id: 7, name: 'سامح خليل', image: '../../images/members/Test.jpg' },
-                        { id: 8, name: 'مرام سمير', image: '../../images/members/Test.jpg' },
-                    ],
-                },
-            ],
+            president: {},
+            vicePresident: {},
+            heads: {
+                Head_Scout: {},
+                Head_Scientific: {},
+                Head_Cultural: {},
+                Head_Clubs: {},
+                Head_Arts: {},
+                Head_Sports: {},
+                Head_Social: {},
+            },
+            viceHeads: {
+                Vice_Scout: {},
+                Vice_Scientific: {},
+                Vice_Cultural: {},
+                Vice_Clubs: {},
+                Vice_Arts: {},
+                Vice_Sports: {},
+                Vice_Social: {},
+            },
+            members: {
+                Member_Scout: [],
+                Member_Scientific: [],
+                Member_Cultural: [],
+                Member_Clubs: [],
+                Member_Arts: [],
+                Member_Sports: [],
+                Member_Social: [],
+            },
+            loading: true,
+            errorMessage: '',
         };
     },
     mounted() {
-        window.scrollTo(0, 0);
-    }
+        this.loadMemberData();
+    },
+    methods: {
+        async loadMemberData() {
+            try {
+                const response = await fetch('https://aiusu-backend.vercel.app/members');
+                if (!response.ok) throw new Error('Failed to fetch member data');
+                const memberData = await response.json();
+
+                // Organize members
+                this.organizeMembers(memberData);
+                this.loading = false;
+            } catch (error) {
+                this.errorMessage = 'خطأ في تحميل بيانات الأعضاء';
+                console.error('Error loading member data:', error);
+                this.loading = false;
+            }
+        },
+
+        organizeMembers(members) {
+            // Extract president and vice president
+            this.president = members.find(m => m.member_title === 'President') || {};
+            this.vicePresident = members.find(m => m.member_title === 'Vice') || {};
+
+            // Organize heads and vice heads
+            const titles = [
+                'Head_Scout', 'Head_Scientific', 'Head_Cultural', 'Head_Clubs',
+                'Head_Arts', 'Head_Sports', 'Head_Social'
+            ];
+            const viceTitles = [
+                'Vice_Scout', 'Vice_Scientific', 'Vice_Cultural', 'Vice_Clubs',
+                'Vice_Arts', 'Vice_Sports', 'Vice_Social'
+            ];
+
+            titles.forEach(title => {
+                this.heads[title] = members.find(m => m.member_title === title) || {};
+            });
+
+            viceTitles.forEach(title => {
+                this.viceHeads[title] = members.find(m => m.member_title === title) || {};
+            });
+
+            // Organize members by title
+            this.members['Member_Scout'] = members.filter(m => m.member_title === 'Member_Scout') || [];
+            this.members['Member_Scientific'] = members.filter(m => m.member_title === 'Member_Scientific') || [];
+            this.members['Member_Cultural'] = members.filter(m => m.member_title === 'Member_Cultural') || [];
+            this.members['Member_Clubs'] = members.filter(m => m.member_title === 'Member_Clubs') || [];
+            this.members['Member_Arts'] = members.filter(m => m.member_title === 'Member_Arts') || [];
+            this.members['Member_Sports'] = members.filter(m => m.member_title === 'Member_Sports') || [];
+            this.members['Member_Social'] = members.filter(m => m.member_title === 'Member_Social') || [];
+        },
+        // New method to extract the first and last words from candidate names
+        formatmemberName(name) {
+            if (!name) return '';
+            const words = name.split(' ');
+            if (words.length === 1) return words[0]; // Return if there's only one word
+            return `${words[0]} ${words[words.length - 1]}`; // Return first and last words
+        },
+    },
 };
 </script>
-
 <style scoped>
 .container {
     padding: 20px;
     direction: rtl; /* Set the text direction to RTL */
 }
+
 .organization-chart {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 20px 0;
 }
+
 .position {
     margin: 10px 0;
     text-align: center;
 }
+
 .profile {
     margin: 10px;
 }
+
 .circle-photo {
     border-radius: 50%;
     width: 80px; /* Adjust size as necessary */
     height: 80px; /* Ensure it’s a circle */
 }
+
 .details {
     padding: 5px;
 }
+
+/* Ensure uniform size for names */
 .name {
     font-weight: bold;
+    color: #0e116c; /* Change to your desired color */
+    font-size: 1rem; /* Set all names to the same size */
 }
+
+/* Ensure uniform size for titles */
 .title {
     font-weight: bold;
+    color: #cb2025;
+    font-size: 1rem; /* Set all titles to the same size */
 }
+
+/* Ensure uniform size for committee titles */
+.committee-title {
+    font-weight: bold;
+    font-size: 1.2rem; /* Set uniform size for committee titles */
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Ensure uniform size for faculty */
+.faculty {
+    font-size: 1rem; /* Set all faculty to the same size */
+}
+
+/* Ensure uniform size for levels */
+.level {
+    font-size: 1rem; /* Set all levels to the same size */
+}
+
 .subordinates {
     display: flex;
     justify-content: center;
 }
+
 .executive-committee {
     display: flex;
     flex-wrap: wrap; /* Allow wrapping to create multiple rows */
     justify-content: space-between; /* Distribute space between committee boxes */
     gap: 10px; /* Optional: Add some spacing between boxes */
 }
+
 .committee-box {
     border: 1px solid #dee2e6;
     border-radius: 5px;
     padding: 10px;
-    width: calc(33.33% - 20px); /* 3 boxes per row minus margin */
+    width: calc(50% - 10px); /* 2 boxes per row */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     box-sizing: border-box; /* Include padding and border in element's total width and height */
 }
-.committee-title {
-    font-weight: bold;
-    font-size: 1.2rem;
-    text-align: center;
-    margin-bottom: 10px;
-}
+
 .committee-content {
     display: flex;
     flex-direction: column;
 }
+
 .members {
     display: flex;
     flex-wrap: wrap; /* Allow members to wrap to the next line */
-    justify-content: space-around; /* Center members with space around */
+    justify-content: space-between; /* Distribute space between members */
 }
 
+/* Default member styling */
 .member {
-    width: 25%; /* 4 members per row */
+    width: calc(25% - 10px); /* 4 members per row with space */
     margin-bottom: 10px; /* Add some space between rows */
     box-sizing: border-box; /* Include padding and borders in width */
     text-align: center; /* Center member details */
 }
+
+/* Media Queries for Smaller Screens */
 @media (max-width: 768px) {
     .committee-box {
         width: calc(50% - 20px); /* 2 boxes per row on tablets */
     }
+
+    .member {
+        width: calc(25% - 10px); /* 4 members per row on tablets */
+    }
+
+    .name, .title, .faculty, .level {
+        font-size: 0.9rem; /* Slightly smaller font size on tablets */
+    }
+
+    .committee-title {
+        font-size: 1rem; /* Reduce font size for committee titles */
+    }
+
+    .circle-photo {
+        width: 60px; /* Adjust size for smaller screens */
+        height: 60px; /* Ensure it’s a circle */
+    }
 }
+
 @media (max-width: 576px) {
     .committee-box {
         width: 100%; /* 1 box per row on mobile */
     }
-    .title {
-        font-size: 0.8rem; /* Reduce font size on small screens */
+
+    .members {
+        flex-direction: row; /* Ensure members are in a row on mobile */
+        justify-content: space-between; /* Distribute members evenly */
     }
-    .committee-box {
-        width: 100%; /* 1 box per row on mobile */
+
+    .member {
+        width: calc(25% - 10px); /* 4 members per row on mobile */
+        margin-bottom: 10px; /* Maintain spacing between rows */
     }
-    .title, .name, .committee-title {
-        font-size: 0.45rem; /* Reduce font size on small screens */
+
+    .name, .title, .faculty, .level {
+        font-size: 0.5rem; /* Further reduce font size on small screens */
     }
-    
-    h2 {
-        font-size: 1.8rem; /* Reduce heading size on mobile */
+
+    .committee-title {
+        font-size: 0.9rem; /* Further reduce font size for committee titles */
     }
-    .details {
-        font-size: 0.45rem; /* Reduce overall details font size */
+
+    .circle-photo {
+        width: 60px; /* Maintain the circle size */
+        height: 60px; /* Ensure it’s a circle */
     }
 }
-
 </style>
