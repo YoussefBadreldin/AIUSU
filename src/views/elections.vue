@@ -11,7 +11,7 @@
                 <button type="submit" class="btn btn-primary">إبحث</button>
             </form>
 
-            <div v-if="loading" class="alert alert-info mt-4"> ...جاري التحميل</div> <!-- Loading message -->
+            <div v-if="loading" class="alert alert-info mt-4">...جاري التحميل</div> <!-- Loading message -->
             <div v-if="errorMessage" class="alert alert-danger mt-4">{{ errorMessage }}</div> <!-- Error message -->
 
             <div v-if="findplace && !loading" class="mt-4">
@@ -20,11 +20,11 @@
                 <p><strong>الكلية:</strong> {{ findplace.student_faculty }}</p>
                 <p><strong>الرقم الجامعي:</strong> {{ findplace.student_id }}</p>
                 <p><strong>المستوى:</strong> {{ studentLevelLastWord }}</p>
-                <p>{{ findplace.student_location }} <strong> :مكان اللجنة</strong></p>
+                <p><strong>مكان اللجنة:</strong> {{ findplace.student_location }}</p>
                 <p><strong>رقم الكشف:</strong> {{ findplace.student_number }}</p>
 
                 <br>
-                <h4><strong>المرشحون الذين لك الحق في انتخابهم</strong></h4>
+                <h4><strong>المرشحون الذين يحق لك انتخابهم</strong></h4>
 
                 <div v-for="(committee, index) in committees" :key="index" class="committee-container mb-4">
                     <h6>{{ committee.name }}</h6>
@@ -45,16 +45,16 @@
                 <div class="election-guidelines mt-4">
                     <h4><strong>إرشادات هامة</strong></h4>
                     <div class="video-container mt-4">
-                    <iframe 
-                        width="350" 
-                        height="180" 
-                        src="https://www.youtube.com/embed/87vnQi8zsiQ?controls=1&showinfo=0&rel=0&modestbranding=1" 
-                        title="YouTube video player" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        referrerpolicy="strict-origin-when-cross-origin" 
-                        allowfullscreen>
-                    </iframe>
+                        <iframe 
+                            width="350" 
+                            height="180" 
+                            src="https://www.youtube.com/embed/87vnQi8zsiQ?controls=1&showinfo=0&rel=0&modestbranding=1" 
+                            title="YouTube video player" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            referrerpolicy="strict-origin-when-cross-origin" 
+                            allowfullscreen>
+                        </iframe>
                     </div>
                     <br>
                     <h5>: نظام الانتخابات</h5>
@@ -63,18 +63,19 @@
                     </ul>
                     <br>
                     <h5>: خطوات التصويت</h5>
-                    <ol>
+                    <ul>
                         <li>.قم بالتوقيع في كشف الحضور قبل بدء التصويت -</li>
                         <li>.ستتلقى ورقة انتخابية مخصصة لك -</li>
                         <li>.اكتب أسماء 14 مرشحًا، بواقع اثنين لكل لجنة -</li>
-                        <li>.تأكد من كتابة 14 اسمًا بالضبط؛ إذ إن أي ورقة تحتوي على أقل أو أكثر من 14 اسمًا أو أي علامات إضافية ستُعتبر باطلة -</li>
-                    </ol>
+                        <li>تأكد من كتابة 14 اسمًا بالضبط؛ إذ إن أي ورقة تحتوي على أقل أو أكثر  -</li>
+                        <li>.من 14 اسمًا أو أي علامات إضافية ستُعتبر باطلة </li>
+                    </ul>
                     <br>
                     <h5>: ملاحظات هامة</h5>
                     <ul>
-                        <li>.يمكنك التصويت فقط للمرشحين المذكورين في القائمة أعلاه، ولا يُسمح بانتخاب طلاب آخرين -</li>
+                        <li>يمكنك التصويت فقط للمرشحين المذكورين في القائمة أعلاه، -</li>
+                         <li>.ولا يُسمح بانتخاب طلاب آخرين</li>
                     </ul>
-
                 </div>
             </div>
         </div>
