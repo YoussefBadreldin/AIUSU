@@ -2,13 +2,15 @@
     <div>
         <HeaderComponent />
         <div class="container">
+            <h2 class="text-center my-4">عن اتحاد الطلاب </h2>
             <div class="video-container mt-4">
                 <iframe width="350" height="180" src="https://www.youtube.com/embed/h_i07JhOqq4?si=QGQ1iOwr-trBwPmn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
-            <h2 class="text-center my-4">عن اتحاد الطلاب </h2>
+            <li>
             <p>
                 يعد اتحاد الطلاب أحد أركان الحياة الجامعية في مصر. يهدف إلى تفعيل مشاركة الطلاب في الأنشطة المختلفة، وتنمية قدراتهم في القيادة، والمسؤولية، والعمل الجماعي. يعمل وفقاً لقوانين ولوائح وزارة التعليم العالي والبحث العلمي.
             </p>
+            </li>
 <br>
             <h3 class="my-4">الأهداف الرئيسية لاتحاد الطلاب</h3>
             <ul>
@@ -37,43 +39,43 @@
                 <li>- تشجيع المشاركة الطلابية: حث الطلاب على المشاركة في الأنشطة.</li>
                 <br>
             </ul>
-
+            
             <h3 class="my-4">لجان اتحاد الطلاب</h3>
             <ul>
                 <li>
                     <strong>لجنة الأسر</strong>
                     <img src="../../images/clubs.jpg" alt="لجنة الأسر" class="committee-image">
-                    <p>تركز هذه اللجنة على الأنشطة الاجتماعية مثل:</p>
+                    <p>تُعنى هذه اللجنة بتنظيم أنشطة الأسر الطلابية (Student Clubs) وتشجيع الطلاب على تأسيسها، بالإضافة إلى متابعة نشاطاتها ودعمها لتحقيق أهدافها.</p>
                 </li>
                 <li>
                     <strong>اللجنة الرياضية</strong>
                     <img src="../../images/sports.jpg" alt="اللجنة الرياضية" class="committee-image">
-                    <p>تركز هذه اللجنة على الأنشطة الرياضية مثل:</p>
+                    <p>تركز هذه اللجنة على الأنشطة الرياضية مثل تنظيم البطولات الرياضية والمباريات، وتشجيع الطلاب على المشاركة في الرياضات الجماعية والفردية لتعزيز اللياقة البدنية.</p>
                 </li>
                 <li>
                     <strong>اللجنة الثقافية والإعلامية</strong>
                     <img src="../../images/cultural.jpg" alt="اللجنة الثقافية والإعلامية" class="committee-image">
-                    <p>تركز هذه اللجنة على الأنشطة الثقافية والإعلامية مثل:</p>
+                    <p>تُعنى هذه اللجنة بتنظيم الأنشطة الثقافية مثل الندوات، المحاضرات، والمسابقات الثقافية، بالإضافة إلى تنمية مهارات الطلاب في مجالات الإعلام مثل الكتابة الصحفية، التصوير، والإنتاج الإعلامي.</p>
                 </li>
                 <li>
                     <strong>اللجنة الفنية</strong>
                     <img src="../../images/arts.jpg" alt="اللجنة الفنية" class="committee-image">
-                    <p>تركز هذه اللجنة على الأنشطة الفنية مثل:</p>
+                    <p>تُعنى هذه اللجنة بتنظيم الأنشطة الفنية مثل المسرح، الموسيقى، الرسم، والنحت، وتسعى لاكتشاف وتنمية المواهب الفنية بين الطلاب.</p>
                 </li>
                 <li>
                     <strong>لجنة الجوالة والخدمة العامة</strong>
                     <img src="../../images/scout.jpg" alt="لجنة الجوالة والخدمة العامة" class="committee-image">
-                    <p>تركز هذه اللجنة على الأنشطة الخدمية والمجتمعية مثل:</p>
+                    <p>تركز هذه اللجنة على الأنشطة الكشفية وتطوير مهارات الطلاب في الاعتماد على النفس والقيادة، بالإضافة إلى المشاركة في الأنشطة المجتمعية والخدمية داخل وخارج الجامعة.</p>
                 </li>
                 <li>
                     <strong>اللجنة الاجتماعية والرحلات</strong>
                     <img src="../../images/social.jpg" alt="اللجنة الاجتماعية" class="committee-image">
-                    <p>تركز هذه اللجنة على الأنشطة الاجتماعية والرحلات مثل:</p>
+                    <p>تهدف هذه اللجنة إلى تنظيم الأنشطة الاجتماعية والرحلات الترفيهية والثقافية، لتعزيز التواصل الاجتماعي بين الطلاب وإثراء تجربتهم الجامعية.</p>
                 </li>
                 <li>
                     <strong>اللجنة العلمية والتكنولوجية</strong>
                     <img src="../../images/scientific.jpg" alt="اللجنة العلمية والتكنولوجية" class="committee-image">
-                    <p>تركز هذه اللجنة على الأنشطة العلمية والتكنولوجية مثل:</p>
+                    <p>تركز هذه اللجنة على تنظيم الأنشطة العلمية مثل المؤتمرات وورش العمل والمسابقات، بالإضافة إلى تعزيز الابتكار التكنولوجي بين الطلاب ومساعدتهم في تطوير مهاراتهم التقنية.</p>
                 </li>
             </ul>
 
@@ -103,46 +105,67 @@ export default {
     padding: 20px;
     direction: rtl; /* Set text direction to RTL */
 }
+
 h2, h3 {
     color: #343a40;
 }
+
 ul {
     list-style-type: disc;
     padding-left: 20px;
 }
+
 p, ul {
     font-size: 1.1rem;
     line-height: 1.6;
 }
+
 img {
     margin-top: 10px;
     border-radius: 8px; /* Optional: to make the images look nicer */
 }
+
 .committee-image {
     width: 600px; /* Fixed width */
     height: 400px; /* Fixed height */
-    object-fit: cover; /* Ensures the image covers the set area without distortion */
+    object-fit: cover; /* Ensures the image/video covers the set area without distortion */
     display: block;
-    margin: 0 auto; /* Centers the images */
+    margin: 0 auto; /* Centers the images and video */
+}
+
+.video-container iframe {
+    width: 600px; /* Fixed width */
+    height: 340px; /* Fixed height */
+    object-fit: cover; /* Ensures the image/video covers the set area without distortion */
+    display: block;
+    margin: 0 auto; /* Centers the images and video */
+}
+
+/* Center the text and match width with the image */
+li p {
+    max-width: 600px; /* Same as the image width */
+    margin: 10px auto; /* Centers the text */
+    text-align: center; /* Center align the text */
 }
 
 /* Responsive adjustments for smaller screens */
 @media (max-width: 1024px) {
-    /* Reduce padding and font sizes for laptops */
     .container {
         padding: 15px;
     }
     p, ul {
         font-size: 1rem;
     }
-    .committee-image {
+    .committee-image, .video-container iframe {
         width: 450px;
         height: 300px;
+    }
+    li p {
+        max-width: 450px; /* Match image width */
     }
 }
 
 @media (max-width: 768px) {
-    /* Adjust layout for tablets */
     .container {
         padding: 10px;
     }
@@ -152,14 +175,16 @@ img {
     p, ul {
         font-size: 0.95rem;
     }
-    .committee-image {
+    .committee-image, .video-container iframe {
         width: 350px;
         height: 230px;
+    }
+    li p {
+        max-width: 350px; /* Match image width */
     }
 }
 
 @media (max-width: 480px) {
-    /* Further scaling down for mobile phones */
     .container {
         padding-right: 30px;
     }
@@ -171,9 +196,19 @@ img {
         font-size: 0.85rem;
         line-height: 1.4;
     }
+    .video-container iframe {
+    width: 340px; /* Fixed width */
+    height: 190px; /* Fixed height */
+    object-fit: cover; /* Ensures the image/video covers the set area without distortion */
+    display: block;
+    margin: 0 auto; /* Centers the images and video */
+}
     .committee-image {
-        width: 100%; /* Make images full width for mobile */
+        width: 100%; /* Make images/videos full width for mobile */
         height: auto; /* Let the height scale proportionally */
+    }
+    li p {
+        max-width: 100%; /* Full width text on mobile */
     }
 }
 </style>

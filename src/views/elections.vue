@@ -71,6 +71,7 @@
         <FooterComponent />
     </div>
 </template>
+
 <script>
 import HeaderComponent from '../../public/global/headerComponent.vue';
 import FooterComponent from '../../public/global/footerComponent.vue';
@@ -250,4 +251,40 @@ export default {
 .video-container {
     margin-top: 20px;
 }
+.video-container iframe {
+    width: 600px; /* Fixed width */
+    height: 340px; /* Fixed height */
+    object-fit: cover; /* Ensures the image/video covers the set area without distortion */
+    display: block;
+    margin: 0 auto; /* Centers the images and video */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 1024px) {
+ .video-container iframe {
+        width: 450px;
+        height: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+   .video-container iframe {
+        width: 350px;
+        height: 230px;
+    }
+    li p {
+        max-width: 350px; /* Match image width */
+    }
+}
+
+@media (max-width: 480px) {
+    .video-container iframe {
+    width: 340px; /* Fixed width */
+    height: 190px; /* Fixed height */
+    object-fit: cover; /* Ensures the image/video covers the set area without distortion */
+    display: block;
+    margin: 0 auto; /* Centers the images and video */
+}
+}
 </style>
+
