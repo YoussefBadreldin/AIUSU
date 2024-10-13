@@ -452,6 +452,7 @@ export default {
     },
 };
 </script>
+
 <style scoped>
 .container {
     padding: 20px;
