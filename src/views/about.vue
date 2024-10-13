@@ -52,7 +52,7 @@
            <h4><strong>لجان اتحاد الطلاب</strong></h4>
             <ul>
                 <li>
-                    <strong>لجنة الأسر</strong>
+                    <h2><strong>لجنة الأسر</strong></h2>
                     <img src="../../images/clubs.jpg" alt="لجنة الأسر" class="committee-image">
                     <p>تُعنى هذه اللجنة بتنظيم أنشطة الأسر الطلابية (Student Clubs) وتشجيع الطلاب على تأسيسها، بالإضافة إلى متابعة نشاطاتها ودعمها لتحقيق أهدافها.</p>
                 </li>
