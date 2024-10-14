@@ -20,7 +20,7 @@
                 <p><strong>الكلية:</strong> {{ findplace.student_faculty }}</p>
                 <p><strong>الرقم الجامعي:</strong> {{ findplace.student_id }}</p>
                 <p><strong>المستوى:</strong> {{ studentLevelLastWord }}</p>
-                <p><strong>مكان اللجنة:</strong> {{ findplace.student_location }}</p>
+                <p>{{ findplace.student_location }}<strong>مكان اللجنة:</strong> </p>
                 <p><strong>رقم الكشف:</strong> {{ findplace.student_number }}</p>
 
                 <br>
