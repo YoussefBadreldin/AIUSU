@@ -450,6 +450,9 @@ export default {
             return `${words[0]} ${words[words.length - 1]}`; // Return first and last words
         },
     },
+    mounted() {
+        window.scrollTo(0, 0);
+    }
 };
 </script>
 
