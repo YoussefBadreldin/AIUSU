@@ -360,31 +360,31 @@ export default {
             president: {},
             vicePresident: {},
             heads: {
-                scout: {},
-                scientific: {},
-                cultural: {},
-                clubs: {},
-                arts: {},
-                sports: {},
-                social: {},
+                Head_Scout: {},
+                Head_Scientific: {},
+                Head_Cultural: {},
+                Head_Clubs: {},
+                Head_Arts: {},
+                Head_Sports: {},
+                Head_Social: {},
             },
             viceHeads: {
-                scout: {},
-                scientific: {},
-                cultural: {},
-                clubs: {},
-                arts: {},
-                sports: {},
-                social: {},
+                Vice_Scout: {},
+                Vice_Scientific: {},
+                Vice_Cultural: {},
+                Vice_Clubs: {},
+                Vice_Arts: {},
+                Vice_Sports: {},
+                Vice_Social: {},
             },
             members: {
-                scout: [],
-                scientific: [],
-                cultural: [],
-                clubs: [],
-                arts: [],
-                sports: [],
-                social: [],
+                Member_Scout: [],
+                Member_Scientific: [],
+                Member_Cultural: [],
+                Member_Clubs: [],
+                Member_Arts: [],
+                Member_Sports: [],
+                Member_Social: [],
             },
             loading: true,
             errorMessage: '',
@@ -392,20 +392,20 @@ export default {
     },
     mounted() {
         this.loadMemberData();
-        window.scrollTo(0, 0); // Moved to first mounted() hook
     },
     methods: {
         async loadMemberData() {
             try {
                 const response = await fetch('https://aiusu-backend.vercel.app/members');
                 if (!response.ok) throw new Error('Failed to fetch member data');
-                
                 const memberData = await response.json();
+
+                // Organize members
                 this.organizeMembers(memberData);
+                this.loading = false;
             } catch (error) {
                 this.errorMessage = 'خطأ في تحميل بيانات الأعضاء';
                 console.error('Error loading member data:', error);
-            } finally {
                 this.loading = false;
             }
         },
@@ -415,28 +415,39 @@ export default {
             this.president = members.find(m => m.member_title === 'President') || {};
             this.vicePresident = members.find(m => m.member_title === 'Vice') || {};
 
-            const titleMapping = [
-                { key: 'scout', title: 'Scout' },
-                { key: 'scientific', title: 'Scientific' },
-                { key: 'cultural', title: 'Cultural' },
-                { key: 'clubs', title: 'Clubs' },
-                { key: 'arts', title: 'Arts' },
-                { key: 'sports', title: 'Sports' },
-                { key: 'social', title: 'Social' },
+            // Organize heads and vice heads
+            const titles = [
+                'Head_Scout', 'Head_Scientific', 'Head_Cultural', 'Head_Clubs',
+                'Head_Arts', 'Head_Sports', 'Head_Social'
+            ];
+            const viceTitles = [
+                'Vice_Scout', 'Vice_Scientific', 'Vice_Cultural', 'Vice_Clubs',
+                'Vice_Arts', 'Vice_Sports', 'Vice_Social'
             ];
 
-            // Organize heads and vice heads
-            titleMapping.forEach(({ key, title }) => {
-                this.heads[key] = members.find(m => m.member_title === `Head_${title}`) || {};
-                this.viceHeads[key] = members.find(m => m.member_title === `Vice_${title}`) || {};
-                this.members[key] = members.filter(m => m.member_title === `Member_${title}`) || [];
+            titles.forEach(title => {
+                this.heads[title] = members.find(m => m.member_title === title) || {};
             });
-        },
 
-        formatMemberName(name) {
+            viceTitles.forEach(title => {
+                this.viceHeads[title] = members.find(m => m.member_title === title) || {};
+            });
+
+            // Organize members by title
+            this.members['Member_Scout'] = members.filter(m => m.member_title === 'Member_Scout') || [];
+            this.members['Member_Scientific'] = members.filter(m => m.member_title === 'Member_Scientific') || [];
+            this.members['Member_Cultural'] = members.filter(m => m.member_title === 'Member_Cultural') || [];
+            this.members['Member_Clubs'] = members.filter(m => m.member_title === 'Member_Clubs') || [];
+            this.members['Member_Arts'] = members.filter(m => m.member_title === 'Member_Arts') || [];
+            this.members['Member_Sports'] = members.filter(m => m.member_title === 'Member_Sports') || [];
+            this.members['Member_Social'] = members.filter(m => m.member_title === 'Member_Social') || [];
+        },
+        // New method to extract the first and last words from candidate names
+        formatmemberName(name) {
             if (!name) return '';
-            const words = name.trim().split(' ');
-            return words.length === 1 ? words[0] : `${words[0]} ${words[words.length - 1]}`;
+            const words = name.split(' ');
+            if (words.length === 1) return words[0]; // Return if there's only one word
+            return `${words[0]} ${words[words.length - 1]}`; // Return first and last words
         },
     },
 };
