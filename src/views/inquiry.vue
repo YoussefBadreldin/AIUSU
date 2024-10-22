@@ -103,13 +103,13 @@ export default {
     },
     eligibilityStatus() {
       const { student_NAT, student_gpa, student_punish, student_activity } = this.eligibility || {};
-      if (student_NAT === 'مصري' && student_gpa > 2.0 && !student_punish && student_activity) {
+      if (student_NAT === 'مصرية' && student_gpa >= 2.0 && !student_punish && student_activity) {
         return 'يحق له الترشح';
       } else {
         let reasons = [];
         if (student_NAT !== 'مصرية') reasons.push('الجنسية غير مصرية');
-        if (student_gpa <= 2.0) reasons.push('التقدير أقل من 2.0');
-        if (student_punish) reasons.push('{{eligibility.student_punish}} لدية عقوبة سابقة وهي');
+        if (student_gpa < 2.0) reasons.push('التقدير أقل من 2.0');
+        if (student_punish) reasons.push('لدية عقوبة سابقة');
         if (!student_activity) reasons.push('ليس له أنشطة سابقة');
         return `لا يحق له الترشح، ${reasons.join(' و')}`;
       }
