@@ -5,6 +5,7 @@ import Join from "../views/join.vue";
 import About from "../views/about.vue";
 import rules from "../views/rules.vue";
 import members from "../views/members.vue";
+import inquiry from "../views/inquiry.vue";
 
 const routes = [
   {
@@ -41,6 +42,11 @@ const routes = [
     path: '/members',
     name: "members",
     component: members,
+  },
+  {
+    path: '/inquiry',
+    name: "inquiry",
+    component: inquiry,
   },
 ];
 
