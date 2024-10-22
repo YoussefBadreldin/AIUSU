@@ -31,7 +31,7 @@
                     <ul>
                         <li v-for="candidate in committee.candidates" :key="candidate.id" class="candidate-item">
                             <div class="candidate-photo">
-                                <img :src="`../../images/candidates/${candidate.candidate_id}.jpg`" alt="مرشح" loading="lazy" />
+                                <img :src="`../../images/students/${candidate.candidate_id}.jpg`" alt="مرشح" loading="lazy" />
                             </div>
                             <div class="candidate-details">
                                 <span class="candidate-name">{{ formatCandidateName(candidate.candidate_name) }}</span>
@@ -194,7 +194,7 @@ export default {
                     .filter(candidate => candidate.candidate_level === level)
                     .map(candidate => ({
                         ...candidate,
-                        photo: `../../images/candidates/${candidate.candidate_id}.jpg`,
+                        photo: `../../images/students/${candidate.candidate_id}.jpg`,
                     }));
 
                 return {

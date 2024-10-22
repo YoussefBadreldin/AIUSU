@@ -6,7 +6,7 @@
             <div class="organization-chart">
                 <div class="position president">
                     <div class="profile">
-                        <img :src="`../../images/members/${president.member_id}.jpg`" :alt="president.member_name" class="circle-photo" v-if="president.member_id" />
+                        <img :src="`../../images/students/${president.member_id}.jpg`" :alt="president.member_name" class="circle-photo" v-if="president.member_id" />
                     </div>
                     <div class="details">
                         <div class="name">{{ formatmemberName(president.member_name) || 'جاري التحميل..' }}</div>
@@ -17,7 +17,7 @@
                     <div class="subordinates">
                         <div class="position vice-president">
                             <div class="profile">
-                                <img :src="`../../images/members/${vicePresident.member_id}.jpg`" :alt="vicePresident.member_name" class="circle-photo" v-if="vicePresident.member_id" />
+                                <img :src="`../../images/students/${vicePresident.member_id}.jpg`" :alt="vicePresident.member_name" class="circle-photo" v-if="vicePresident.member_id" />
                             </div>
                             <div class="details">
                                 <div class="name">{{ formatmemberName(vicePresident.member_name) || 'جاري التحميل..' }}</div>
@@ -37,7 +37,7 @@
         <div class="committee-content">
             <div class="position head">
                 <div class="profile">
-                    <img :src="`../../images/members/${heads['Head_Clubs'].member_id}.jpg`" :alt="heads['Head_Clubs'].member_name" class="circle-photo" v-if="heads['Head_Clubs'].member_id" />
+                    <img :src="`../../images/students/${heads['Head_Clubs'].member_id}.jpg`" :alt="heads['Head_Clubs'].member_name" class="circle-photo" v-if="heads['Head_Clubs'].member_id" />
                 </div>
                 <div class="details">
                     <div class="name">{{ formatmemberName(heads['Head_Clubs'].member_name) || 'جاري التحميل..' }}</div>
@@ -48,7 +48,7 @@
                 <div class="subordinates">
                     <div class="position vice-head">
                         <div class="profile">
-                            <img :src="`../../images/members/${viceHeads['Vice_Clubs'].member_id}.jpg`" :alt="viceHeads['Vice_Clubs'].member_name" class="circle-photo" v-if="viceHeads['Vice_Clubs'].member_id" />
+                            <img :src="`../../images/students/${viceHeads['Vice_Clubs'].member_id}.jpg`" :alt="viceHeads['Vice_Clubs'].member_name" class="circle-photo" v-if="viceHeads['Vice_Clubs'].member_id" />
                         </div>
                         <div class="details">
                             <div class="name">{{ formatmemberName(viceHeads['Vice_Clubs'].member_name) || 'جاري التحميل..' }}</div>
@@ -62,7 +62,7 @@
             <div class="members">
                 <div class="member" v-for="member in members['Member_Clubs']" :key="member.member_id">
                     <div class="profile">
-                        <img :src="`../../images/members/${member.member_id}.jpg`" :alt="member.member_name" class="circle-photo" v-if="member.member_id" />
+                        <img :src="`../../images/students/${member.member_id}.jpg`" :alt="member.member_name" class="circle-photo" v-if="member.member_id" />
                     </div>
                     <div class="details">
                         <div class="name">{{ formatmemberName(member.member_name) || 'جاري التحميل..' }}</div>
@@ -81,7 +81,7 @@
         <div class="committee-content">
             <div class="position head">
                 <div class="profile">
-                    <img :src="`../../images/members/${heads['Head_Sports'].member_id}.jpg`" :alt="heads['Head_Sports'].member_name" class="circle-photo" v-if="heads['Head_Sports'].member_id" />
+                    <img :src="`../../images/students/${heads['Head_Sports'].member_id}.jpg`" :alt="heads['Head_Sports'].member_name" class="circle-photo" v-if="heads['Head_Sports'].member_id" />
                 </div>
                 <div class="details">
                     <div class="name">{{ formatmemberName(heads['Head_Sports'].member_name) || 'جاري التحميل..' }}</div>
@@ -92,7 +92,7 @@
                 <div class="subordinates">
                     <div class="position vice-head">
                         <div class="profile">
-                            <img :src="`../../images/members/${viceHeads['Vice_Sports'].member_id}.jpg`" :alt="viceHeads['Vice_Sports'].member_name" class="circle-photo" v-if="viceHeads['Vice_Sports'].member_id" />
+                            <img :src="`../../images/students/${viceHeads['Vice_Sports'].member_id}.jpg`" :alt="viceHeads['Vice_Sports'].member_name" class="circle-photo" v-if="viceHeads['Vice_Sports'].member_id" />
                         </div>
                         <div class="details">
                             <div class="name">{{ formatmemberName(viceHeads['Vice_Sports'].member_name) || 'جاري التحميل..' }}</div>
@@ -106,7 +106,7 @@
             <div class="members">
                 <div class="member" v-for="member in members['Member_Sports']" :key="member.member_id">
                     <div class="profile">
-                        <img :src="`../../images/members/${member.member_id}.jpg`" :alt="member.member_name" class="circle-photo" v-if="member.member_id" />
+                        <img :src="`../../images/students/${member.member_id}.jpg`" :alt="member.member_name" class="circle-photo" v-if="member.member_id" />
                     </div>
                     <div class="details">
                         <div class="name">{{ formatmemberName(member.member_name) || 'جاري التحميل..' }}</div>
@@ -125,7 +125,7 @@
         <div class="committee-content">
             <div class="position head">
                 <div class="profile">
-                    <img :src="`../../images/members/${heads['Head_Cultural'].member_id}.jpg`" :alt="heads['Head_Cultural'].member_name" class="circle-photo" v-if="heads['Head_Cultural'].member_id" />
+                    <img :src="`../../images/students/${heads['Head_Cultural'].member_id}.jpg`" :alt="heads['Head_Cultural'].member_name" class="circle-photo" v-if="heads['Head_Cultural'].member_id" />
                 </div>
                 <div class="details">
                     <div class="name">{{ formatmemberName(heads['Head_Cultural'].member_name) || 'جاري التحميل..' }}</div>
@@ -136,7 +136,7 @@
                 <div class="subordinates">
                     <div class="position vice-head">
                         <div class="profile">
-                            <img :src="`../../images/members/${viceHeads['Vice_Cultural'].member_id}.jpg`" :alt="viceHeads['Vice_Cultural'].member_name" class="circle-photo" v-if="viceHeads['Vice_Cultural'].member_id" />
+                            <img :src="`../../images/students/${viceHeads['Vice_Cultural'].member_id}.jpg`" :alt="viceHeads['Vice_Cultural'].member_name" class="circle-photo" v-if="viceHeads['Vice_Cultural'].member_id" />
                         </div>
                         <div class="details">
                             <div class="name">{{ formatmemberName(viceHeads['Vice_Cultural'].member_name) || 'جاري التحميل..' }}</div>
@@ -150,7 +150,7 @@
             <div class="members">
                 <div class="member" v-for="member in members['Member_Cultural']" :key="member.member_id">
                     <div class="profile">
-                        <img :src="`../../images/members/${member.member_id}.jpg`" :alt="member.member_name" class="circle-photo" v-if="member.member_id" />
+                        <img :src="`../../images/students/${member.member_id}.jpg`" :alt="member.member_name" class="circle-photo" v-if="member.member_id" />
                     </div>
                     <div class="details">
                         <div class="name">{{ formatmemberName(member.member_name) || 'جاري التحميل..' }}</div>
@@ -169,7 +169,7 @@
         <div class="committee-content">
             <div class="position head">
                 <div class="profile">
-                    <img :src="`../../images/members/${heads['Head_Arts'].member_id}.jpg`" :alt="heads['Head_Arts'].member_name" class="circle-photo" v-if="heads['Head_Arts'].member_id" />
+                    <img :src="`../../images/students/${heads['Head_Arts'].member_id}.jpg`" :alt="heads['Head_Arts'].member_name" class="circle-photo" v-if="heads['Head_Arts'].member_id" />
                 </div>
                 <div class="details">
                     <div class="name">{{ formatmemberName(heads['Head_Arts'].member_name) || 'جاري التحميل..' }}</div>
@@ -180,7 +180,7 @@
                 <div class="subordinates">
                     <div class="position vice-head">
                         <div class="profile">
-                            <img :src="`../../images/members/${viceHeads['Vice_Arts'].member_id}.jpg`" :alt="viceHeads['Vice_Arts'].member_name" class="circle-photo" v-if="viceHeads['Vice_Arts'].member_id" />
+                            <img :src="`../../images/students/${viceHeads['Vice_Arts'].member_id}.jpg`" :alt="viceHeads['Vice_Arts'].member_name" class="circle-photo" v-if="viceHeads['Vice_Arts'].member_id" />
                         </div>
                         <div class="details">
                             <div class="name">{{ formatmemberName(viceHeads['Vice_Arts'].member_name) || 'جاري التحميل..' }}</div>
@@ -194,7 +194,7 @@
             <div class="members">
                 <div class="member" v-for="member in members['Member_Arts']" :key="member.member_id">
                     <div class="profile">
-                        <img :src="`../../images/members/${member.member_id}.jpg`" :alt="member.member_name" class="circle-photo" v-if="member.member_id" />
+                        <img :src="`../../images/students/${member.member_id}.jpg`" :alt="member.member_name" class="circle-photo" v-if="member.member_id" />
                     </div>
                     <div class="details">
                         <div class="name">{{ formatmemberName(member.member_name) || 'جاري التحميل..' }}</div>
@@ -213,7 +213,7 @@
         <div class="committee-content">
             <div class="position head">
                 <div class="profile">
-                    <img :src="`../../images/members/${heads['Head_Scout'].member_id}.jpg`" :alt="heads['Head_Scout'].member_name" class="circle-photo" v-if="heads['Head_Scout'].member_id" />
+                    <img :src="`../../images/students/${heads['Head_Scout'].member_id}.jpg`" :alt="heads['Head_Scout'].member_name" class="circle-photo" v-if="heads['Head_Scout'].member_id" />
                 </div>
                 <div class="details">
                     <div class="name">{{ formatmemberName(heads['Head_Scout'].member_name) || 'جاري التحميل..' }}</div>
@@ -224,7 +224,7 @@
                 <div class="subordinates">
                     <div class="position vice-head">
                         <div class="profile">
-                            <img :src="`../../images/members/${viceHeads['Vice_Scout'].member_id}.jpg`" :alt="viceHeads['Vice_Scout'].member_name" class="circle-photo" v-if="viceHeads['Vice_Scout'].member_id" />
+                            <img :src="`../../images/students/${viceHeads['Vice_Scout'].member_id}.jpg`" :alt="viceHeads['Vice_Scout'].member_name" class="circle-photo" v-if="viceHeads['Vice_Scout'].member_id" />
                         </div>
                         <div class="details">
                             <div class="name">{{ formatmemberName(viceHeads['Vice_Scout'].member_name) || 'جاري التحميل..' }}</div>
@@ -238,7 +238,7 @@
             <div class="members">
                 <div class="member" v-for="member in members['Member_Scout']" :key="member.member_id">
                     <div class="profile">
-                        <img :src="`../../images/members/${member.member_id}.jpg`" :alt="member.member_name" class="circle-photo" v-if="member.member_id" />
+                        <img :src="`../../images/students/${member.member_id}.jpg`" :alt="member.member_name" class="circle-photo" v-if="member.member_id" />
                     </div>
                     <div class="details">
                         <div class="name">{{ formatmemberName(member.member_name) || 'جاري التحميل..' }}</div>
@@ -257,7 +257,7 @@
         <div class="committee-content">
             <div class="position head">
                 <div class="profile">
-                    <img :src="`../../images/members/${heads['Head_Social'].member_id}.jpg`" :alt="heads['Head_Social'].member_name" class="circle-photo" v-if="heads['Head_Social'].member_id" />
+                    <img :src="`../../images/students/${heads['Head_Social'].member_id}.jpg`" :alt="heads['Head_Social'].member_name" class="circle-photo" v-if="heads['Head_Social'].member_id" />
                 </div>
                 <div class="details">
                     <div class="name">{{ formatmemberName(heads['Head_Social'].member_name) || 'جاري التحميل..' }}</div>
@@ -268,7 +268,7 @@
                 <div class="subordinates">
                     <div class="position vice-head">
                         <div class="profile">
-                            <img :src="`../../images/members/${viceHeads['Vice_Social'].member_id}.jpg`" :alt="viceHeads['Vice_Social'].member_name" class="circle-photo" v-if="viceHeads['Vice_Social'].member_id" />
+                            <img :src="`../../images/students/${viceHeads['Vice_Social'].member_id}.jpg`" :alt="viceHeads['Vice_Social'].member_name" class="circle-photo" v-if="viceHeads['Vice_Social'].member_id" />
                         </div>
                         <div class="details">
                             <div class="name">{{ formatmemberName(viceHeads['Vice_Social'].member_name) || 'جاري التحميل..' }}</div>
@@ -282,7 +282,7 @@
             <div class="members">
                 <div class="member" v-for="member in members['Member_Social']" :key="member.member_id">
                     <div class="profile">
-                        <img :src="`../../images/members/${member.member_id}.jpg`" :alt="member.member_name" class="circle-photo" v-if="member.member_id" />
+                        <img :src="`../../images/students/${member.member_id}.jpg`" :alt="member.member_name" class="circle-photo" v-if="member.member_id" />
                     </div>
                     <div class="details">
                         <div class="name">{{ formatmemberName(member.member_name) || 'جاري التحميل..' }}</div>
@@ -301,7 +301,7 @@
         <div class="committee-content">
             <div class="position head">
                 <div class="profile">
-                    <img :src="`../../images/members/${heads['Head_Scientific'].member_id}.jpg`" :alt="heads['Head_Scientific'].member_name" class="circle-photo" v-if="heads['Head_Scientific'].member_id" />
+                    <img :src="`../../images/students/${heads['Head_Scientific'].member_id}.jpg`" :alt="heads['Head_Scientific'].member_name" class="circle-photo" v-if="heads['Head_Scientific'].member_id" />
                 </div>
                 <div class="details">
                     <div class="name">{{ formatmemberName(heads['Head_Scientific'].member_name) || 'جاري التحميل..' }}</div>
@@ -312,7 +312,7 @@
                 <div class="subordinates">
                     <div class="position vice-head">
                         <div class="profile">
-                            <img :src="`../../images/members/${viceHeads['Vice_Scientific'].member_id}.jpg`" :alt="viceHeads['Vice_Scientific'].member_name" class="circle-photo" v-if="viceHeads['Vice_Scientific'].member_id" />
+                            <img :src="`../../images/students/${viceHeads['Vice_Scientific'].member_id}.jpg`" :alt="viceHeads['Vice_Scientific'].member_name" class="circle-photo" v-if="viceHeads['Vice_Scientific'].member_id" />
                         </div>
                         <div class="details">
                             <div class="name">{{ formatmemberName(viceHeads['Vice_Scientific'].member_name) || 'جاري التحميل..' }}</div>
@@ -326,7 +326,7 @@
             <div class="members">
                 <div class="member" v-for="member in members['Member_Scientific']" :key="member.member_id">
                     <div class="profile">
-                        <img :src="`../../images/members/${member.member_id}.jpg`" :alt="member.member_name" class="circle-photo" v-if="member.member_id" />
+                        <img :src="`../../images/students/${member.member_id}.jpg`" :alt="member.member_name" class="circle-photo" v-if="member.member_id" />
                     </div>
                     <div class="details">
                         <div class="name">{{ formatmemberName(member.member_name) || 'جاري التحميل..' }}</div>
