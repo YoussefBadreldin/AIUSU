@@ -44,20 +44,23 @@
                 <div v-if="errorMessage" class="alert alert-danger mt-4">{{ errorMessage }}</div>
 
                 <div v-if="eligibility && !loading" class="mt-4">
-                  <p><strong class="title-color">اسم الطالب:</strong> {{ eligibility.student_name }}</p>
-                  <p><strong class="title-color">الجنسية:</strong> {{ eligibility.student_NAT }}</p>
-                  <p><strong class="title-color">الرقم القومي:</strong> {{ eligibility.student_NATid }}</p>
-                  <p><strong class="title-color">الكلية:</strong> {{ eligibility.student_faculty }}</p>
-                  <p><strong class="title-color">الرقم الجامعي:</strong> {{ eligibility.student_id }}</p>
-                  <p><strong class="title-color">المستوى:</strong> {{ studentLevelLastWord }}</p>
-                  <p><strong class="title-color">التقدير:</strong> {{ eligibility.student_gpa }}</p>
-                  <p><strong class="title-color">العقوبات:</strong> {{ eligibility.student_punish || 'لا يوجد' }}</p>
-                  <p><strong class="title-color">الانشطة السابقة:</strong> {{ eligibility.student_activity || 'لا يوجد' }}</p>
-                  <br>
-                  <p v-if="eligibilityStatus" class="title-color"> {{ eligibilityStatus }}</p>
-                </div>
-
-                <br />
+              <div class="status-box">
+                <p v-if="eligibilityStatus" :style="{ color: eligibilityStatus.color, textAlign: 'center' }">
+                  {{ eligibilityStatus.message }}
+                </p>
+              </div>
+              <br>
+              <h4 style="color: #0f106c;"><strong>بيانات الطالب</strong></h4>
+              <p><strong class="title-color" style="color: black;">اسم الطالب:</strong> {{ eligibility.student_name }}</p>
+              <p><strong class="title-color" style="color: black;">الجنسية:</strong> {{ eligibility.student_NAT }}</p>
+              <p><strong class="title-color" style="color: black;">الرقم القومي:</strong> {{ eligibility.student_NATid }}</p>
+              <p><strong class="title-color" style="color: black;">الكلية:</strong> {{ eligibility.student_faculty }}</p>
+              <p><strong class="title-color" style="color: black;">الرقم الجامعي:</strong> {{ eligibility.student_id }}</p>
+              <p><strong class="title-color" style="color: black;">المستوى:</strong> {{ studentLevelLastWord }}</p>
+              <p><strong class="title-color" style="color: black;">التقدير:</strong> {{ eligibility.student_gpa }}</p>
+              <p><strong class="title-color" style="color: black;">العقوبات:</strong> {{ eligibility.student_punish || 'لا يوجد' }}</p>
+              <p><strong class="title-color" style="color: black;">الانشطة السابقة:</strong> {{ eligibility.student_activity || 'لا يوجد' }}</p>
+            </div>
               </div>
             </div>
           </div>
@@ -94,6 +97,7 @@ export default {
   },
   mounted() {
     this.loadStudentData(); // Load student data on component mount
+    this.checkAuthentication(); // Check authentication on mount
   },
   computed: {
     studentLevelLastWord() {
@@ -103,19 +107,32 @@ export default {
     },
     eligibilityStatus() {
       const { student_NAT, student_gpa, student_punish, student_activity } = this.eligibility || {};
+      let statusMessage;
+      let statusColor;
+
       if (student_NAT === 'مصرية' && student_gpa >= 2.0 && !student_punish && student_activity) {
-        return 'يحق له الترشح';
+        statusMessage = 'يحق له الترشح';
+        statusColor = 'green'; // Green color for eligible
       } else {
         let reasons = [];
         if (student_NAT !== 'مصرية') reasons.push('الجنسية غير مصرية');
         if (student_gpa < 2.0) reasons.push('التقدير أقل من 2.0');
         if (student_punish) reasons.push('لدية عقوبة سابقة');
         if (!student_activity) reasons.push('ليس له أنشطة سابقة');
-        return `لا يحق له الترشح، ${reasons.join(' و')}`;
+        statusMessage = `لا يحق له الترشح، ${reasons.join(' و')}`;
+        statusColor = 'red'; // Red color for not eligible
       }
+
+      return { message: statusMessage, color: statusColor };
     },
   },
   methods: {
+    checkAuthentication() {
+      const storedAuth = sessionStorage.getItem('isAuthenticated');
+      if (storedAuth === 'true') {
+        this.isAuthenticated = true; // Restore authentication state
+      }
+    },
     handleLogin() {
       const validUsername = 'admin'; // Placeholder for real validation
       const validPassword = 'admin'; // Placeholder for real validation
@@ -125,11 +142,12 @@ export default {
         this.isAuthenticated = true;
         this.showLogin = false; // Hide login form after successful login
         this.errorMessage = '';
+        sessionStorage.setItem('isAuthenticated', 'true'); // Store auth state in session storage
       } else {
         this.errorMessage = 'اسم المستخدم او كلمة المرور غير صحيحة!';
       }
     },
-    
+
     // Method to find student by university number
     findStudent() {
       this.loading = true; // Start loading
@@ -144,8 +162,11 @@ export default {
         return;
       }
 
-      this.eligibility = studentData; // Set eligibility data
-      this.loading = false; // Stop loading
+      // Simulate a delay to demonstrate loading (optional)
+      setTimeout(() => {
+        this.eligibility = studentData; // Set eligibility data
+        this.loading = false; // Stop loading
+      }, 1000); // Delay for 1 second (you can adjust this as needed)
     },
 
     async loadStudentData() {
@@ -164,6 +185,11 @@ export default {
         this.errorMessage = 'فشل تحميل بيانات الطلاب';
       }
     },
+
+    logout() {
+      this.isAuthenticated = false;
+      sessionStorage.removeItem('isAuthenticated'); // Clear auth state from session storage
+    }
   },
 };
 </script>
@@ -199,35 +225,29 @@ export default {
   text-align: center;
   display: block;
   width: 100%;
-  border-radius: 5px; /* Add border-radius for rounded corners */
+  margin-bottom: 10px;
 }
 
 .custom-btn:hover {
-  background-color: #b11d22 !important;
-  border-color: #e6e6e6; /* Change border color on hover */
+  background-color: #ffffff; /* Change background on hover */
+  color: #c42326; /* Change text color on hover */
+  border-color: #c42326; /* Change border color on hover */
 }
 
-/* Title Color */
-.title-color {
-  color: #0f106c; /* Set the color for titles */
-}
-
-/* Center the row content */
-.row {
-  display: flex;
-  justify-content: center; /* Center items horizontally */
-}
-
-/* Error message style */
 .error {
-  color: white; /* Adjusted color */
-  margin-top: 10px;
+  color: red;
 }
 
-/* Spacing for Mobile */
-@media (max-width: 768px) {
-  .About-Us .row > div {
-    margin-bottom: 15px;
-  }
+.title-color {
+  color: #c42326; /* Change the title color */
+}
+
+.status-box {
+  background-color: white; /* White background for eligibility status */
+  border: 1px solid #ccc; /* Light gray border */
+  padding: 15px; /* Padding around the content */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  color: black; /* Black text for better contrast */
 }
 </style>
