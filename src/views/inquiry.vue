@@ -45,7 +45,7 @@
 
                 <div v-if="eligibility && !loading" class="mt-4">
                   <p><strong class="title-color">اسم الطالب:</strong> {{ eligibility.student_name }}</p>
-                  <p><strong class="title-color">الجنسية :</strong> {{ eligibility.student_NAT }}</p>
+                  <p><strong class="title-color">الجنسية:</strong> {{ eligibility.student_NAT }}</p>
                   <p><strong class="title-color">الرقم القومي:</strong> {{ eligibility.student_NATid }}</p>
                   <p><strong class="title-color">الكلية:</strong> {{ eligibility.student_faculty }}</p>
                   <p><strong class="title-color">الرقم الجامعي:</strong> {{ eligibility.student_id }}</p>
