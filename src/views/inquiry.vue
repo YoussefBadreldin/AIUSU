@@ -51,9 +51,10 @@
                   <p><strong class="title-color">الرقم الجامعي:</strong> {{ eligibility.student_id }}</p>
                   <p><strong class="title-color">المستوى:</strong> {{ studentLevelLastWord }}</p>
                   <p><strong class="title-color">التقدير:</strong> {{ eligibility.student_gpa }}</p>
-                  <p><strong class="title-color">العقوبات:</strong> {{ eligibility.student_punish }}</p>
-                  <p><strong class="title-color">الانشطة السابقة:</strong> {{ eligibility.student_activity }}</p>
+                  <p><strong class="title-color">العقوبات:</strong> {{ eligibility.student_punish || 'لا يوجد' }}</p>
+                  <p><strong class="title-color">الانشطة السابقة:</strong> {{ eligibility.student_activity || 'لا يوجد' }}</p>
                 </div>
+
                 <br />
               </div>
             </div>
