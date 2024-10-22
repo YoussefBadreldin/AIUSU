@@ -53,6 +53,8 @@
                   <p><strong class="title-color">التقدير:</strong> {{ eligibility.student_gpa }}</p>
                   <p><strong class="title-color">العقوبات:</strong> {{ eligibility.student_punish || 'لا يوجد' }}</p>
                   <p><strong class="title-color">الانشطة السابقة:</strong> {{ eligibility.student_activity || 'لا يوجد' }}</p>
+                  <br>
+                  <p v-if="eligibilityStatus" class="title-color"> {{ eligibilityStatus }}</p>
                 </div>
 
                 <br />
@@ -94,11 +96,23 @@ export default {
     this.loadStudentData(); // Load student data on component mount
   },
   computed: {
-    // New computed property to get the last word of student_level
     studentLevelLastWord() {
       return this.eligibility && this.eligibility.student_level
         ? this.eligibility.student_level.split(' ').pop()
         : '';
+    },
+    eligibilityStatus() {
+      const { student_NAT, student_gpa, student_punish, student_activity } = this.eligibility || {};
+      if (student_NAT === 'مصري' && student_gpa > 2.0 && !student_punish && student_activity) {
+        return 'يحق له الترشح';
+      } else {
+        let reasons = [];
+        if (student_NAT !== 'مصري') reasons.push('الجنسية غير مصرية');
+        if (student_gpa <= 2.0) reasons.push('التقدير أقل من 2.0');
+        if (student_punish) reasons.push('{{eligibility.student_punish}} لدية عقوبة سابقة وهي');
+        if (!student_activity) reasons.push('ليس له أنشطة سابقة');
+        return `لا يحق له الترشح، ${reasons.join(' و')}`;
+      }
     },
   },
   methods: {
