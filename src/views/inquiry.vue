@@ -57,7 +57,7 @@
               <p><strong class="title-color" style="color: black;">الكلية:</strong> {{ eligibility.student_faculty }}</p>
               <p><strong class="title-color" style="color: black;">الرقم الجامعي:</strong> {{ eligibility.student_id }}</p>
               <p><strong class="title-color" style="color: black;">المستوى:</strong> {{ studentLevelLastWord }}</p>
-              <p><strong class="title-color" style="color: black;">التقدير:</strong> {{ eligibility.student_gpa }}</p>
+              <p><strong class="title-color" style="color: black;">المعدل التراكمي:</strong> {{ eligibility.student_gpa }}</p>
               <p><strong class="title-color" style="color: black;">العقوبات:</strong> {{ eligibility.student_punish || 'لا يوجد' }}</p>
               <p><strong class="title-color" style="color: black;">الانشطة السابقة:</strong> {{ eligibility.student_activity || 'لا يوجد' }}</p>
             </div>
@@ -116,7 +116,7 @@ export default {
       } else {
         let reasons = [];
         if (student_NAT !== 'مصرية') reasons.push('الجنسية غير مصرية');
-        if (student_gpa < 2.0) reasons.push('التقدير أقل من 2.0');
+        if (student_gpa < 2.0) reasons.push('المعدل التراكمي أقل من 2.0');
         if (student_punish) reasons.push('لدية عقوبة سابقة');
         if (!student_activity) reasons.push('ليس له أنشطة سابقة');
         statusMessage = `لا يحق له الترشح، ${reasons.join(' و')}`;
