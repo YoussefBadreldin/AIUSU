@@ -1,3 +1,4 @@
+
 <template>
   <div>
     <HeaderComponent />
@@ -106,11 +107,15 @@ export default {
         : '';
     },
     eligibilityStatus() {
-      const { student_NAT, student_gpa, student_punish, student_activity } = this.eligibility || {};
+      const { student_NAT, student_gpa, student_punish, student_activity, student_level, student_id } = this.eligibility || {};
       let statusMessage;
       let statusColor;
 
-      if (student_NAT === 'مصرية' && student_gpa >= 2.0 && !student_punish && student_activity) {
+      // Check for the new conditions: if student_level is "المستوى الأول", student_activity is null, and student_id starts with "24"
+      if (student_level === "المستوى الأول" && !student_activity && student_id.startsWith('24')) {
+        statusMessage = 'يحق له الترشح';
+        statusColor = 'green';
+      } else if (student_NAT === 'مصرية' && student_gpa >= 2.0 && !student_punish && student_activity) {
         statusMessage = 'يحق له الترشح';
         statusColor = 'green'; // Green color for eligible
       } else {
