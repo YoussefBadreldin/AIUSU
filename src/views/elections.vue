@@ -11,8 +11,8 @@
                 <button type="submit" class="btn btn-primary">إبحث</button>
             </form>
 
-            <div v-if="loading" class="alert alert-info mt-4">...جاري التحميل</div> <!-- Loading message -->
-            <div v-if="errorMessage" class="alert alert-danger mt-4">{{ errorMessage }}</div> <!-- Error message -->
+            <div v-if="loading" class="alert alert-info mt-4">...جاري التحميل</div>
+            <div v-if="errorMessage" class="alert alert-danger mt-4">{{ errorMessage }}</div>
 
             <div v-if="findplace && !loading" class="mt-4">
                 <h4><strong>معلومات لجنتك</strong></h4>
@@ -20,7 +20,7 @@
                 <p><strong>الكلية:</strong> {{ findplace.student_faculty }}</p>
                 <p><strong>الرقم الجامعي:</strong> {{ findplace.student_id }}</p>
                 <p><strong>المستوى:</strong> {{ studentLevelLastWord }}</p>
-                <p>{{ findplace.student_location }}<strong> :مكان اللجنة</strong> </p>
+                <p>{{ findplace.student_location }} <strong>:مكان اللجنة</strong> </p>
                 <p><strong>رقم الكشف:</strong> {{ findplace.student_number }}</p>
 
                 <br>
@@ -29,19 +29,19 @@
                 <div v-for="(committee, index) in committees" :key="index" class="committee-container mb-4">
                     <h6>{{ committee.name }}</h6>
                     <ul>
-                        <li v-for="candidate in committee.candidates" :key="candidate.id" class="candidate-item">
+                        <li v-for="candidate in committee.candidates" :key="candidate.candidate_id" class="candidate-item">
                             <div class="candidate-photo">
                                 <img :src="`../../images/students/${candidate.candidate_id}.jpg`" alt="مرشح" loading="lazy" />
                             </div>
                             <div class="candidate-details">
-                                <span class="candidate-name">{{ formatCandidateName(candidate.candidate_name) }}</span>
+                                <span class="candidate-name">{{ formattedCandidateName(candidate.candidate_name) }}</span>
                                 <span class="candidate-faculty">{{ candidate.candidate_faculty }}</span>
+                                <span class="candidate-level">{{ candidate.candidate_level }}</span>
                             </div>
                         </li>
                     </ul>
                 </div>
 
-                <!-- Election Guidelines Section -->
                 <div class="election-guidelines mt-4">
                     <h4><strong>إرشادات هامة</strong></h4>
                     <div class="video-container mt-4">
@@ -74,7 +74,7 @@
                     <h5>: ملاحظات هامة</h5>
                     <ul>
                         <li>يمكنك التصويت فقط للمرشحين المذكورين في -</li>
-                         <li>.القائمة أعلاه ولا يُسمح بانتخاب طلاب آخرين</li>
+                        <li>.القائمة أعلاه ولا يُسمح بانتخاب طلاب آخرين</li>
                     </ul>
                 </div>
             </div>
@@ -101,70 +101,94 @@ export default {
             errorMessage: '',
             committees: [],
             loading: false,
-            cache: {}, // Cache for committee data
-            studentsMap: {}, // A hash map for fast student lookup
+            cache: {},
+            studentsMap: {},
         };
     },
     mounted() {
-        this.loadStudentData(); // Load student data on component mount
+        this.loadStudentData();
     },
     computed: {
-        // New computed property to get the last word of student_level
         studentLevelLastWord() {
             return this.findplace && this.findplace.student_level 
                 ? this.findplace.student_level.split(' ').pop() 
-                : ''; // Returns last word or empty string if not available
+                : '';
+        },
+        formattedCandidateName() {
+            return (candidateName) => {
+                if (!candidateName) return '';
+                const words = candidateName.trim().split(' ');
+                return `${words[0]} ${words[words.length - 1]}`;
+            };
         }
     },
     methods: {
-        // New method to extract the first and last words from candidate names
-        formatCandidateName(name) {
-            if (!name) return '';
-            const words = name.split(' ');
-            if (words.length === 1) return words[0]; // Return if there's only one word
-            return `${words[0]} ${words[words.length - 1]}`; // Return first and last words
+        async updateCandidateInfo(committees) {
+            // Ensure findplace is not null before proceeding
+            if (!this.findplace || !this.findplace.student_level) {
+                console.warn('findplace is null or does not have a student_level');
+                return; // Exit the method early if findplace is null
+            }
+
+            for (const committee of committees) {
+                // Filter candidates based on level after updating information
+                committee.candidates = committee.candidates.filter(candidate => {
+                    const studentInfo = this.studentsMap[candidate.candidate_id]; // Match candidate_id with student_id
+                    if (studentInfo) {
+                        candidate.candidate_name = studentInfo.student_name;
+                        candidate.candidate_faculty = studentInfo.student_faculty;
+                        candidate.candidate_level = studentInfo.student_level; // Add student level
+                        
+                        // Check if the candidate level matches the student's level
+                        return candidate.candidate_level === this.findplace.student_level; // Use findplace.student_level
+                    } else {
+                        candidate.candidate_name = 'غير معروف';
+                        candidate.candidate_faculty = 'غير معروف';
+                        candidate.candidate_level = 'غير معروف'; // Mark level as unknown
+                        return false; // Exclude unknown candidates
+                    }
+                });
+            }
         },
 
-        // Debounced findCommittee method to reduce unnecessary API calls
         findCommittee: _.debounce(async function() {
-            this.loading = true;  // Start loading
+            this.loading = true;
             this.errorMessage = '';
-            this.findplace = null; // Hide previous data
+            this.findplace = null;
 
             const studentData = this.studentsMap[this.universityNumber];
 
             if (!studentData) {
                 this.errorMessage = 'الرقم الذي أدخلته غير صحيح، يرجى التحقق منه';
-                this.loading = false;  // Stop loading
+                this.loading = false;
                 return;
             }
 
-            const committees = await this.fetchCommitteesByLevel(studentData.student_level);
+            this.findplace = studentData; // Set findplace here
+            const committees = await this.fetchCommittees();
+            await this.updateCandidateInfo(committees);
 
-            this.findplace = studentData;
             this.committees = committees;
-            this.loading = false;  // Stop loading
-        }, 300), // Debounce with 300ms delay
+            this.loading = false;
+        }, 300),
 
         async loadStudentData() {
             try {
                 const response = await fetch('https://aiusu-backend.vercel.app/students');
                 if (!response.ok) throw new Error('Failed to fetch student data');
                 const students = await response.json();
-                
-                // Create a hash map for faster lookups
+
                 this.studentsMap = students.reduce((map, student) => {
                     map[student.student_id] = student;
                     return map;
                 }, {});
+                console.log('Students Map:', this.studentsMap);
             } catch (error) {
                 console.error('Error loading student data:', error);
             }
         },
 
-        async fetchCommitteesByLevel(level) {
-            if (this.cache[level]) return this.cache[level]; // Return cached data if available
-
+        async fetchCommittees() {
             const committeeURLs = [
                 'https://aiusu-backend.vercel.app/clubs',
                 'https://aiusu-backend.vercel.app/sports',
@@ -187,25 +211,22 @@ export default {
 
             const committeePromises = committeeURLs.map(async (url) => {
                 const response = await fetch(url);
-                if (!response.ok) return null;
-
+                if (!response.ok) throw new Error('Failed to fetch committee data');
                 const candidates = await response.json();
-                const filteredCandidates = candidates
-                    .filter(candidate => candidate.candidate_level === level)
-                    .map(candidate => ({
-                        ...candidate,
-                        photo: `../../images/students/${candidate.candidate_id}.jpg`,
-                    }));
 
                 return {
                     name: committeeNames[url],
-                    candidates: filteredCandidates,
+                    candidates: candidates.map(candidate => ({
+                        candidate_id: candidate.candidate_id, // Ensure candidate_id is fetched correctly
+                        candidate_name: '', // Initially empty
+                        candidate_faculty: '', // Initially empty
+                        candidate_level: '', // Initially empty
+                        photo: `../../images/students/${candidate.candidate_id}.jpg`, // Placeholder for image path
+                    })),
                 };
             });
 
-            const committees = await Promise.all(committeePromises);
-            this.cache[level] = committees.filter(committee => committee && committee.candidates.length > 0); // Cache results
-            return this.cache[level];
+            return Promise.all(committeePromises);
         },
     },
 };
