@@ -101,8 +101,8 @@ export default {
             errorMessage: '',
             committees: [],
             loading: false,
-            cache: {},
             studentsMap: {},
+            placesMap: {}, // New property for storing places
         };
     },
     mounted() {
@@ -124,23 +124,21 @@ export default {
     },
     methods: {
         async updateCandidateInfo(committees) {
-            // Ensure findplace is not null before proceeding
             if (!this.findplace || !this.findplace.student_level) {
                 console.warn('findplace is null or does not have a student_level');
                 return; // Exit the method early if findplace is null
             }
 
             for (const committee of committees) {
-                // Filter candidates based on level after updating information
                 committee.candidates = committee.candidates.filter(candidate => {
                     const studentInfo = this.studentsMap[candidate.candidate_id]; // Match candidate_id with student_id
                     if (studentInfo) {
                         candidate.candidate_name = studentInfo.student_name;
                         candidate.candidate_faculty = studentInfo.student_faculty;
                         candidate.candidate_level = studentInfo.student_level; // Add student level
-                        
+
                         // Check if the candidate level matches the student's level
-                        return candidate.candidate_level === this.findplace.student_level; // Use findplace.student_level
+                        return candidate.candidate_level === this.findplace.student_level;
                     } else {
                         candidate.candidate_name = 'غير معروف';
                         candidate.candidate_faculty = 'غير معروف';
@@ -164,7 +162,14 @@ export default {
                 return;
             }
 
-            this.findplace = studentData; // Set findplace here
+            // Fetch place data based on student_id
+            const placeData = await this.fetchPlaceData(studentData.student_id);
+            if (placeData) {
+                this.findplace = { ...studentData, ...placeData }; // Combine student and place data
+            } else {
+                this.findplace = studentData; // Just use student data if no place found
+            }
+
             const committees = await this.fetchCommittees();
             await this.updateCandidateInfo(committees);
 
@@ -185,6 +190,24 @@ export default {
                 console.log('Students Map:', this.studentsMap);
             } catch (error) {
                 console.error('Error loading student data:', error);
+            }
+        },
+
+        async fetchPlaceData(studentId) {
+            try {
+                const response = await fetch('https://aiusu-backend.vercel.app/places');
+                if (!response.ok) throw new Error('Failed to fetch place data');
+                const places = await response.json();
+
+                // Find the place data based on student_id
+                const placeInfo = places.find(place => place.student_id === studentId);
+                return placeInfo ? {
+                    student_location: placeInfo.student_location,
+                    student_number: placeInfo.student_number
+                } : null; // Return null if not found
+            } catch (error) {
+                console.error('Error loading place data:', error);
+                return null; // Return null in case of error
             }
         },
 
