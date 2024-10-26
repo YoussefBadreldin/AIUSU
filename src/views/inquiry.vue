@@ -94,10 +94,12 @@ export default {
       eligibility: null,
       loading: false,
       studentsMap: {}, // A hash map for fast student lookup
+      activitiesMap: {}, // A hash map for fast activity lookup
     };
   },
   mounted() {
     this.loadStudentData(); // Load student data on component mount
+    this.loadActivityData(); // Load activity data on component mount
     this.checkAuthentication(); // Check authentication on mount
   },
   computed: {
@@ -111,21 +113,27 @@ export default {
       let statusMessage;
       let statusColor;
 
-      // Check for the new conditions: if student_level is "المستوى الأول", student_activity is null, and student_id starts with "24"
-      if (student_level === "المستوى الأول" && !student_activity && student_id.startsWith('24')) {
-        statusMessage = 'يحق له الترشح';
-        statusColor = 'green';
-      } else if (student_NAT === 'مصرية' && student_gpa >= 2.0 && !student_punish && student_activity) {
+      // Check if gpa or punish is "N/A"
+      if (student_gpa === 'N/A' || student_punish === 'N/A') {
         statusMessage = 'يحق له الترشح';
         statusColor = 'green'; // Green color for eligible
       } else {
-        let reasons = [];
-        if (student_NAT !== 'مصرية') reasons.push('الجنسية غير مصرية');
-        if (student_gpa < 2.0) reasons.push('المعدل التراكمي أقل من 2.0');
-        if (student_punish) reasons.push('لدية عقوبة سابقة');
-        if (!student_activity) reasons.push('ليس له أنشطة سابقة');
-        statusMessage = `لا يحق له الترشح، ${reasons.join(' و')}`;
-        statusColor = 'red'; // Red color for not eligible
+        // Check for the new conditions
+        if (student_level === "المستوى الأول" && !student_activity && student_id.startsWith('24')) {
+          statusMessage = 'يحق له الترشح';
+          statusColor = 'green';
+        } else if (student_NAT === 'مصرية' && student_gpa >= 2.0 && !student_punish && student_activity) {
+          statusMessage = 'يحق له الترشح';
+          statusColor = 'green'; // Green color for eligible
+        } else {
+          let reasons = [];
+          if (student_NAT !== 'مصرية') reasons.push('الجنسية غير مصرية');
+          if (student_gpa < 2.0) reasons.push('المعدل التراكمي أقل من 2.0');
+          if (student_punish) reasons.push('لدية عقوبة سابقة');
+          if (!student_activity) reasons.push('ليس له أنشطة سابقة');
+          statusMessage = `لا يحق له الترشح، ${reasons.join(' و')}`;
+          statusColor = 'red'; // Red color for not eligible
+        }
       }
 
       return { message: statusMessage, color: statusColor };
@@ -154,7 +162,7 @@ export default {
     },
 
     // Method to find student by university number
-    findStudent() {
+    async findStudent() {
       this.loading = true; // Start loading
       this.errorMessage = '';
       this.eligibility = null; // Reset eligibility data
@@ -167,9 +175,15 @@ export default {
         return;
       }
 
+      // Fetch student activity data
+      const activityData = this.activitiesMap[this.universityNumber];
+
+      // Only assign student_activity from activity data, or set it to null if not found
+      studentData.student_activity = activityData ? activityData.student_activity : null;
+
       // Simulate a delay to demonstrate loading (optional)
       setTimeout(() => {
-        this.eligibility = studentData; // Set eligibility data
+        this.eligibility = { ...studentData }; // Set the entire student data including student_activity
         this.loading = false; // Stop loading
       }, 1000); // Delay for 1 second (you can adjust this as needed)
     },
@@ -188,6 +202,23 @@ export default {
       } catch (error) {
         console.error('Error loading student data:', error);
         this.errorMessage = 'فشل تحميل بيانات الطلاب';
+      }
+    },
+
+    async loadActivityData() {
+      try {
+        const response = await fetch('https://aiusu-backend.vercel.app/activities');
+        if (!response.ok) throw new Error('Failed to fetch activity data');
+        const activities = await response.json();
+
+        // Create a hash map for faster lookups
+        this.activitiesMap = activities.reduce((map, activity) => {
+          map[activity.student_id] = activity; // Assuming activity data has a student_id field
+          return map;
+        }, {});
+      } catch (error) {
+        console.error('Error loading activity data:', error);
+        this.errorMessage = 'فشل تحميل بيانات الأنشطة';
       }
     },
 
