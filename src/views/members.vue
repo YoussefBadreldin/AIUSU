@@ -388,6 +388,7 @@ export default {
             },
             loading: true,
             errorMessage: '',
+            studentsMap: {},
         };
     },
     mounted() {
@@ -397,6 +398,10 @@ export default {
     methods: {
         async loadMemberData() {
             try {
+                // Load students data first
+                await this.loadStudentData();
+                
+                // Then load members data
                 const response = await fetch('https://aiusu-backend.vercel.app/members');
                 if (!response.ok) throw new Error('Failed to fetch member data');
                 const memberData = await response.json();
@@ -411,7 +416,39 @@ export default {
             }
         },
 
+        async loadStudentData() {
+            try {
+                const response = await fetch('https://aiusu-backend.vercel.app/students');
+                if (!response.ok) throw new Error('Failed to fetch student data');
+                const students = await response.json();
+
+                // Create a mapping of student data by student_id for quick access
+                this.studentsMap = students.reduce((map, student) => {
+                    map[student.student_id] = student;
+                    return map;
+                }, {});
+            } catch (error) {
+                console.error('Error loading student data:', error);
+            }
+        },
+
         organizeMembers(members) {
+            // Match member data with student data based on member_id
+            members.forEach(member => {
+                const studentInfo = this.studentsMap[member.member_id];
+                if (studentInfo) {
+                    // Add student details to each member if they exist
+                    member.member_name = studentInfo.student_name;
+                    member.member_faculty = studentInfo.student_faculty;
+                    member.member_level = studentInfo.student_level;
+                } else {
+                    // If no matching student is found, default values
+                    member.member_name = 'غير معروف';
+                    member.member_faculty = 'غير معروف';
+                    member.member_level = 'غير معروف';
+                }
+            });
+
             // Extract president and vice president
             this.president = members.find(m => m.member_title === 'President') || {};
             this.vicePresident = members.find(m => m.member_title === 'Vice') || {};
@@ -443,7 +480,7 @@ export default {
             this.members['Member_Sports'] = members.filter(m => m.member_title === 'Member_Sports') || [];
             this.members['Member_Social'] = members.filter(m => m.member_title === 'Member_Social') || [];
         },
-        // New method to extract the first and last words from candidate names
+
         formatmemberName(name) {
             if (!name) return '';
             const words = name.split(' ');
