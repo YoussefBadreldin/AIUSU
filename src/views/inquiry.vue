@@ -94,7 +94,7 @@ export default {
       eligibility: null,
       loading: false,
       studentsMap: {}, // A hash map for fast student lookup
-      activitiesMap: {}, // A hash map for fast activity lookup with multiple activities per student
+      activitiesMap: {}, // A hash map for fast activity lookup
     };
   },
   mounted() {
@@ -175,18 +175,17 @@ export default {
         return;
       }
 
-      // Retrieve all activities for the student ID, map to only `student_activity` field, and join with " و "
-      const activityData = this.activitiesMap[this.universityNumber]
-        ?.map(activity => activity.student_activity)
-        .join(" و ") || '';
+      // Fetch student activity data
+      const activityData = this.activitiesMap[this.universityNumber];
 
-      // Update eligibility with student data and include the formatted activities string
-      studentData.student_activity = activityData;
+      // Only assign student_activity from activity data, or set it to null if not found
+      studentData.student_activity = activityData ? activityData.student_activity : null;
 
+      // Simulate a delay to demonstrate loading (optional)
       setTimeout(() => {
-        this.eligibility = { ...studentData }; // Display student data along with activities
+        this.eligibility = { ...studentData }; // Set the entire student data including student_activity
         this.loading = false; // Stop loading
-      }, 1000); // Delay for 1 second (optional)
+      }, 1000); // Delay for 1 second (you can adjust this as needed)
     },
 
     async loadStudentData() {
@@ -212,12 +211,9 @@ export default {
         if (!response.ok) throw new Error('Failed to fetch activity data');
         const activities = await response.json();
 
-        // Group activities by student ID
+        // Create a hash map for faster lookups
         this.activitiesMap = activities.reduce((map, activity) => {
-          if (!map[activity.student_id]) {
-            map[activity.student_id] = []; // Initialize array if not already present
-          }
-          map[activity.student_id].push(activity); // Add activity to the array for that student_id
+          map[activity.student_id] = activity; // Assuming activity data has a student_id field
           return map;
         }, {});
       } catch (error) {
