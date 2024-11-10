@@ -263,6 +263,7 @@ export default {
     border: 1px solid #ddd;
     padding: 15px;
     border-radius: 8px;
+    direction: rtl; /* Ensures the text flows from right to left */
 }
 .committee-container h6 {
     margin-bottom: 10px;
@@ -275,14 +276,17 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    direction: rtl; /* Ensures the list items align right to left */
 }
 .candidate-item {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; /* Centers the content horizontally */
+    justify-content: center; /* Centers the content vertically */
     margin: 15px;
     flex: 0 1 calc(33.333% - 30px);
     box-sizing: border-box;
+    text-align: center; /* Aligns text within the container */
 }
 .candidate-photo img {
     width: 70px;
@@ -300,6 +304,10 @@ export default {
     display: block;
     font-size: 0.9em;
 }
+.candidate-level {
+    font-size: 0.9em;
+    color: #888;
+}
 .alert {
     margin-top: 20px;
 }
@@ -316,29 +324,57 @@ export default {
 
 /* Responsive adjustments for smaller screens */
 @media (max-width: 1024px) {
- .video-container iframe {
+    .video-container iframe {
         width: 450px;
         height: 300px;
     }
 }
 
 @media (max-width: 768px) {
-   .video-container iframe {
+    .video-container iframe {
         width: 350px;
         height: 230px;
     }
+
     li p {
         max-width: 350px; /* Match image width */
+    }
+
+    /* Adjust font sizes for candidate details */
+    .candidate-name {
+        font-size: 0.9em; /* Smaller font size */
+    }
+
+    .candidate-faculty {
+        font-size: 0.8em; /* Smaller font size */
+    }
+
+    .candidate-level {
+        font-size: 0.8em; /* Smaller font size */
     }
 }
 
 @media (max-width: 480px) {
     .video-container iframe {
-    width: 340px; /* Fixed width */
-    height: 190px; /* Fixed height */
-    object-fit: cover; /* Ensures the image/video covers the set area without distortion */
-    display: block;
-    margin: 0 auto; /* Centers the images and video */
+        width: 340px; /* Fixed width */
+        height: 190px; /* Fixed height */
+        object-fit: cover; /* Ensures the image/video covers the set area without distortion */
+        display: block;
+        margin: 0 auto; /* Centers the images and video */
+    }
+
+    /* Adjust font sizes for candidate details */
+    .candidate-name {
+        font-size: 0.8em; /* Even smaller font size */
+    }
+
+    .candidate-faculty {
+        font-size: 0.7em; /* Even smaller font size */
+    }
+
+    .candidate-level {
+        font-size: 0.7em; /* Even smaller font size */
+    }
 }
-}
+
 </style>
