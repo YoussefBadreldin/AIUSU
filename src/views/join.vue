@@ -151,7 +151,7 @@ export default {
 }
 @media (max-width: 576px) {
     .table th, .table td {
-        font-size: 0.8rem; /* Reduce font size on small screens */
+        font-size: 0.7rem; /* Reduce font size on small screens */
     }
 }
 </style>
