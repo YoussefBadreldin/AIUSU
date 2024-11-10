@@ -112,28 +112,35 @@ export default {
       const { student_NAT, student_gpa, student_punish, student_activity, student_level, student_id } = this.eligibility || {};
       let statusMessage;
       let statusColor;
+      let reasons = [];
 
-      // Check if gpa or punish is "N/A"
-      if (student_gpa === 'N/A' || student_punish === 'N/A') {
+      // Check Punish
+      if (student_punish && student_punish !== 'N/A' && student_punish !== '') {
+        reasons.push('لديه عقوبة سابقة');
+      }
+
+      // Check GPA
+      if (student_gpa !== 'N/A' && student_gpa < 2.0) {
+        reasons.push('المعدل التراكمي أقل من 2.0');
+      }
+
+      // Check Activity (except for students with student_id starting with "24" and level "المستوى الأول")
+      if (!student_activity && !(student_id.startsWith('24') && student_level === 'المستوى الأول')) {
+        reasons.push('ليس له انشطة سابقة');
+      }
+
+      // Check NAT
+      if (student_NAT !== 'مصرية' && student_NAT !== 'مصري') {
+        reasons.push('الجنسية غير مصرية');
+      }
+
+      // If there are any reasons, the student is not eligible
+      if (reasons.length > 0) {
+        statusMessage = `لا يحق له الترشح، ${reasons.join(' و')}`;
+        statusColor = 'red'; // Red color for not eligible
+      } else {
         statusMessage = 'يحق له الترشح';
         statusColor = 'green'; // Green color for eligible
-      } else {
-        // Check for the new conditions
-        if (student_level === "المستوى الأول" && !student_activity && student_id.startsWith('24')) {
-          statusMessage = 'يحق له الترشح';
-          statusColor = 'green';
-        } else if (student_NAT === 'مصرية' && student_gpa >= 2.0 && !student_punish && student_activity) {
-          statusMessage = 'يحق له الترشح';
-          statusColor = 'green'; // Green color for eligible
-        } else {
-          let reasons = [];
-          if (student_NAT !== 'مصرية') reasons.push('الجنسية غير مصرية');
-          if (student_gpa < 2.0) reasons.push('المعدل التراكمي أقل من 2.0');
-          if (student_punish) reasons.push('لدية عقوبة سابقة');
-          if (!student_activity) reasons.push('ليس له أنشطة سابقة');
-          statusMessage = `لا يحق له الترشح، ${reasons.join(' و')}`;
-          statusColor = 'red'; // Red color for not eligible
-        }
       }
 
       return { message: statusMessage, color: statusColor };
