@@ -76,6 +76,7 @@
 <script>
 import HeaderComponent from '../../public/global/headerComponent.vue';
 import FooterComponent from '../../public/global/footerComponent.vue';
+import _ from 'lodash'; // Import lodash for debouncing
 
 export default {
   name: 'MainComponent',
@@ -94,12 +95,10 @@ export default {
       eligibility: null,
       loading: false,
       studentsMap: {}, // A hash map for fast student lookup
-      activitiesMap: {}, // A hash map for fast activity lookup
     };
   },
   mounted() {
     this.loadStudentData(); // Load student data on component mount
-    this.loadActivityData(); // Load activity data on component mount
     this.checkAuthentication(); // Check authentication on mount
   },
   computed: {
@@ -168,11 +167,17 @@ export default {
       }
     },
 
-    // Method to find student by university number
-    async findStudent() {
+    // Method to find student by university number with debouncing
+    findStudent: _.debounce(async function() {
       this.loading = true; // Start loading
       this.errorMessage = '';
       this.eligibility = null; // Reset eligibility data
+
+      // Ensure studentsMap is loaded before checking
+      if (Object.keys(this.studentsMap).length === 0) {
+        this.loading = false; // Stop loading if data is not available
+        return;
+      }
 
       const studentData = this.studentsMap[this.universityNumber];
 
@@ -183,9 +188,7 @@ export default {
       }
 
       // Fetch student activity data
-      const activityData = this.activitiesMap[this.universityNumber];
-
-      // Only assign student_activity from activity data, or set it to null if not found
+      const activityData = await this.fetchActivityData(this.universityNumber);
       studentData.student_activity = activityData ? activityData.student_activity : null;
 
       // Simulate a delay to demonstrate loading (optional)
@@ -193,15 +196,13 @@ export default {
         this.eligibility = { ...studentData }; // Set the entire student data including student_activity
         this.loading = false; // Stop loading
       }, 1000); // Delay for 1 second (you can adjust this as needed)
-    },
+    }, 300), // Debounce time: 300ms
 
     async loadStudentData() {
       try {
         const response = await fetch('https://aiusu-backend.vercel.app/students');
         if (!response.ok) throw new Error('Failed to fetch student data');
         const students = await response.json();
-
-        // Create a hash map for faster lookups
         this.studentsMap = students.reduce((map, student) => {
           map[student.student_id] = student;
           return map;
@@ -212,20 +213,17 @@ export default {
       }
     },
 
-    async loadActivityData() {
+    // Fetch activity data directly from the API instead of storing it in a map
+    async fetchActivityData(studentId) {
       try {
         const response = await fetch('https://aiusu-backend.vercel.app/activities');
         if (!response.ok) throw new Error('Failed to fetch activity data');
         const activities = await response.json();
-
-        // Create a hash map for faster lookups
-        this.activitiesMap = activities.reduce((map, activity) => {
-          map[activity.student_id] = activity; // Assuming activity data has a student_id field
-          return map;
-        }, {});
+        const activityData = activities.find(activity => activity.student_id === studentId);
+        return activityData || null;
       } catch (error) {
-        console.error('Error loading activity data:', error);
-        this.errorMessage = 'فشل تحميل بيانات الأنشطة';
+        console.error('Error fetching activity data:', error);
+        return null;
       }
     },
 
