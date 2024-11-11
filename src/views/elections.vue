@@ -151,8 +151,13 @@ export default {
 
         findCommittee: _.debounce(async function() {
             this.loading = true;
-            this.errorMessage = '';
+            this.errorMessage = ''; // Remove the error message during loading
             this.findplace = null;
+
+            // Ensure studentsMap is loaded before checking
+            if (Object.keys(this.studentsMap).length === 0) {
+                return; // Don't proceed with search if students data is not loaded yet
+            }
 
             const studentData = this.studentsMap[this.universityNumber];
 
@@ -162,32 +167,47 @@ export default {
                 return;
             }
 
-            // Fetch place data based on student_id
-            const placeData = await this.fetchPlaceData(studentData.student_id);
+            // Fetch place data based on student_id in parallel
+            const [placeData, committees] = await Promise.all([
+                this.fetchPlaceData(studentData.student_id),
+                this.fetchCommittees(),
+            ]);
+
             if (placeData) {
                 this.findplace = { ...studentData, ...placeData }; // Combine student and place data
             } else {
                 this.findplace = studentData; // Just use student data if no place found
             }
 
-            const committees = await this.fetchCommittees();
             await this.updateCandidateInfo(committees);
-
             this.committees = committees;
             this.loading = false;
         }, 300),
 
         async loadStudentData() {
             try {
-                const response = await fetch('https://aiusu-backend.vercel.app/students');
-                if (!response.ok) throw new Error('Failed to fetch student data');
-                const students = await response.json();
+                // Check if data is already in cache (sessionStorage/localStorage)
+                const cachedData = sessionStorage.getItem('studentsMap');
+                if (cachedData) {
+                    this.studentsMap = JSON.parse(cachedData);
+                } else {
+                    const response = await fetch('https://aiusu-backend.vercel.app/students');
+                    if (!response.ok) throw new Error('Failed to fetch student data');
+                    const students = await response.json();
+                    this.studentsMap = students.reduce((map, student) => {
+                        map[student.student_id] = student;
+                        return map;
+                    }, {});
+                    // Cache the students data for future use
+                    sessionStorage.setItem('studentsMap', JSON.stringify(this.studentsMap));
+                }
 
-                this.studentsMap = students.reduce((map, student) => {
-                    map[student.student_id] = student;
-                    return map;
-                }, {});
                 console.log('Students Map:', this.studentsMap);
+
+                // After loading student data, automatically trigger the search
+                if (this.universityNumber) {
+                    this.findCommittee(); // Automatically start searching after data is loaded
+                }
             } catch (error) {
                 console.error('Error loading student data:', error);
             }
@@ -195,16 +215,26 @@ export default {
 
         async fetchPlaceData(studentId) {
             try {
+                // Check if place data is already cached
+                const cachedPlaceData = this.placesMap[studentId];
+                if (cachedPlaceData) {
+                    return cachedPlaceData;
+                }
+
                 const response = await fetch('https://aiusu-backend.vercel.app/places');
                 if (!response.ok) throw new Error('Failed to fetch place data');
                 const places = await response.json();
 
-                // Find the place data based on student_id
                 const placeInfo = places.find(place => place.student_id === studentId);
-                return placeInfo ? {
-                    student_location: placeInfo.student_location,
-                    student_number: placeInfo.student_number
-                } : null; // Return null if not found
+                if (placeInfo) {
+                    this.placesMap[studentId] = placeInfo; // Cache place data
+                    return {
+                        student_location: placeInfo.student_location,
+                        student_number: placeInfo.student_number,
+                    };
+                }
+
+                return null; // Return null if not found
             } catch (error) {
                 console.error('Error loading place data:', error);
                 return null; // Return null in case of error
