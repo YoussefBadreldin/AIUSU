@@ -366,7 +366,7 @@ export default {
     }
 
     .name, .title, .faculty, .level {
-        font-size: 0.5rem; /* Further reduce font size on small screens */
+        font-size: 0.4rem; /* Further reduce font size on small screens */
     }
 
     .committee-title {
