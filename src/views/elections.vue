@@ -34,7 +34,7 @@
                                 <img :src="`../../images/students/${candidate.candidate_id}.jpg`" alt="مرشح" loading="lazy" />
                             </div>
                             <div class="candidate-details">
-                                <span class="candidate-name">{{ formattedCandidateName(candidate.candidate_name) }}</span>
+                                <span class="candidate-name">{{ candidate.candidate_name }}</span>
                                 <span class="candidate-faculty">{{ candidate.candidate_faculty }}</span>
                                 <span class="candidate-level">{{ candidate.candidate_level }}</span>
                             </div>
@@ -66,7 +66,7 @@
                     <ul>
                         <li>.قم بالتوقيع في كشف الحضور قبل بدء التصويت -</li>
                         <li>.ستتلقى ورقة انتخابية مخصصة لك -</li>
-                        <li>.اكتب أسماء 14 مرشحًا، بواقع اثنين لكل لجنة -</li>
+                        <li>.اكتب أسماء 14 مرشحًا ثلاثيا، بواقع اثنين لكل لجنة -</li>
                         <li>تأكد من كتابة 14 اسمًا بالضبط؛ إذ إن أي ورقة تحتوي على -</li>
                         <li>.أقل أو أكثر من 14 اسمًا أو أي علامات إضافية ستُعتبر باطلة </li>
                     </ul>
@@ -113,13 +113,6 @@ export default {
             return this.findplace && this.findplace.student_level 
                 ? this.findplace.student_level.split(' ').pop() 
                 : '';
-        },
-        formattedCandidateName() {
-            return (candidateName) => {
-                if (!candidateName) return '';
-                const words = candidateName.trim().split(' ');
-                return `${words[0]} ${words[words.length - 1]}`;
-            };
         }
     },
     methods: {
