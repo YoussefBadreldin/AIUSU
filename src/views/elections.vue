@@ -35,7 +35,7 @@
                             </div>
                             <div class="candidate-details">
                                 <span class="candidate-name">{{ candidate.candidate_name }}</span>
-                                <span class="candidate-faculty">{{ candidate.candidate_faculty }}</span>
+                                <span class="candidate-faculty">كلية {{ candidate.candidate_faculty }}</span>
                                 <span class="candidate-level">{{ candidate.candidate_level }}</span>
                             </div>
                         </li>
@@ -311,15 +311,27 @@ export default {
     box-sizing: border-box;
     text-align: center; /* Aligns text within the container */
 }
+
+/* Circular photo for candidate */
 .candidate-photo img {
     width: 70px;
-    height: auto;
-    border-radius: 50%;
+    height: 70px; /* Ensure height is the same as width to maintain the circle */
+    border-radius: 50%; /* Makes the image circular */
 }
+
+/* Candidate name and details */
 .candidate-name {
     font-weight: bold;
     margin-top: 5px;
     font-size: 1em;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limit the name to 2 lines */
+    -webkit-box-orient: vertical; /* Ensure the text is treated as a vertical box */
+    overflow: hidden; /* Hide the overflowing text */
+    text-align: center;
+    word-break: break-word; /* Allow breaking of long words */
+    hyphens: auto; /* Enable hyphenation for better word distribution */
+    white-space: normal; /* Allow normal wrapping */
 }
 .candidate-faculty {
     color: #555;
@@ -365,15 +377,21 @@ export default {
 
     /* Adjust font sizes for candidate details */
     .candidate-name {
-        font-size: 0.9em; /* Smaller font size */
+        font-size: 0.7em; /* Smaller font size */
     }
 
     .candidate-faculty {
-        font-size: 0.8em; /* Smaller font size */
+        font-size: 0.7em; /* Smaller font size */
     }
 
     .candidate-level {
         font-size: 0.8em; /* Smaller font size */
+    }
+
+    /* Adjust circular photo size for smaller screens */
+    .candidate-photo img {
+        width: 60px; /* Adjust size for smaller screens */
+        height: 60px; /* Ensure it's a circle */
     }
 }
 
@@ -388,16 +406,21 @@ export default {
 
     /* Adjust font sizes for candidate details */
     .candidate-name {
-        font-size: 0.8em; /* Even smaller font size */
+        font-size: 0.7em; /* Even smaller font size */
     }
 
     .candidate-faculty {
-        font-size: 0.7em; /* Even smaller font size */
+        font-size: 0.6em; /* Even smaller font size */
     }
 
     .candidate-level {
         font-size: 0.7em; /* Even smaller font size */
     }
-}
 
+    /* Adjust circular photo size for mobile screens */
+    .candidate-photo img {
+        width: 50px; /* Smaller circle size for mobile */
+        height: 50px; /* Ensure it's a circle */
+    }
+}
 </style>
