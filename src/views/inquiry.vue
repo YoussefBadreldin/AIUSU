@@ -155,7 +155,7 @@ export default {
     },
     handleLogin() {
       const validUsername = 'admin'; // Placeholder for real validation
-      const validPassword = 'admin'; // Placeholder for real validation
+      const validPassword = '2025'; // Placeholder for real validation
 
       // Check credentials
       if (this.username === validUsername && this.password === validPassword) {
