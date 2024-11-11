@@ -11,7 +11,7 @@
                     <div class="details">
                         <div class="name">{{ president.member_name || 'جاري التحميل..' }}</div>
                         <div class="title">رئيس الاتحاد</div>
-                        <div class="faculty">{{ president.member_faculty || 'جاري التحميل..' }}</div>
+                        <div class="faculty">{{ president.member_faculty ? `كلية ${president.member_faculty}` : 'جاري التحميل..' }}</div>
                         <div class="level">{{ president.member_level || 'جاري التحميل..' }}</div>
                     </div>
                     <div class="subordinates">
@@ -22,7 +22,7 @@
                             <div class="details">
                                 <div class="name">{{ vicePresident.member_name || 'جاري التحميل..' }}</div>
                                 <div class="title">نائب رئيس الاتحاد</div>
-                                <div class="faculty">{{ vicePresident.member_faculty || 'جاري التحميل..' }}</div>
+                                <div class="faculty">{{ vicePresident.member_faculty ? `كلية ${vicePresident.member_faculty}` : 'جاري التحميل..' }}</div>
                                 <div class="level">{{ vicePresident.member_level || 'جاري التحميل..' }}</div>
                             </div>
                         </div>
@@ -30,51 +30,50 @@
                 </div>
             </div>
 
-           <div class="executive-committee">
-    <!-- Committees -->
-    <div v-for="(committee, key) in committees" :key="key" class="committee-box">
-        <div class="committee-title">{{ committee.title }}</div>
-        <div class="committee-content">
-            <div class="position head">
-                <div class="profile">
-                    <img :src="`../../images/students/${heads[committee.headKey].member_id}.jpg`" :alt="heads[committee.headKey].member_name" class="circle-photo" v-if="heads[committee.headKey].member_id" />
-                </div>
-                <div class="details">
-                    <div class="name">{{ heads[committee.headKey].member_name || 'جاري التحميل..' }}</div>
-                    <div class="title">أمين اللجنة</div>
-                    <div class="faculty">{{ heads[committee.headKey].member_faculty || 'جاري التحميل..' }}</div>
-                    <div class="level">{{ heads[committee.headKey].member_level || 'جاري التحميل..' }}</div>
-                </div>
-                <div class="subordinates">
-                    <div class="position vice-head">
-                        <div class="profile">
-                            <img :src="`../../images/students/${viceHeads[committee.viceHeadKey].member_id}.jpg`" :alt="viceHeads[committee.viceHeadKey].member_name" class="circle-photo" v-if="viceHeads[committee.viceHeadKey].member_id" />
+            <div class="executive-committee">
+                <div v-for="(committee, key) in committees" :key="key" class="committee-box">
+                    <div class="committee-title">{{ committee.title }}</div>
+                    <div class="committee-content">
+                        <div class="position head">
+                            <div class="profile">
+                                <img :src="`../../images/students/${heads[committee.headKey].member_id}.jpg`" :alt="heads[committee.headKey].member_name" class="circle-photo" v-if="heads[committee.headKey].member_id" />
+                            </div>
+                            <div class="details">
+                                <div class="name">{{ heads[committee.headKey].member_name || 'جاري التحميل..' }}</div>
+                                <div class="title">أمين اللجنة</div>
+                                <div class="faculty">{{ heads[committee.headKey].member_faculty ? `كلية ${heads[committee.headKey].member_faculty}` : 'جاري التحميل..' }}</div>
+                                <div class="level">{{ heads[committee.headKey].member_level || 'جاري التحميل..' }}</div>
+                            </div>
+                            <div class="subordinates">
+                                <div class="position vice-head">
+                                    <div class="profile">
+                                        <img :src="`../../images/students/${viceHeads[committee.viceHeadKey].member_id}.jpg`" :alt="viceHeads[committee.viceHeadKey].member_name" class="circle-photo" v-if="viceHeads[committee.viceHeadKey].member_id" />
+                                    </div>
+                                    <div class="details">
+                                        <div class="name">{{ viceHeads[committee.viceHeadKey].member_name || 'جاري التحميل..' }}</div>
+                                        <div class="title">أمين مساعد اللجنة</div>
+                                        <div class="faculty">{{ viceHeads[committee.viceHeadKey].member_faculty ? `كلية ${viceHeads[committee.viceHeadKey].member_faculty}` : 'جاري التحميل..' }}</div>
+                                        <div class="level">{{ viceHeads[committee.viceHeadKey].member_level || 'جاري التحميل..' }}</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="details">
-                            <div class="name">{{ viceHeads[committee.viceHeadKey].member_name || 'جاري التحميل..' }}</div>
-                            <div class="title">أمين مساعد اللجنة</div>
-                            <div class="faculty">{{ viceHeads[committee.viceHeadKey].member_faculty || 'جاري التحميل..' }}</div>
-                            <div class="level">{{ viceHeads[committee.viceHeadKey].member_level || 'جاري التحميل..' }}</div>
+                        <div class="members">
+                            <div class="member" v-for="member in members[committee.memberKey]" :key="member.member_id">
+                                <div class="profile">
+                                    <img :src="`../../images/students/${member.member_id}.jpg`" :alt="member.member_name" class="circle-photo" v-if="member.member_id" />
+                                </div>
+                                <div class="details">
+                                    <div class="name">{{ member.member_name || 'جاري التحميل..' }}</div>
+                                    <div class="title">عضو باللجنة</div>
+                                    <div class="faculty">{{ member.member_faculty ? `كلية ${member.member_faculty}` : 'جاري التحميل..' }}</div>
+                                    <div class="level">{{ member.member_level || 'جاري التحميل..' }}</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="members">
-                <div class="member" v-for="member in members[committee.memberKey]" :key="member.member_id">
-                    <div class="profile">
-                        <img :src="`../../images/students/${member.member_id}.jpg`" :alt="member.member_name" class="circle-photo" v-if="member.member_id" />
-                    </div>
-                    <div class="details">
-                        <div class="name">{{ member.member_name || 'جاري التحميل..' }}</div>
-                        <div class="title">عضو باللجنة</div>
-                        <div class="faculty">{{ member.member_faculty || 'جاري التحميل..' }}</div>
-                        <div class="level">{{ member.member_level || 'جاري التحميل..' }}</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>            
-</div>
         </div>
         <FooterComponent />
     </div>
@@ -130,8 +129,8 @@ export default {
                 { title: 'اللجنة الثقافية والاعلامية', headKey: 'Head_Cultural', viceHeadKey: 'Vice_Cultural', memberKey: 'Member_Cultural' },
                 { title: 'اللجنة الاجتماعية', headKey: 'Head_Social', viceHeadKey: 'Vice_Social', memberKey: 'Member_Social' },
                 { title: 'اللجنة الفنية', headKey: 'Head_Arts', viceHeadKey: 'Vice_Arts', memberKey: 'Member_Arts' },
-                { title: 'اللجنة العلمية', headKey: 'Head_Scientific', viceHeadKey: 'Vice_Scientific', memberKey: 'Member_Scientific' },
-                { title: 'لجنة الجوالة', headKey: 'Head_Scout', viceHeadKey: 'Vice_Scout', memberKey: 'Member_Scout' },
+                { title: 'اللجنة العلمية والتكنولوجية', headKey: 'Head_Scientific', viceHeadKey: 'Vice_Scientific', memberKey: 'Member_Scientific' },
+                { title: 'لجنة الجوالة والخدمة العامة', headKey: 'Head_Scout', viceHeadKey: 'Vice_Scout', memberKey: 'Member_Scout' },
             ],
         };
     },
@@ -247,11 +246,19 @@ export default {
     padding: 5px;
 }
 
-/* Ensure uniform size for names */
+/* Ensure uniform size for names and limit to 2 lines */
 .name {
     font-weight: bold;
     color: #0e116c; /* Change to your desired color */
-    font-size: 1rem; /* Set all names to the same size */
+    font-size: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limit the name to 2 lines */
+    -webkit-box-orient: vertical; /* Ensure the text is treated as a vertical box */
+    overflow: hidden; /* Hide the overflowing text */
+    text-align: center;
+    word-break: break-word; /* Allow breaking of long words */
+    hyphens: auto; /* Enable hyphenation for better word distribution */
+    white-space: normal; /* Allow normal wrapping */
 }
 
 /* Ensure uniform size for titles */
@@ -271,12 +278,12 @@ export default {
 
 /* Ensure uniform size for faculty */
 .faculty {
-    font-size: 1rem; /* Set all faculty to the same size */
+    font-size: 0.7rem; /* Set all faculty to the same size */
 }
 
 /* Ensure uniform size for levels */
 .level {
-    font-size: 1rem; /* Set all levels to the same size */
+    font-size: 0.8rem; /* Set all levels to the same size */
 }
 
 .subordinates {
