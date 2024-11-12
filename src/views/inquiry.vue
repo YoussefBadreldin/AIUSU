@@ -57,7 +57,7 @@
               <p><strong class="title-color" style="color: black;">الرقم القومي:</strong> {{ eligibility.student_NATid }}</p>
               <p><strong class="title-color" style="color: black;">الكلية:</strong> {{ eligibility.student_faculty }}</p>
               <p><strong class="title-color" style="color: black;">الرقم الجامعي:</strong> {{ eligibility.student_id }}</p>
-              <p><strong class="title-color" style="color: black;">المستوى:</strong> {{ studentLevelLastWord }}</p>
+              <p><strong class="title-color" style="color: black;">المستوى الفعلي (بناءً على عدد الساعات المجتازة):</strong> {{ studentLevelLastWord }}</p>
               <p><strong class="title-color" style="color: black;">المعدل التراكمي:</strong> {{ eligibility.student_gpa }}</p>
               <p><strong class="title-color" style="color: black;">العقوبات:</strong> {{ eligibility.student_punish || 'يرجي مراجعة الشوؤن القانونية' }}</p>
               <p><strong class="title-color" style="color: black;">الانشطة السابقة:</strong> {{ eligibility.student_activity || 'لا يوجد' }}</p>
