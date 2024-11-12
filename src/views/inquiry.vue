@@ -41,7 +41,7 @@
                   <button type="submit" class="custom-btn login-btn">إبحث</button>
                 </form>
 
-                <div v-if="loading" class="alert alert-info mt-4">جاري التحميل...</div>
+                <div v-if="loading" class="alert alert-info mt-4">برجاء الانتظار قليلًا، جاري تحميل البيانات</div>
                 <div v-if="errorMessage" class="alert alert-danger mt-4">{{ errorMessage }}</div>
 
                 <div v-if="eligibility && !loading" class="mt-4">
@@ -276,7 +276,7 @@ export default {
 }
 
 .error {
-  color: red;
+  color: white;
 }
 
 .title-color {

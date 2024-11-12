@@ -11,7 +11,7 @@
                 <button type="submit" class="btn btn-primary">إبحث</button>
             </form>
 
-            <div v-if="loading" class="alert alert-info mt-4">...جاري التحميل</div>
+            <div v-if="loading" class="alert alert-info mt-4">برجاء الانتظار قليلًا، جاري تحميل البيانات</div>
             <div v-if="errorMessage" class="alert alert-danger mt-4">{{ errorMessage }}</div>
 
             <div v-if="findplace && !loading" class="mt-4">
@@ -28,7 +28,10 @@
 
                 <div v-for="(committee, index) in committees" :key="index" class="committee-container mb-4">
                     <h6>{{ committee.name }}</h6>
-                    <ul v-if="committee.candidates && committee.candidates.length > 0">
+                    <div v-if="committee.candidates.length === 0">
+                        <p class="text-danger">{{ committee.message }}</p>
+                    </div>
+                    <ul v-else>
                         <li v-for="candidate in committee.candidates" :key="candidate.candidate_id" class="candidate-item">
                             <div class="candidate-photo">
                                 <img :src="`../../images/students/${candidate.candidate_id}.jpg`" alt="مرشح" loading="lazy" />
@@ -40,7 +43,6 @@
                             </div>
                         </li>
                     </ul>
-                    <p v-else class="no-candidates-message">لا توجد بيانات متوفرة حاليا.<br> سيتم إضافتها فور غلق باب الترشح.<br> يرجى مراجعة الصفحة لاحقاً.</p>
                 </div>
 
                 <div class="election-guidelines mt-4">
@@ -191,7 +193,7 @@ export default {
                     this.studentsMap = students.reduce((map, student) => {
                         map[student.student_id] = student;
                         return map;
-                    }, {});
+                    }, {}); 
                     // Cache the students data for future use
                     sessionStorage.setItem('studentsMap', JSON.stringify(this.studentsMap));
                 }
@@ -257,23 +259,33 @@ export default {
             };
 
             const committeePromises = committeeURLs.map(async (url) => {
-                const response = await fetch(url);
-                if (!response.ok) throw new Error('Failed to fetch committee data');
-                const candidates = await response.json();
+                try {
+                    const response = await fetch(url);
+                    if (!response.ok) throw new Error('Failed to fetch committee data');
+                    const candidates = await response.json();
 
-                return {
-                    name: committeeNames[url],
-                    candidates: candidates.map(candidate => ({
-                        candidate_id: candidate.candidate_id, // Ensure candidate_id is fetched correctly
-                        candidate_name: '', // Initially empty
-                        candidate_faculty: '', // Initially empty
-                        candidate_level: '', // Initially empty
-                        photo: `../../images/students/${candidate.candidate_id}.jpg`, // Placeholder for image path
-                    })),
-                };
+                    return {
+                        name: committeeNames[url],
+                        candidates: candidates.map(candidate => ({
+                            candidate_id: candidate.candidate_id, // Ensure candidate_id is fetched correctly
+                            candidate_name: '', // Initially empty
+                            candidate_faculty: '', // Initially empty
+                            candidate_level: '', // Initially empty
+                            photo: `../../images/students/${candidate.candidate_id}.jpg`, // Placeholder for image path
+                        })),
+                    };
+                } catch (error) {
+                    console.error(`Error fetching committee data from ${url}:`, error);
+                    return {
+                        name: committeeNames[url],
+                        candidates: [],
+                        message: 'البيانات غير متاحة حاليًا. سيتم إضافتها فور غلق باب الترشح. يرجى مراجعة الموقع لاحقًا.',
+                    };
+                }
             });
 
-            return Promise.all(committeePromises);
+            const results = await Promise.all(committeePromises);
+            return results.filter(result => result !== null);
         },
     },
 };
@@ -424,10 +436,4 @@ export default {
         height: 50px; /* Ensure it's a circle */
     }
 }
- 
-    .no-candidates-message {
-        color: #D9534F; /* Soft red color */
-        font-weight: bold;
-        text-align: center;
-    }
 </style>
