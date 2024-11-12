@@ -28,7 +28,7 @@
 
                 <div v-for="(committee, index) in committees" :key="index" class="committee-container mb-4">
                     <h6>{{ committee.name }}</h6>
-                    <ul>
+                    <ul v-if="committee.candidates && committee.candidates.length > 0">
                         <li v-for="candidate in committee.candidates" :key="candidate.candidate_id" class="candidate-item">
                             <div class="candidate-photo">
                                 <img :src="`../../images/students/${candidate.candidate_id}.jpg`" alt="مرشح" loading="lazy" />
@@ -40,6 +40,7 @@
                             </div>
                         </li>
                     </ul>
+                    <p v-else class="no-candidates-message">لا توجد بيانات متوفرة حاليا.<br> سيتم إضافتها فور غلق باب الترشح.<br> يرجى مراجعة الصفحة لاحقاً.</p>
                 </div>
 
                 <div class="election-guidelines mt-4">
@@ -423,4 +424,10 @@ export default {
         height: 50px; /* Ensure it's a circle */
     }
 }
+ 
+    .no-candidates-message {
+        color: #D9534F; /* Soft red color */
+        font-weight: bold;
+        text-align: center;
+    }
 </style>
