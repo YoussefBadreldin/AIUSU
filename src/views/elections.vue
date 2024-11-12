@@ -377,11 +377,11 @@ export default {
 
     /* Adjust font sizes for candidate details */
     .candidate-name {
-        font-size: 0.7em; /* Smaller font size */
+        font-size: 0.5em; /* Smaller font size */
     }
 
     .candidate-faculty {
-        font-size: 0.7em; /* Smaller font size */
+        font-size: 0.5em; /* Smaller font size */
     }
 
     .candidate-level {
@@ -406,11 +406,11 @@ export default {
 
     /* Adjust font sizes for candidate details */
     .candidate-name {
-        font-size: 0.7em; /* Even smaller font size */
+        font-size: 0.5em; /* Even smaller font size */
     }
 
     .candidate-faculty {
-        font-size: 0.6em; /* Even smaller font size */
+        font-size: 0.5em; /* Even smaller font size */
     }
 
     .candidate-level {
