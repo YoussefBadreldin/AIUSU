@@ -19,7 +19,7 @@
                 <p><strong>الاسم:</strong> {{ findplace.student_name }}</p>
                 <p><strong>الكلية:</strong> {{ findplace.student_faculty }}</p>
                 <p><strong>الرقم الجامعي:</strong> {{ findplace.student_id }}</p>
-                <p><strong>المستوى الفعلي (بناءً على عدد الساعات المجتازة):</strong> {{ studentLevelLastWord }}</p>
+                <p><strong>المستوى الفعلي (حسب عدد الساعات):</strong> {{ studentLevelLastWord }}</p>
                 <p>{{ findplace.student_location }} <strong>:مكان اللجنة</strong> </p>
                 <p><strong>رقم الكشف:</strong> {{ findplace.student_number }}</p>
 
