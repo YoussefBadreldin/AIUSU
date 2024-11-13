@@ -249,7 +249,7 @@ export default {
             ];
 
             const committeeNames = {
-                'https://aiusu-backend.vercel.app/clubs': 'لجنة الاسر',
+                'https://aiusu-backend.vercel.app/clubs': 'لجنة الأسر',
                 'https://aiusu-backend.vercel.app/sports': 'اللجنة الرياضية',
                 'https://aiusu-backend.vercel.app/cultural': 'اللجنة الثقافية والاعلامية',
                 'https://aiusu-backend.vercel.app/arts': 'اللجنة الفنية',
