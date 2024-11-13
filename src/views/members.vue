@@ -127,10 +127,10 @@ export default {
                 { title: 'لجنة الأسر', headKey: 'Head_Clubs', viceHeadKey: 'Vice_Clubs', memberKey: 'Member_Clubs' },
                 { title: 'اللجنة الرياضية', headKey: 'Head_Sports', viceHeadKey: 'Vice_Sports', memberKey: 'Member_Sports' },
                 { title: 'اللجنة الثقافية والاعلامية', headKey: 'Head_Cultural', viceHeadKey: 'Vice_Cultural', memberKey: 'Member_Cultural' },
-                { title: 'اللجنة الاجتماعية', headKey: 'Head_Social', viceHeadKey: 'Vice_Social', memberKey: 'Member_Social' },
                 { title: 'اللجنة الفنية', headKey: 'Head_Arts', viceHeadKey: 'Vice_Arts', memberKey: 'Member_Arts' },
+               { title: 'لجنة الجوالة والخدمة العامة', headKey: 'Head_Scout', viceHeadKey: 'Vice_Scout', memberKey: 'Member_Scout' },
+                { title: 'اللجنة الاجتماعية والرحلات', headKey: 'Head_Social', viceHeadKey: 'Vice_Social', memberKey: 'Member_Social' },
                 { title: 'اللجنة العلمية والتكنولوجية', headKey: 'Head_Scientific', viceHeadKey: 'Vice_Scientific', memberKey: 'Member_Scientific' },
-                { title: 'لجنة الجوالة والخدمة العامة', headKey: 'Head_Scout', viceHeadKey: 'Vice_Scout', memberKey: 'Member_Scout' },
             ],
         };
     },
