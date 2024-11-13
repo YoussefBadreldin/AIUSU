@@ -30,7 +30,7 @@
                             <button class="custom-btn btn-lg btn-block" @click="navigateToPage('/rules')">لائحة الاتحاد</button>
                         </div>
                         <div class="col-lg-6 col-md-4 mb-3">
-                            <button class="custom-btn btn-lg btn-block" @click="navigateToPage('/members')">اعضاء الاتحاد</button>
+                            <button class="custom-btn btn-lg btn-block" @click="navigateToPage('/members')">اعضاء الاتحاد الحاليين</button>
                         </div>
                         <div class="col-lg-6 col-md-4 mb-3">
                             <button class="custom-btn btn-lg btn-block" @click="redirectToLink">الاشتراك في انشطة الاتحاد</button>
