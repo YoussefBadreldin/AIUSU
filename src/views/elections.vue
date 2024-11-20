@@ -20,6 +20,7 @@
                 <p><strong>الكلية:</strong> {{ findplace.student_faculty }}</p>
                 <p><strong>الرقم الجامعي:</strong> {{ findplace.student_id }}</p>
                 <p><strong>المستوى طبقا لعدد الساعات المجتازة:</strong> {{ studentLevelLastWord }}</p>
+                <p>الأحد 24 نوفمبر من 9 ص حتي 2 م<strong>:موعد الانتخابات</strong> </p>
                 <p>{{ findplace.student_location }} <strong>:مكان اللجنة</strong> </p>
                 <p><strong>رقم الكشف:</strong> {{ findplace.student_number }}</p>
 
