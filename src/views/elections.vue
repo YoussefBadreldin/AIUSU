@@ -279,7 +279,7 @@ export default {
                     return {
                         name: committeeNames[url],
                         candidates: [],
-                        message: 'البيانات غير متاحة حاليًا. سيتم إضافتها فور غلق باب الترشح. يرجى مراجعة الموقع لاحقًا.',
+                        message: 'لا يوجد مرشحين',
                     };
                 }
             });
