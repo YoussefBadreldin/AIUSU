@@ -125,23 +125,36 @@ export default {
                 return; // Exit the method early if findplace is null
             }
 
+            const studentLevel = this.findplace.student_level;
+
             for (const committee of committees) {
-                committee.candidates = committee.candidates.filter(candidate => {
+                // Filter candidates to match the student's level
+                const matchingCandidates = committee.candidates.filter(candidate => {
                     const studentInfo = this.studentsMap[candidate.candidate_id]; // Match candidate_id with student_id
                     if (studentInfo) {
                         candidate.candidate_name = studentInfo.student_name;
                         candidate.candidate_faculty = studentInfo.student_faculty;
-                        candidate.candidate_level = studentInfo.student_level; // Add student level
+                        candidate.candidate_level = studentInfo.student_level;
 
                         // Check if the candidate level matches the student's level
-                        return candidate.candidate_level === this.findplace.student_level;
+                        return candidate.candidate_level === studentLevel;
                     } else {
+                        // Unknown candidate details
                         candidate.candidate_name = 'غير معروف';
                         candidate.candidate_faculty = 'غير معروف';
-                        candidate.candidate_level = 'غير معروف'; // Mark level as unknown
-                        return false; // Exclude unknown candidates
+                        candidate.candidate_level = 'غير معروف';
+                        return false;
                     }
                 });
+
+                // If no matching candidates, add a "no candidates" message
+                if (matchingCandidates.length === 0) {
+                    committee.candidates = [];
+                    committee.message = 'لا يوجد مرشحين';
+                } else {
+                    committee.candidates = matchingCandidates;
+                    delete committee.message; // Remove the message if candidates are present
+                }
             }
         },
 
@@ -279,7 +292,7 @@ export default {
                     return {
                         name: committeeNames[url],
                         candidates: [],
-                        message: 'لا يوجد مرشحين',
+                        message: 'البيانات غير متاحة حاليًا. سيتم إضافتها فور غلق باب الترشح. يرجى مراجعة الموقع لاحقًا.',
                     };
                 }
             });
@@ -290,6 +303,7 @@ export default {
     },
 };
 </script>
+
 
 <style scoped>
 .container {
