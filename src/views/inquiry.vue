@@ -118,8 +118,12 @@ export default {
         reasons.push('لديه عقوبة سابقة');
       }
 
-      // Check GPA
-      if (student_gpa !== 'N/A' && student_gpa < 2.0) {
+      // Check GPA (except for students with student_id starting with "24" and level "المستوى الأول")
+      if (
+        student_gpa !== 'N/A' &&
+        student_gpa < 2.0 &&
+        !(student_id.startsWith('24') && student_level === 'المستوى الأول')
+      ) {
         reasons.push('المعدل التراكمي أقل من 2.0');
       }
 
