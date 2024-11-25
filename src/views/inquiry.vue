@@ -157,8 +157,8 @@ export default {
       }
     },
     handleLogin() {
-      const validUsername = 'hano'; // Placeholder for real validation
-      const validPassword = 'AIUsu##2024'; // Placeholder for real validation
+      const validUsername = 'admin'; // Placeholder for real validation
+      const validPassword = 'AIU_su20##25'; // Placeholder for real validation
 
       // Check credentials
       if (this.username === validUsername && this.password === validPassword) {
