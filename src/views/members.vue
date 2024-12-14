@@ -2,7 +2,7 @@
     <div>
         <HeaderComponent />
         <div class="container">
-            <h2 class="text-center my-4">أعضاء الاتحاد الحاليين</h2>
+            <h2 class="text-center my-4">أعضاء الاتحاد الحالي</h2>
             <div class="organization-chart">
                 <div class="position president">
                     <div class="profile">
