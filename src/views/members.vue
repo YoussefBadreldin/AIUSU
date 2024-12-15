@@ -237,9 +237,10 @@ export default {
 }
 
 .circle-photo {
-    border-radius: 50%;
-    width: 80px; /* Adjust size as necessary */
-    height: 80px; /* Ensure it’s a circle */
+    width: 80px; /* Default size */
+    height: 80px; /* Matches the width */
+    border-radius: 50%; /* Ensures the image is circular */
+    object-fit: cover; /* Keeps the aspect ratio intact and avoids distortion */
 }
 
 .details {
@@ -326,18 +327,42 @@ export default {
     text-align: center; /* Center member details */
 }
 
-/* Media Queries for Smaller Screens */
-@media (max-width: 768px) {
+/* Media Queries for Tablets and iPads */
+@media (max-width: 1024px) {
     .committee-box {
-        width: calc(50% - 20px); /* 2 boxes per row on tablets */
+        width: calc(50% - 20px); /* 2 boxes per row on iPads and tablets */
     }
 
     .member {
-        width: calc(25% - 10px); /* 4 members per row on tablets */
+        width: calc(33.33% - 10px); /* 3 members per row on tablets */
     }
 
     .name, .title, .faculty, .level {
-        font-size: 0.9rem; /* Slightly smaller font size on tablets */
+        font-size: 0.8rem; /* Slightly smaller font size for tablets */
+    }
+
+    .committee-title {
+        font-size: 1.1rem; /* Adjusted font size for titles */
+    }
+
+    .circle-photo {
+        width: 70px; /* Adjust size for tablets */
+        height: 70px; /* Matches the width */
+    }
+}
+
+/* Media Queries for Smaller Tablets */
+@media (max-width: 768px) {
+    .committee-box {
+        width: calc(50% - 20px); /* 2 boxes per row on smaller tablets */
+    }
+
+    .member {
+        width: calc(25% - 10px); /* 4 members per row (restored mobile-like behavior) */
+    }
+
+    .name, .title, .faculty, .level {
+        font-size: 0.7rem; /* Reduce font size for smaller tablets */
     }
 
     .committee-title {
@@ -345,11 +370,12 @@ export default {
     }
 
     .circle-photo {
-        width: 60px; /* Adjust size for smaller screens */
-        height: 60px; /* Ensure it’s a circle */
+        width: 60px; /* Adjust size for smaller tablets */
+        height: 60px; /* Matches the width */
     }
 }
 
+/* Media Queries for Mobile Phones */
 @media (max-width: 576px) {
     .committee-box {
         width: 100%; /* 1 box per row on mobile */
@@ -361,12 +387,12 @@ export default {
     }
 
     .member {
-        width: calc(25% - 10px); /* 4 members per row on mobile */
+        width: calc(25% - 10px); /* 4 members per row on mobile (restored behavior) */
         margin-bottom: 10px; /* Maintain spacing between rows */
     }
 
     .name, .title, .faculty, .level {
-        font-size: 0.4rem; /* Further reduce font size on small screens */
+        font-size: 0.6rem; /* Further reduce font size on small screens */
     }
 
     .committee-title {
@@ -374,8 +400,9 @@ export default {
     }
 
     .circle-photo {
-        width: 60px; /* Maintain the circle size */
-        height: 60px; /* Ensure it’s a circle */
+        width: 50px; /* Smaller size for mobile */
+        height: 50px; /* Matches the width */
     }
 }
 </style>
+
