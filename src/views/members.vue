@@ -330,7 +330,7 @@ export default {
 /* Media Queries for Tablets and iPads */
 @media (max-width: 1024px) {
     .committee-box {
-        width: calc(50% - 20px); /* 2 boxes per row on iPads and tablets */
+        width: 100%; /* 1 box per row on tablets */
     }
 
     .member {
@@ -354,11 +354,11 @@ export default {
 /* Media Queries for Smaller Tablets */
 @media (max-width: 768px) {
     .committee-box {
-        width: calc(50% - 20px); /* 2 boxes per row on smaller tablets */
+        width: 100%; /* 1 box per row on smaller tablets (as mobile behavior) */
     }
 
     .member {
-        width: calc(25% - 10px); /* 4 members per row (restored mobile-like behavior) */
+        width: calc(25% - 10px); /* 4 members per row on smaller tablets */
     }
 
     .name, .title, .faculty, .level {
@@ -387,7 +387,7 @@ export default {
     }
 
     .member {
-        width: calc(25% - 10px); /* 4 members per row on mobile (restored behavior) */
+        width: calc(25% - 10px); /* 4 members per row on mobile */
         margin-bottom: 10px; /* Maintain spacing between rows */
     }
 
@@ -405,4 +405,3 @@ export default {
     }
 }
 </style>
-
