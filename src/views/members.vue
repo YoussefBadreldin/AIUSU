@@ -251,7 +251,7 @@ export default {
 .name {
     font-weight: bold;
     color: #0e116c; /* Change to your desired color */
-    font-size: 1rem;
+    font-size: 0.9rem;
     display: -webkit-box;
     -webkit-line-clamp: 2; /* Limit the name to 2 lines */
     -webkit-box-orient: vertical; /* Ensure the text is treated as a vertical box */
