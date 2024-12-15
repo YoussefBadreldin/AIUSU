@@ -362,7 +362,7 @@ export default {
     }
 
     .name, .title, .faculty, .level {
-        font-size: 0.7rem; /* Reduce font size for smaller tablets */
+        font-size: 0.6rem; /* Reduce font size for smaller tablets */
     }
 
     .committee-title {
@@ -392,7 +392,7 @@ export default {
     }
 
     .name, .title, .faculty, .level {
-        font-size: 0.6rem; /* Further reduce font size on small screens */
+        font-size: 0.4rem; /* Further reduce font size on small screens */
     }
 
     .committee-title {
