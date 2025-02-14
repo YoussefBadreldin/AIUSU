@@ -35,9 +35,19 @@
                         <h2 class="text-center">تقديم طلب</h2>
                         <form @submit.prevent="submitForm">
                             <div class="form-group">
-                                <label for="student_id">الرقم الجامعي</label>
-                                <input v-model="form.student_id" type="text" id="student_id" class="form-control" required>
-                            </div>
+    <label for="student_id">الرقم الجامعي</label>
+    <input 
+        v-model="form.student_id" 
+        @input="validateStudentId" 
+        type="text" 
+        id="student_id" 
+        class="form-control" 
+        required
+    >
+    <p v-if="studentIdValid === false" class="text-danger">⚠️ الرقم الجامعي غير صحيح، يرجى التحقق.</p>
+    <p v-if="studentIdValid === true" class="text-success">✅ الرقم الجامعي صحيح</p>
+</div>
+
 
                             <div class="form-group">
                                 <label for="requestScope">نطاق الطلب</label>
@@ -153,54 +163,29 @@ export default {
             loading: false,
             trackingRequestNumber: '',
             trackingResult: null,
+            studentIdValid: null, // Tracks student ID validity
+            studentName: '', // Stores student name if found
             form: { student_id: '', requestScope: '', requestType: '', details: '', comments: '' },
-            studentsMap: {} // Store students data for quick lookup
+            studentsMap: {} // Stores students for quick lookup
         };
     },
     mounted() {
         this.loadStudentData(); // Load student data on component mount
     },
     methods: {
-        submitForm() {
-            this.loading = true;
-            axios.post('https://aiusu-backend.vercel.app/complaints-suggestions/add', this.form)
-                .then(response => {
-                    this.requestNumber = response.data.requestNumber;
-                    this.submitted = true;
-                    this.showRequestForm = false;
-                    this.form = { student_id: '', requestScope: '', requestType: '', details: '', comments: '' };
-                })
-                .catch(() => alert('حدث خطأ أثناء إرسال النموذج.'))
-                .finally(() => { this.loading = false; });
-        },
-        
-        trackRequest() {
-            this.loading = true;
-            this.trackingResult = null;
+        async validateStudentId() {
+            if (!this.form.student_id) {
+                this.studentIdValid = null;
+                return;
+            }
 
-            axios.get(`https://aiusu-backend.vercel.app/complaints-suggestions/${this.trackingRequestNumber}`)
-                .then(response => {
-                    this.trackingResult = response.data;
-
-                    if (this.trackingResult && this.trackingResult.student_id) {
-                        const studentData = this.studentsMap[this.trackingResult.student_id];
-
-                        if (studentData) {
-                            this.trackingResult.student_name = studentData.student_name;
-                            this.trackingResult.student_faculty = studentData.student_faculty;
-                        } else {
-                            this.trackingResult.student_name = "لم يتم العثور على اسم الطالب";
-                            this.trackingResult.student_faculty = "لم يتم العثور على الكلية";
-                        }
-                    }
-                })
-                .catch(error => {
-                    alert('حدث خطأ أثناء البحث عن البيانات.');
-                    console.error(error);
-                })
-                .finally(() => {
-                    this.loading = false;
-                });
+            if (this.studentsMap[this.form.student_id]) {
+                this.studentIdValid = true;
+                this.studentName = this.studentsMap[this.form.student_id].student_name;
+            } else {
+                this.studentIdValid = false;
+                this.studentName = '';
+            }
         },
 
         async loadStudentData() {
@@ -216,10 +201,31 @@ export default {
                 console.error('Error loading student data:', error);
                 alert('فشل تحميل بيانات الطلاب');
             }
+        },
+
+        submitForm() {
+            if (!this.studentIdValid) {
+                alert('الرجاء إدخال رقم جامعي صحيح قبل الإرسال.');
+                return;
+            }
+
+            this.loading = true;
+            axios.post('https://aiusu-backend.vercel.app/complaints-suggestions/add', this.form)
+                .then(response => {
+                    this.requestNumber = response.data.requestNumber;
+                    this.submitted = true;
+                    this.showRequestForm = false;
+                    this.form = { student_id: '', requestScope: '', requestType: '', details: '', comments: '' };
+                    this.studentIdValid = null;
+                    this.studentName = '';
+                })
+                .catch(() => alert('حدث خطأ أثناء إرسال النموذج.'))
+                .finally(() => { this.loading = false; });
         }
     }
 };
 </script>
+
 
 
 <style scoped>
