@@ -172,12 +172,13 @@ export default {
             loading: false,
             trackingRequestNumber: '',
             trackingResult: null,
-            studentIdValid: null, // Tracks student ID validity
-            studentName: '', // Stores student name if found
-            requestNumberValid: null, // Tracks request number validity
+            studentIdValid: null,
+            studentName: '',
+            studentFaculty: '',
+            requestNumberValid: null,
             form: { student_id: '', requestScope: '', requestType: '', details: '', comments: '' },
-            studentsMap: {}, // Stores students for quick lookup
-            requestNumbers: new Set() // Stores valid request numbers
+            studentsMap: {},
+            requestNumbers: new Set()
         };
     },
     mounted() {
@@ -188,15 +189,19 @@ export default {
         async validateStudentId() {
             if (!this.form.student_id) {
                 this.studentIdValid = null;
+                this.studentName = '';
+                this.studentFaculty = '';
                 return;
             }
 
             if (this.studentsMap[this.form.student_id]) {
                 this.studentIdValid = true;
                 this.studentName = this.studentsMap[this.form.student_id].student_name;
+                this.studentFaculty = this.studentsMap[this.form.student_id].student_faculty;
             } else {
                 this.studentIdValid = false;
                 this.studentName = '';
+                this.studentFaculty = '';
             }
         },
 
@@ -205,7 +210,6 @@ export default {
                 this.requestNumberValid = null;
                 return;
             }
-
             this.requestNumberValid = this.requestNumbers.has(this.trackingRequestNumber);
         },
 
@@ -223,21 +227,18 @@ export default {
                 alert('فشل تحميل بيانات الطلاب');
             }
         },
-        
+
         async loadRequestNumbers() {
-    try {
-        const response = await fetch('https://aiusu-backend.vercel.app/complaints-suggestions/list');
-        if (!response.ok) throw new Error('Failed to fetch request numbers');
-
-        const requests = await response.json();
-        this.requestNumbers = new Set(requests.map(request => request.requestNumber));
-
-        console.log("Loaded request numbers:", this.requestNumbers); // Debugging log
-    } catch (error) {
-        console.error('Error loading request numbers:', error);
-        alert('فشل تحميل أرقام الطلبات');
-    }
-},
+            try {
+                const response = await fetch('https://aiusu-backend.vercel.app/complaints-suggestions/list');
+                if (!response.ok) throw new Error('Failed to fetch request numbers');
+                const requests = await response.json();
+                this.requestNumbers = new Set(requests.map(request => request.requestNumber));
+            } catch (error) {
+                console.error('Error loading request numbers:', error);
+                alert('فشل تحميل أرقام الطلبات');
+            }
+        },
 
         submitForm() {
             if (!this.studentIdValid) {
@@ -254,6 +255,7 @@ export default {
                     this.form = { student_id: '', requestScope: '', requestType: '', details: '', comments: '' };
                     this.studentIdValid = null;
                     this.studentName = '';
+                    this.studentFaculty = '';
                 })
                 .catch(() => alert('حدث خطأ أثناء إرسال النموذج.'))
                 .finally(() => { this.loading = false; });
@@ -271,6 +273,16 @@ export default {
             axios.get(`https://aiusu-backend.vercel.app/complaints-suggestions/${this.trackingRequestNumber}`)
                 .then(response => {
                     this.trackingResult = response.data;
+                    if (this.trackingResult && this.trackingResult.student_id) {
+                        const studentData = this.studentsMap[this.trackingResult.student_id];
+                        if (studentData) {
+                            this.trackingResult.student_name = studentData.student_name;
+                            this.trackingResult.student_faculty = studentData.student_faculty;
+                        } else {
+                            this.trackingResult.student_name = 'لم يتم العثور على اسم الطالب';
+                            this.trackingResult.student_faculty = 'لم يتم العثور على الكلية';
+                        }
+                    }
                 })
                 .catch(() => alert('حدث خطأ أثناء البحث عن البيانات.'))
                 .finally(() => { this.loading = false; });
