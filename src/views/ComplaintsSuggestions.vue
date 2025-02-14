@@ -35,18 +35,18 @@
                         <h2 class="text-center">تقديم طلب</h2>
                         <form @submit.prevent="submitForm">
                             <div class="form-group">
-    <label for="student_id">الرقم الجامعي</label>
-    <input 
-        v-model="form.student_id" 
-        @input="validateStudentId" 
-        type="text" 
-        id="student_id" 
-        class="form-control" 
-        required
-    >
-    <p v-if="studentIdValid === false" class="text-danger">⚠️ الرقم الجامعي غير صحيح، يرجى التحقق.</p>
-    <p v-if="studentIdValid === true" class="text-success">✅ الرقم الجامعي صحيح</p>
-</div>
+                        <label for="student_id">الرقم الجامعي</label>
+                        <input 
+                            v-model="form.student_id" 
+                            @input="validateStudentId" 
+                            type="text" 
+                            id="student_id" 
+                            class="form-control" 
+                            required
+                        >
+                        <p v-if="studentIdValid === false" class="text-danger"> الرقم الجامعي غير صحيح، يرجى التحقق منه⚠️</p>
+                        <p v-if="studentIdValid === true" class="text-success"> الرقم الجامعي صحيح✅</p>
+                    </div>
 
 
                             <div class="form-group">
@@ -105,9 +105,18 @@
                         <h2 class="text-center">متابعة الطلب</h2>
                         <form @submit.prevent="trackRequest">
                             <div class="form-group">
-                                <label for="requestNumber">رقم الطلب</label>
-                                <input v-model="trackingRequestNumber" type="text" id="requestNumber" class="form-control" required>
-                            </div>
+                        <label for="requestNumber">رقم الطلب</label>
+                        <input 
+                            v-model="trackingRequestNumber" 
+                            @input="validateRequestNumber" 
+                            type="text" 
+                            id="requestNumber" 
+                            class="form-control" 
+                            required
+                        >
+                        <p v-if="requestNumberValid === false" class="text-danger"> رقم الطلب غير صحيح، يرجى التحقق منه⚠️</p>
+                        <p v-if="requestNumberValid === true" class="text-success"> رقم الطلب صحيح✅</p>
+                    </div>
 
                             <div class="form-group text-center">
                                 <button type="submit" class="btn btn-success btn-block" :disabled="loading">
@@ -165,12 +174,15 @@ export default {
             trackingResult: null,
             studentIdValid: null, // Tracks student ID validity
             studentName: '', // Stores student name if found
+            requestNumberValid: null, // Tracks request number validity
             form: { student_id: '', requestScope: '', requestType: '', details: '', comments: '' },
-            studentsMap: {} // Stores students for quick lookup
+            studentsMap: {}, // Stores students for quick lookup
+            requestNumbers: new Set() // Stores valid request numbers
         };
     },
     mounted() {
-        this.loadStudentData(); // Load student data on component mount
+        this.loadStudentData();
+        this.loadRequestNumbers();
     },
     methods: {
         async validateStudentId() {
@@ -188,6 +200,15 @@ export default {
             }
         },
 
+        async validateRequestNumber() {
+            if (!this.trackingRequestNumber) {
+                this.requestNumberValid = null;
+                return;
+            }
+
+            this.requestNumberValid = this.requestNumbers.has(this.trackingRequestNumber);
+        },
+
         async loadStudentData() {
             try {
                 const response = await fetch('https://aiusu-backend.vercel.app/students');
@@ -202,6 +223,21 @@ export default {
                 alert('فشل تحميل بيانات الطلاب');
             }
         },
+        
+        async loadRequestNumbers() {
+    try {
+        const response = await fetch('https://aiusu-backend.vercel.app/complaints-suggestions/list');
+        if (!response.ok) throw new Error('Failed to fetch request numbers');
+
+        const requests = await response.json();
+        this.requestNumbers = new Set(requests.map(request => request.requestNumber));
+
+        console.log("Loaded request numbers:", this.requestNumbers); // Debugging log
+    } catch (error) {
+        console.error('Error loading request numbers:', error);
+        alert('فشل تحميل أرقام الطلبات');
+    }
+},
 
         submitForm() {
             if (!this.studentIdValid) {
@@ -221,12 +257,27 @@ export default {
                 })
                 .catch(() => alert('حدث خطأ أثناء إرسال النموذج.'))
                 .finally(() => { this.loading = false; });
+        },
+
+        trackRequest() {
+            if (!this.requestNumberValid) {
+                alert('الرجاء إدخال رقم طلب صحيح قبل المتابعة.');
+                return;
+            }
+
+            this.loading = true;
+            this.trackingResult = null;
+
+            axios.get(`https://aiusu-backend.vercel.app/complaints-suggestions/${this.trackingRequestNumber}`)
+                .then(response => {
+                    this.trackingResult = response.data;
+                })
+                .catch(() => alert('حدث خطأ أثناء البحث عن البيانات.'))
+                .finally(() => { this.loading = false; });
         }
     }
 };
 </script>
-
-
 
 <style scoped>
 /* General Styles */
