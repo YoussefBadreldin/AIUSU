@@ -1,5 +1,4 @@
-
-<template>
+<template> 
   <div>
     <HeaderComponent />
 
@@ -9,11 +8,9 @@
         <div class="container">
           <div class="row justify-content-center">
             <div class="col-lg-6 col-md-4 mb-3">
-              <button v-if="!showLogin && !isAuthenticated" class="custom-btn btn-lg btn-block" @click="showLogin = true">
-                استعلام عن طالب
-              </button>
 
-              <div v-if="showLogin && !isAuthenticated" class="login-form">
+              <!-- Login Form -->
+              <div v-if="!isAuthenticated" class="login-form">
                 <h2>تسجيل الدخول</h2>
                 <form @submit.prevent="handleLogin">
                   <div class="form-group">
@@ -25,13 +22,29 @@
                     <input type="password" v-model="password" id="password" required />
                   </div>
                   <button type="submit" class="custom-btn login-btn">تسجيل</button>
-                  <br />
-                  <button type="button" @click="showLogin = false" class="custom-btn cancel-btn">الغاء</button>
                 </form>
                 <div v-if="errorMessage" class="error">{{ errorMessage }}</div>
               </div>
 
-              <div v-if="isAuthenticated" class="login-form">
+              <!-- Button (Visible After Login) -->
+              <button 
+                v-if="isAuthenticated && !showInquiryForm" 
+                class="custom-btn btn-lg btn-block" 
+                @click="showInquiryForm = true"
+              >
+                استعلام عن طالب
+              </button>
+
+                            <button 
+                v-if="isAuthenticated && !showRegisteration" 
+                class="custom-btn btn-lg btn-block" 
+                @click="showRegisteration = true"
+              >
+                تسجيل الانشطة
+              </button>
+
+              <!-- Inquiry Form -->
+              <div v-if="isAuthenticated && showInquiryForm" class="login-form">
                 <form @submit.prevent="findStudent">
                   <h2 class="text-center my-4">الاستعلام عن طالب</h2>
                   <div class="mb-3">
@@ -39,30 +52,97 @@
                     <input type="text" v-model="universityNumber" class="form-control" id="universityNumber" required />
                   </div>
                   <button type="submit" class="custom-btn login-btn">إبحث</button>
+                  <br />
+                  <button type="button" class="custom-btn cancel-btn" @click="showInquiryForm = false">الغاء</button>
                 </form>
 
                 <div v-if="loading" class="alert alert-info mt-4">برجاء الانتظار قليلًا، جاري تحميل البيانات</div>
                 <div v-if="errorMessage" class="alert alert-danger mt-4">{{ errorMessage }}</div>
 
                 <div v-if="eligibility && !loading" class="mt-4">
-              <div class="status-box">
-                <p v-if="eligibilityStatus" :style="{ color: eligibilityStatus.color, textAlign: 'center' }">
-                  {{ eligibilityStatus.message }}
-                </p>
+                  <div class="status-box">
+                    <p v-if="eligibilityStatus" :style="{ color: eligibilityStatus.color, textAlign: 'center' }">
+                      {{ eligibilityStatus.message }}
+                    </p>
+                  </div>
+                  <br>
+                  <h4 style="color: #0f106c;"><strong>بيانات الطالب</strong></h4>
+                  <p><strong class="title-color" style="color: black;">اسم الطالب:</strong> {{ eligibility.student_name }}</p>
+                  <p><strong class="title-color" style="color: black;">الجنسية:</strong> {{ eligibility.student_NAT }}</p>
+                  <p><strong class="title-color" style="color: black;">الرقم القومي:</strong> {{ eligibility.student_NATid }}</p>
+                  <p><strong class="title-color" style="color: black;">الكلية:</strong> {{ eligibility.student_faculty }}</p>
+                  <p><strong class="title-color" style="color: black;">الرقم الجامعي:</strong> {{ eligibility.student_id }}</p>
+                  <p><strong class="title-color" style="color: black;">المستوى طبقا لعدد الساعات المجتازة:</strong> {{ studentLevelLastWord }}</p>
+                  <p><strong class="title-color" style="color: black;">المعدل التراكمي:</strong> {{ eligibility.student_gpa }}</p>
+                  <p><strong class="title-color" style="color: black;">العقوبات:</strong> {{ eligibility.student_punish || 'يرجي مراجعة الشوؤن القانونية' }}</p>
+                  <p><strong class="title-color" style="color: black;">الانشطة السابقة:</strong> {{ eligibility.student_activity || 'لا يوجد' }}</p>
+                </div>
+
+                              <!-- Event Creation and Registration -->
+              <div v-if="isAuthenticated && showRegisteration" class="login-form event-section">
+                              <h3 class="mt-4">قائمة الأنشطة</h3>
+                <div v-if="events.length > 0">
+                  <ul class="event-list">
+                    <li v-for="event in events" :key="event.id">
+                      <button class="event-btn" @click="openEvent(event)">
+                        {{ event.name }}
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+                <div v-else>
+                  <p>لا توجد أنشطة حالياً.</p>
+                </div>
+                <h2>إضافة نشاط</h2>
+                <form @submit.prevent="createEvent">
+                  <div class="form-group">
+                    <label for="eventName">اسم النشاط:</label>
+                    <input type="text" v-model="newEvent.name" id="eventName" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="eventDescription">تاريخ النشاط:</label>
+                    <textarea v-model="newEvent.description" id="eventDescription" required></textarea>
+                  </div>
+                  <button type="submit" class="custom-btn btn-sm">إضافة النشاط</button>
+                </form>
+
+
+
+                <!-- Register for Event -->
+                <div v-if="selectedEvent" class="mt-4">
+                  <h4>التسجيل في النشاط: {{ selectedEvent.name }}</h4>
+                  <input type="text" v-model="studentId" placeholder="ادخل الرقم الجامعي" />
+                  <button @click="registerForEvent" class="custom-btn">تسجيل</button>
+                </div>
+
+                <!-- Registration Table -->
+                <div v-if="registeredStudents.length > 0" class="mt-4">
+                  <h5>الطلاب المسجلين</h5>
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>الاسم</th>
+                        <th>الرقم الجامعي</th>
+                        <th>الكلية</th>
+                        <th>الايميل الجامعي</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="student in registeredStudents" :key="student.student_id">
+                        <td>{{ student.student_name }}</td>
+                        <td>{{ student.student_id }}</td>
+                        <td>{{ student.student_faculty }}</td>
+                        <td>{{ student.student_faculty }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <!-- Export Button -->
+                  <button @click="exportToPDF" class="custom-btn btn-sm mt-2">تصدير إلى PDF</button>
+                </div>
               </div>
-              <br>
-              <h4 style="color: #0f106c;"><strong>بيانات الطالب</strong></h4>
-              <p><strong class="title-color" style="color: black;">اسم الطالب:</strong> {{ eligibility.student_name }}</p>
-              <p><strong class="title-color" style="color: black;">الجنسية:</strong> {{ eligibility.student_NAT }}</p>
-              <p><strong class="title-color" style="color: black;">الرقم القومي:</strong> {{ eligibility.student_NATid }}</p>
-              <p><strong class="title-color" style="color: black;">الكلية:</strong> {{ eligibility.student_faculty }}</p>
-              <p><strong class="title-color" style="color: black;">الرقم الجامعي:</strong> {{ eligibility.student_id }}</p>
-              <p><strong class="title-color" style="color: black;">المستوى طبقا لعدد الساعات المجتازة:</strong> {{ studentLevelLastWord }}</p>
-              <p><strong class="title-color" style="color: black;">المعدل التراكمي:</strong> {{ eligibility.student_gpa }}</p>
-              <p><strong class="title-color" style="color: black;">العقوبات:</strong> {{ eligibility.student_punish || 'يرجي مراجعة الشوؤن القانونية' }}</p>
-              <p><strong class="title-color" style="color: black;">الانشطة السابقة:</strong> {{ eligibility.student_activity || 'لا يوجد' }}</p>
-            </div>
               </div>
+
             </div>
           </div>
         </div>
@@ -88,6 +168,7 @@ export default {
     return {
       isAuthenticated: false,
       showLogin: false,
+      showInquiryForm: false, // New state to show/hide inquiry form
       username: '',
       password: '',
       universityNumber: '',
@@ -164,6 +245,7 @@ export default {
       if (this.username === validUsername && this.password === validPassword) {
         this.isAuthenticated = true;
         this.showLogin = false; // Hide login form after successful login
+        this.showInquiryForm = false; // Reset inquiry form visibility
         this.errorMessage = '';
         sessionStorage.setItem('isAuthenticated', 'true'); // Store auth state in session storage
       } else {

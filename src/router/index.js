@@ -5,7 +5,9 @@ import Join from "../views/join.vue";
 import About from "../views/about.vue";
 import rules from "../views/rules.vue";
 import members from "../views/members.vue";
-import inquiry from "../views/inquiry.vue";
+import adminpanel from "../views/adminpanel.vue";
+import Calander from "../views/Calander.vue";
+import Complaints_Suggestions from "../views/ComplaintsSuggestions.vue";
 
 const routes = [
   {
@@ -44,9 +46,19 @@ const routes = [
     component: members,
   },
   {
-    path: '/inquiry',
-    name: "inquiry",
-    component: inquiry,
+    path: '/Calander',
+    name: "Calander",
+    component: Calander,
+  },
+  {
+    path: '/Complaints_Suggestions',
+    name: "Complaints_Suggestions",
+    component: Complaints_Suggestions,
+  },
+  {
+    path: '/adminpanel',
+    name: "adminpanel",
+    component: adminpanel,
   },
 ];
 

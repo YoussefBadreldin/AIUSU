@@ -33,7 +33,13 @@
                             <button class="custom-btn btn-lg btn-block" @click="navigateToPage('/members')">اعضاء الاتحاد الحالي</button>
                         </div>
                         <div class="col-lg-6 col-md-4 mb-3">
+                            <button class="custom-btn btn-lg btn-block" @click="navigateToPage('/Calander')">تقويم الانشطة</button>
+                        </div>
+                        <div class="col-lg-6 col-md-4 mb-3">
                             <button class="custom-btn btn-lg btn-block" @click="redirectToLink">الاشتراك في انشطة الاتحاد</button>
+                        </div>
+                        <div class="col-lg-6 col-md-4 mb-3">
+                            <button class="custom-btn btn-lg btn-block" @click="navigateToPage('/Complaints_Suggestions')">الشكاوي والمقترحات</button>
                         </div>
                         <div class="col-lg-6 col-md-4 mb-3">
                             <button class="custom-btn btn-lg btn-block" @click="navigateToPage('/join')">الانضمام الي الاتحاد</button>
