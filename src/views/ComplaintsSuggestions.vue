@@ -24,8 +24,8 @@
                 </ul>
 
                 <div class="btn-group">
-                    <button @click="showRequestForm = true; showTrackingForm = false; submitted = false" class="btn btn-primary">تقديم طلب</button>
                     <button @click="showRequestForm = false; showTrackingForm = true" class="btn btn-secondary">متابعة طلب</button>
+                    <button @click="showRequestForm = true; showTrackingForm = false; submitted = false" class="btn btn-primary">تقديم طلب</button>  
                 </div>
             </div>
 
@@ -241,25 +241,30 @@ export default {
         },
 
         submitForm() {
-            if (!this.studentIdValid) {
-                alert('الرجاء إدخال رقم جامعي صحيح قبل الإرسال.');
-                return;
-            }
+    if (!this.studentIdValid) {
+        alert('الرجاء إدخال رقم جامعي صحيح قبل الإرسال.');
+        return;
+    }
 
-            this.loading = true;
-            axios.post('https://aiusu-backend.vercel.app/complaints-suggestions/add', this.form)
-                .then(response => {
-                    this.requestNumber = response.data.requestNumber;
-                    this.submitted = true;
-                    this.showRequestForm = false;
-                    this.form = { student_id: '', requestScope: '', requestType: '', details: '', comments: '' };
-                    this.studentIdValid = null;
-                    this.studentName = '';
-                    this.studentFaculty = '';
-                })
-                .catch(() => alert('حدث خطأ أثناء إرسال النموذج.'))
-                .finally(() => { this.loading = false; });
-        },
+    this.loading = true;
+    axios.post('https://aiusu-backend.vercel.app/complaints-suggestions/add', this.form)
+        .then(response => {
+            this.requestNumber = response.data.requestNumber;
+            this.submitted = true;
+            this.showRequestForm = false;
+            this.form = { student_id: '', requestScope: '', requestType: '', details: '', comments: '' };
+            this.studentIdValid = null;
+            this.studentName = '';
+            this.studentFaculty = '';
+
+            // Refresh the page after 2 seconds
+            setTimeout(() => {
+                window.location.reload();
+            }, 5000);
+        })
+        .catch(() => alert('حدث خطأ أثناء إرسال النموذج.'))
+        .finally(() => { this.loading = false; });
+},
 
         trackRequest() {
             if (!this.requestNumberValid) {
