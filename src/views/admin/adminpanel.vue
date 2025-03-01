@@ -30,6 +30,7 @@
               <div v-if="isAuthenticated">
                 <button class="custom-btn btn-lg btn-block" @click="goTo('inquiry')">استعلام عن طالب</button>
                 <button class="custom-btn btn-lg btn-block" @click="goTo('events')">تسجيل الانشطة</button>
+                <button class="custom-btn btn-lg btn-block" @click="goTo('CSBox')">متابعة الشكاوي والمقترحات</button>
                 <button class="custom-btn logout-btn" @click="logout">تسجيل الخروج</button>
               </div>
 

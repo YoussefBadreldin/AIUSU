@@ -10,6 +10,7 @@ import Complaints_Suggestions from "../views/user/ComplaintsSuggestions.vue";
 import adminpanel from "../views/admin/adminpanel.vue";
 import events from "../views/admin/events.vue";
 import inquiry from "../views/admin/inquiry.vue";
+import CSBox from "../views/admin/CSBox.vue";
 
 const routes = [
   {
@@ -71,6 +72,11 @@ const routes = [
     path: '/adminpanel/inquiry',
     name: "inquiry",
     component: inquiry,
+  },
+  {
+    path: '/adminpanel/CSBox',
+    name: "CSBox",
+    component: CSBox,
   },
 ];
 
