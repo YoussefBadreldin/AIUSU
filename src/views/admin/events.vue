@@ -8,24 +8,28 @@
         <div class="container">
           <div class="row justify-content-center">
             <div class="col-lg-6 col-md-4 mb-3">
+              
+              <div v-if="isAuthenticated">
+                <h3 class="mt-4">قائمة الأنشطة</h3>
+                <ul v-if="events.length">
+                  <li v-for="event in events" :key="event.id">
+                    <button class="event-btn" @click="openEvent(event)">
+                      {{ event.name }}
+                    </button>
+                  </li>
+                </ul>
 
-              <h3 class="mt-4">قائمة الأنشطة</h3>
-              <ul v-if="events.length">
-                <li v-for="event in events" :key="event.id">
-                  <button class="event-btn" @click="openEvent(event)">
-                    {{ event.name }}
-                  </button>
-                </li>
-              </ul>
+                <h2>إضافة نشاط</h2>
+                <form @submit.prevent="createEvent">
+                  <div class="form-group">
+                    <label for="eventName">اسم النشاط:</label>
+                    <input type="text" v-model="newEvent.name" id="eventName" required />
+                  </div>
+                  <button type="submit" class="custom-btn btn-sm">إضافة النشاط</button>
+                </form>
+              </div>
 
-              <h2>إضافة نشاط</h2>
-              <form @submit.prevent="createEvent">
-                <div class="form-group">
-                  <label for="eventName">اسم النشاط:</label>
-                  <input type="text" v-model="newEvent.name" id="eventName" required />
-                </div>
-                <button type="submit" class="custom-btn btn-sm">إضافة النشاط</button>
-              </form>
+              <button v-if="isAuthenticated" class="custom-btn logout-btn" @click="logout">تسجيل الخروج</button>
 
             </div>
           </div>
@@ -46,25 +50,48 @@ export default {
   components: { HeaderComponent, FooterComponent },
   data() {
     return {
+      isAuthenticated: false,
       events: [],
       newEvent: { name: '' },
     };
   },
   mounted() {
+    this.checkAuthentication();
     this.fetchEvents();
   },
   methods: {
+    checkAuthentication() {
+      this.isAuthenticated = sessionStorage.getItem('isAuthenticated') === 'true';
+      if (!this.isAuthenticated) {
+        this.$router.push('/adminpanel'); // Redirect to login if not authenticated
+      }
+    },
+    logout() {
+      this.isAuthenticated = false;
+      sessionStorage.removeItem('isAuthenticated');
+      this.$router.push('/adminpanel'); // Redirect to login after logout
+    },
     async fetchEvents() {
-      const response = await fetch('https://aiusu-backend.vercel.app/events');
-      this.events = await response.json();
+      try {
+        const response = await fetch('https://aiusu-backend.vercel.app/events');
+        if (!response.ok) throw new Error('Failed to fetch events');
+        this.events = await response.json();
+      } catch (error) {
+        console.error('Error fetching events:', error);
+      }
     },
     async createEvent() {
-      await fetch('https://aiusu-backend.vercel.app/events', {
-        method: 'POST',
-        body: JSON.stringify(this.newEvent),
-      });
-      this.newEvent.name = '';
-      this.fetchEvents();
+      try {
+        await fetch('https://aiusu-backend.vercel.app/events', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(this.newEvent),
+        });
+        this.newEvent.name = '';
+        this.fetchEvents(); // Refresh event list
+      } catch (error) {
+        console.error('Error creating event:', error);
+      }
     },
   },
 };

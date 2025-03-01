@@ -19,26 +19,6 @@
       <meta name="description" content="AIUSU يوفر معلومات شاملة للطلاب في جامعة العلمين الدولية. تعرف على اللجان، كيفية الانضمام، والانتخابات الطلابية.">
       <meta name="keywords" content="اتحاد طلاب جامعة العلمين الدولية, AIUSU, لجان الطلاب, انتخابات الطلاب, الانضمام للاتحاد, الدراسة في مصر, الحياة الجامعية, فرص العمل, المنح الدراسية, التواصل الطلابي">
 
-      <!-- Open Graph Meta Tags for Social Sharing -->
-      <meta property="og:title" content="AIUSU - اتحاد طلاب جامعة العلمين الدولية">
-      <meta property="og:description" content="اكتشف المزيد حول اتحاد طلاب جامعة العلمين الدولية. معلومات عن اللجان، الانضمام، والانتخابات.">
-      <meta property="og:image" content="https://yourdomain.com/images/og-image.jpg"> <!-- Ensure this is the correct image path -->
-      <meta property="og:url" content="https://yourdomain.com">
-      <meta property="og:type" content="website">
-
-      <!-- Twitter Card Meta Tags -->
-      <meta name="twitter:card" content="summary_large_image">
-      <meta name="twitter:title" content="AIUSU - اتحاد طلاب جامعة العلمين الدولية">
-      <meta name="twitter:description" content="استكشف اتحاد طلاب جامعة العلمين الدولية. تعرف على كيفية الانضمام، الانتخابات، والمزيد.">
-      <meta name="twitter:image" content="https://yourdomain.com/images/twitter-card.jpg"> <!-- Ensure this is the correct image path -->
-
-      <!-- CSS Preloading for Critical CSS -->
-      <link rel="preload" href="/css/bootstrap.min.css" as="style">
-      <link rel="preload" href="/css/fontawsom-all.min.css" as="style">
-      <link rel="preload" href="/plugins/slider/css/owl.carousel.min.css" as="style">
-      <link rel="preload" href="/plugins/slider/css/owl.theme.default.css" as="style">
-      <link rel="preload" href="/css/style.css" as="style">
-
       <!-- Stylesheets -->
       <link rel="stylesheet" href="/css/bootstrap.min.css">
       <link rel="stylesheet" href="/css/fontawsom-all.min.css">
@@ -52,7 +32,25 @@
           <img :src="logoSrc" alt="AIUSU Logo" class="logo" />
         </router-link>
       </div>
+      <div class="nav-right">
+        <div class="dropdown" @click="toggleMenu">
+          <i class="fas fa-bars dropbtn"></i>
+        </div>
+      </div>
     </nav>
+    <div v-if="menuOpen" class="menu">
+      <router-link to="/about">معلومات عن الاتحاد</router-link>
+      <router-link to="/rules">لائحة الاتحاد</router-link>
+      <router-link to="/members">اعضاء الاتحاد الحالي</router-link>
+      <!--<router-link to="/Calander">تقويم الانشطة</router-link>-->
+      <a href="https://linktr.ee/aiustudentunion" target="_blank" rel="noopener noreferrer">
+        الاشتراك في انشطة الاتحاد
+      </a>
+      <!--<router-link to="/Complaints_Suggestions">صندوق الشكاوي والمقترحات</router-link>-->
+      <router-link to="/join">الانضمام الي الاتحاد</router-link>
+      <router-link to="/elections">معرفة لجنتك الانتخابية</router-link>
+      <router-link to="/adminpanel" class="login-button">تسجيل الدخول</router-link>
+    </div>
   </div>
 </template>
 
@@ -61,9 +59,16 @@ export default {
   name: 'Navbar',
   data() {
     return {
-      logoSrc: require('../../images/logo.png'), // Correct path to your logo image
+      logoSrc: require('../../images/logo.png'),
+      menuOpen: false
     };
   },
+  methods: {
+    toggleMenu() {
+      this.menuOpen = !this.menuOpen;
+    }
+  }
+  
 };
 </script>
 
@@ -73,8 +78,9 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px 0; /* Adjust padding as needed */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for depth */
+  padding: 20px 20px; /* Increased top and bottom padding */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
 .logo-container {
@@ -87,5 +93,41 @@ export default {
 .logo {
   max-height: 200px; /* Adjust the max height to make the logo larger */
   max-width: 100%; /* Keep the logo responsive */
+}
+
+.nav-right {
+  position: absolute;
+  right: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown {
+  cursor: pointer;
+  font-size: 24px;
+  color: #007bff;
+}
+
+.menu {
+  background-color: white;
+  width: 100%;
+  padding: 20px 0; /* Increased top and bottom padding */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.menu a {
+  color: black;
+  padding: 15px; /* Increased padding */
+  text-decoration: none;
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.menu a:hover {
+  background-color: #f1f1f1;
 }
 </style>
