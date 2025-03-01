@@ -8,6 +8,8 @@ import members from "../views/user/members.vue";
 import Calander from "../views/user/Calander.vue";
 import Complaints_Suggestions from "../views/user/ComplaintsSuggestions.vue";
 import adminpanel from "../views/admin/adminpanel.vue";
+import events from "../views/admin/events.vue";
+import inquiry from "../views/admin/inquiry.vue";
 
 const routes = [
   {
@@ -59,6 +61,16 @@ const routes = [
     path: '/adminpanel',
     name: "adminpanel",
     component: adminpanel,
+  },
+  {
+    path: '/adminpanel/events',
+    name: "events",
+    component: events,
+  },
+  {
+    path: '/adminpanel/inquiry',
+    name: "inquiry",
+    component: inquiry,
   },
 ];
 
