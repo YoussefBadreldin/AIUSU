@@ -54,43 +54,43 @@
             <ul>
                 <li>
                     <h2><strong>لجنة الأسر</strong></h2>
-                    <img src="../../images/clubs.jpg" alt="لجنة الأسر" class="committee-image">
+                    <img src="../../../images/clubs.jpg" alt="لجنة الأسر" class="committee-image">
                     <p>تُعنى هذه اللجنة بتنظيم أنشطة الأسر الطلابية (Student Clubs) وتشجيع الطلاب على تأسيسها، بالإضافة إلى متابعة نشاطاتها ودعمها لتحقيق أهدافها.</p>
                 </li>
                 <br>
                 <li>
                     <h2><strong>اللجنة الرياضية</strong></h2>
-                    <img src="../../images/sports.jpg" alt="اللجنة الرياضية" class="committee-image">
+                    <img src="../../../images/sports.jpg" alt="اللجنة الرياضية" class="committee-image">
                     <p>تركز هذه اللجنة على الأنشطة الرياضية مثل تنظيم البطولات الرياضية والمباريات، وتشجيع الطلاب على المشاركة في الرياضات الجماعية والفردية لتعزيز اللياقة البدنية.</p>
                 </li>
                 <br>
                 <li>
                     <h2><strong>اللجنة الثقافية والإعلامية</strong></h2>
-                    <img src="../../images/cultural.jpg" alt="اللجنة الثقافية والإعلامية" class="committee-image">
+                    <img src="../../../images/cultural.jpg" alt="اللجنة الثقافية والإعلامية" class="committee-image">
                     <p>تُعنى هذه اللجنة بتنظيم الأنشطة الثقافية مثل الندوات، المحاضرات، والمسابقات الثقافية، بالإضافة إلى تنمية مهارات الطلاب في مجالات الإعلام مثل الكتابة الصحفية، التصوير، والإنتاج الإعلامي.</p>
                 </li>
                 <br>
                 <li>
                     <h2><strong>اللجنة الفنية</strong></h2>
-                    <img src="../../images/arts.jpg" alt="اللجنة الفنية" class="committee-image">
+                    <img src="../../../images/arts.jpg" alt="اللجنة الفنية" class="committee-image">
                     <p>تُعنى هذه اللجنة بتنظيم الأنشطة الفنية مثل المسرح، الموسيقى، الرسم، والنحت، وتسعى لاكتشاف وتنمية المواهب الفنية بين الطلاب.</p>
                 </li>
                 <br>
                 <li>
                     <h2><strong>لجنة الجوالة والخدمة العامة</strong></h2>
-                    <img src="../../images/scout.jpg" alt="لجنة الجوالة والخدمة العامة" class="committee-image">
+                    <img src="../../../images/scout.jpg" alt="لجنة الجوالة والخدمة العامة" class="committee-image">
                     <p>تركز هذه اللجنة على الأنشطة الكشفية وتطوير مهارات الطلاب في الاعتماد على النفس والقيادة، بالإضافة إلى المشاركة في الأنشطة المجتمعية والخدمية داخل وخارج الجامعة.</p>
                 </li>
                 <br>
                 <li>
                     <h2><strong>اللجنة الاجتماعية والرحلات</strong></h2>
-                    <img src="../../images/social.jpg" alt="اللجنة الاجتماعية" class="committee-image">
+                    <img src="../../../images/social.jpg" alt="اللجنة الاجتماعية" class="committee-image">
                     <p>تهدف هذه اللجنة إلى تنظيم الأنشطة الاجتماعية والرحلات الترفيهية والثقافية، لتعزيز التواصل الاجتماعي بين الطلاب وإثراء تجربتهم الجامعية.</p>
                 </li>
                 <br>
                 <li>
                     <h2><strong>اللجنة العلمية والتكنولوجية</strong></h2>
-                    <img src="../../images/scientific.jpg" alt="اللجنة العلمية والتكنولوجية" class="committee-image">
+                    <img src="../../../images/scientific.jpg" alt="اللجنة العلمية والتكنولوجية" class="committee-image">
                     <p>تركز هذه اللجنة على تنظيم الأنشطة العلمية مثل المؤتمرات وورش العمل والمسابقات، بالإضافة إلى تعزيز الابتكار التكنولوجي بين الطلاب ومساعدتهم في تطوير مهاراتهم التقنية.</p>
                 </li>
             </ul>
@@ -101,8 +101,8 @@
 </template>
 
 <script>
-import HeaderComponent from '../../public/global/headerComponent.vue';
-import FooterComponent from '../../public/global/footerComponent.vue';
+import HeaderComponent from '../../../public/global/headerComponent.vue';
+import FooterComponent from '../../../public/global/footerComponent.vue';
 
 export default {
     name: 'AboutUnion',

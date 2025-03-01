@@ -6,7 +6,7 @@
             <div class="organization-chart">
                 <div class="position president">
                     <div class="profile">
-                        <img :src="`../../images/students/${president.member_id}.jpg`" :alt="president.member_name" class="circle-photo" v-if="president.member_id" />
+                        <img :src="`../../../images/students/${president.member_id}.jpg`" :alt="president.member_name" class="circle-photo" v-if="president.member_id" />
                     </div>
                     <div class="details">
                         <div class="name">{{ president.member_name || 'جاري التحميل..' }}</div>
@@ -17,7 +17,7 @@
                     <div class="subordinates">
                         <div class="position vice-president">
                             <div class="profile">
-                                <img :src="`../../images/students/${vicePresident.member_id}.jpg`" :alt="vicePresident.member_name" class="circle-photo" v-if="vicePresident.member_id" />
+                                <img :src="`../../../images/students/${vicePresident.member_id}.jpg`" :alt="vicePresident.member_name" class="circle-photo" v-if="vicePresident.member_id" />
                             </div>
                             <div class="details">
                                 <div class="name">{{ vicePresident.member_name || 'جاري التحميل..' }}</div>
@@ -36,7 +36,7 @@
                     <div class="committee-content">
                         <div class="position head">
                             <div class="profile">
-                                <img :src="`../../images/students/${heads[committee.headKey].member_id}.jpg`" :alt="heads[committee.headKey].member_name" class="circle-photo" v-if="heads[committee.headKey].member_id" />
+                                <img :src="`../../../images/students/${heads[committee.headKey].member_id}.jpg`" :alt="heads[committee.headKey].member_name" class="circle-photo" v-if="heads[committee.headKey].member_id" />
                             </div>
                             <div class="details">
                                 <div class="name">{{ heads[committee.headKey].member_name || 'جاري التحميل..' }}</div>
@@ -47,7 +47,7 @@
                             <div class="subordinates">
                                 <div class="position vice-head">
                                     <div class="profile">
-                                        <img :src="`../../images/students/${viceHeads[committee.viceHeadKey].member_id}.jpg`" :alt="viceHeads[committee.viceHeadKey].member_name" class="circle-photo" v-if="viceHeads[committee.viceHeadKey].member_id" />
+                                        <img :src="`../../../images/students/${viceHeads[committee.viceHeadKey].member_id}.jpg`" :alt="viceHeads[committee.viceHeadKey].member_name" class="circle-photo" v-if="viceHeads[committee.viceHeadKey].member_id" />
                                     </div>
                                     <div class="details">
                                         <div class="name">{{ viceHeads[committee.viceHeadKey].member_name || 'جاري التحميل..' }}</div>
@@ -61,7 +61,7 @@
                         <div class="members">
                             <div class="member" v-for="member in members[committee.memberKey]" :key="member.member_id">
                                 <div class="profile">
-                                    <img :src="`../../images/students/${member.member_id}.jpg`" :alt="member.member_name" class="circle-photo" v-if="member.member_id" />
+                                    <img :src="`../../../images/students/${member.member_id}.jpg`" :alt="member.member_name" class="circle-photo" v-if="member.member_id" />
                                 </div>
                                 <div class="details">
                                     <div class="name">{{ member.member_name || 'جاري التحميل..' }}</div>
@@ -80,8 +80,8 @@
 </template>
 
 <script>
-import HeaderComponent from '../../public/global/headerComponent.vue';
-import FooterComponent from '../../public/global/footerComponent.vue';
+import HeaderComponent from '../../../public/global/headerComponent.vue';
+import FooterComponent from '../../../public/global/footerComponent.vue';
 
 export default {
     name: 'FindCommittee',

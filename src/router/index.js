@@ -1,13 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
-import MainComponent from "../views/home.vue";
-import Elections from "../views/elections.vue";
-import Join from "../views/join.vue";
-import About from "../views/about.vue";
-import rules from "../views/rules.vue";
-import members from "../views/members.vue";
-import adminpanel from "../views/adminpanel.vue";
-import Calander from "../views/Calander.vue";
-import Complaints_Suggestions from "../views/ComplaintsSuggestions.vue";
+import MainComponent from "../views/user/home.vue";
+import Elections from "../views/user/elections.vue";
+import Join from "../views/user/join.vue";
+import About from "../views/user/about.vue";
+import rules from "../views/user/rules.vue";
+import members from "../views/user/members.vue";
+import Calander from "../views/user/Calander.vue";
+import Complaints_Suggestions from "../views/user/ComplaintsSuggestions.vue";
+import adminpanel from "../views/admin/adminpanel.vue";
 
 const routes = [
   {

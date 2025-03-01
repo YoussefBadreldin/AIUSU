@@ -7,7 +7,7 @@
             <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="../../images/slider/slider-1.jpg" class="d-block w-100" alt="Slider Image 1">
+                        <img src="../../../images/slider/slider-1.jpg" class="d-block w-100" alt="Slider Image 1">
                         <div class="carousel-caption d-none d-md-block">
                             <!-- Optional Caption Here -->
                         </div>
@@ -58,8 +58,8 @@
 
 <script>
 import { useRouter } from 'vue-router'; // Import useRouter
-import HeaderComponent from '../../public/global/headerComponent.vue';
-import FooterComponent from '../../public/global/footerComponent.vue';
+import HeaderComponent from '../../../public/global/headerComponent.vue';
+import FooterComponent from '../../../public/global/footerComponent.vue';
 
 export default {
     name: 'MainComponent',

@@ -36,8 +36,8 @@
 </template>
 
 <script>
-import HeaderComponent from '../../public/global/headerComponent.vue';
-import FooterComponent from '../../public/global/footerComponent.vue';
+import HeaderComponent from '../../../public/global/headerComponent.vue';
+import FooterComponent from '../../../public/global/footerComponent.vue';
 import FullCalendar from '@fullcalendar/vue3'; // Updated for Vue 3
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';

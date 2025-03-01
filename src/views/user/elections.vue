@@ -35,7 +35,7 @@
                     <ul v-else>
                         <li v-for="candidate in committee.candidates" :key="candidate.candidate_id" class="candidate-item">
                             <div class="candidate-photo">
-                                <img :src="`../../images/students/${candidate.candidate_id}.jpg`" alt="مرشح" loading="lazy" />
+                                <img :src="`../../../images/students/${candidate.candidate_id}.jpg`" alt="مرشح" loading="lazy" />
                             </div>
                             <div class="candidate-details">
                                 <span class="candidate-name">{{ candidate.candidate_name }}</span>
@@ -88,8 +88,8 @@
 </template>
 
 <script>
-import HeaderComponent from '../../public/global/headerComponent.vue';
-import FooterComponent from '../../public/global/footerComponent.vue';
+import HeaderComponent from '../../../public/global/headerComponent.vue';
+import FooterComponent from '../../../public/global/footerComponent.vue';
 import _ from 'lodash'; // Import lodash for debouncing
 
 export default {
@@ -285,7 +285,7 @@ export default {
                             candidate_name: '', // Initially empty
                             candidate_faculty: '', // Initially empty
                             candidate_level: '', // Initially empty
-                            photo: `../../images/students/${candidate.candidate_id}.jpg`, // Placeholder for image path
+                            photo: `../../../images/students/${candidate.candidate_id}.jpg`, // Placeholder for image path
                         })),
                     };
                 } catch (error) {
