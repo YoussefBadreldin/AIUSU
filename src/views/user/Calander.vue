@@ -93,7 +93,6 @@ export default {
           start: event.eventDate, // Use eventDate from your backend
           extendedProps: {
             description: event.eventDescription, // Use eventDescription from your backend
-            participants: event.participants, // Use participants from your backend
           },
         }));
       } catch (error) {
