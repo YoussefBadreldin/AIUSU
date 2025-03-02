@@ -71,6 +71,7 @@ export default {
         height: 'auto', // Make calendar height responsive
         contentHeight: 'auto',
         aspectRatio: 1.5, // Adjust aspect ratio for better responsiveness
+        eventContent: this.renderEventContent, // Custom event content renderer
       },
       selectedEvent: null, // Selected event for modal
     };
@@ -112,9 +113,17 @@ export default {
         title: info.event.title,
         start: info.event.start.toLocaleString(),
         description: info.event.extendedProps.description,
+        participants: info.event.extendedProps.participants,
       };
       const modal = new Modal(document.getElementById('eventModal'));
       modal.show();
+    },
+
+    // Custom event content renderer
+    renderEventContent(eventInfo) {
+      return {
+        html: `<div class="event-title">${eventInfo.event.title}</div>`, // Add a class for styling
+      };
     },
   },
 };
@@ -140,6 +149,17 @@ export default {
 
 :deep(.fc-daygrid-event) {
   cursor: pointer;
+  display: flex; /* Use Flexbox for centering */
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  text-align: center; /* Ensure text is centered */
+  height: 100%; /* Ensure the event takes full height of the cell */
+}
+
+:deep(.event-title) {
+  font-size: 14px; /* Adjust font size as needed */
+  padding: 5px; /* Add padding for better spacing */
+  word-break: break-word; /* Ensure long titles wrap */
 }
 
 /* Modal styling */
@@ -177,6 +197,10 @@ export default {
 
   .modal-dialog {
     margin: 10px;
+  }
+
+  :deep(.event-title) {
+    font-size: 12px; /* Smaller font size for mobile */
   }
 }
 </style>
