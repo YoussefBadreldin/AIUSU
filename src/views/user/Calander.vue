@@ -23,7 +23,6 @@
             <div class="modal-body">
               <p><strong>الوصف:</strong> {{ selectedEvent.description }}</p>
               <p><strong>التاريخ:</strong> {{ selectedEvent.start }}</p>
-              <p><strong>المشاركون:</strong></p>
               <ul>
                 <li v-for="(participant, index) in selectedEvent.participants" :key="index">{{ participant }}</li>
               </ul>
