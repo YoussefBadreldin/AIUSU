@@ -113,7 +113,6 @@ export default {
         title: info.event.title,
         start: info.event.start.toLocaleString(),
         description: info.event.extendedProps.description,
-        participants: info.event.extendedProps.participants,
       };
       const modal = new Modal(document.getElementById('eventModal'));
       modal.show();
