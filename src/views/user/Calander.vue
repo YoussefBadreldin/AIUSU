@@ -14,7 +14,7 @@
 
       <!-- Event Details Modal -->
       <div v-if="selectedEvent" class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="eventModalLabel">{{ selectedEvent.title }}</h5>
@@ -23,6 +23,10 @@
             <div class="modal-body">
               <p><strong>الوصف:</strong> {{ selectedEvent.description }}</p>
               <p><strong>التاريخ:</strong> {{ selectedEvent.start }}</p>
+              <p><strong>المشاركون:</strong></p>
+              <ul>
+                <li v-for="(participant, index) in selectedEvent.participants" :key="index">{{ participant }}</li>
+              </ul>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
@@ -65,6 +69,9 @@ export default {
         direction: 'rtl', // Right-to-left layout
         dateClick: this.handleDateClick,
         eventClick: this.handleEventClick,
+        height: 'auto', // Make calendar height responsive
+        contentHeight: 'auto',
+        aspectRatio: 1.5, // Adjust aspect ratio for better responsiveness
       },
       selectedEvent: null, // Selected event for modal
     };
@@ -76,16 +83,18 @@ export default {
     // Fetch events from the database
     async fetchEvents() {
       try {
-        const response = await fetch('https://your-backend-api.com/events'); // Replace with your API endpoint
+        const response = await fetch('https://aiusu-backend.vercel.app/events'); // Fetch from localhost:3000
         if (!response.ok) throw new Error('Failed to fetch events');
         const events = await response.json();
 
         // Map events to FullCalendar's expected format
         this.calendarOptions.events = events.map(event => ({
-          title: event.title,
-          start: event.start_date,
-          end: event.end_date,
-          description: event.description,
+          title: event.eventName, // Use eventName from your backend
+          start: event.eventDate, // Use eventDate from your backend
+          extendedProps: {
+            description: event.eventDescription, // Use eventDescription from your backend
+            participants: event.participants, // Use participants from your backend
+          },
         }));
       } catch (error) {
         console.error('Error fetching events:', error);
@@ -104,6 +113,7 @@ export default {
         title: info.event.title,
         start: info.event.start.toLocaleString(),
         description: info.event.extendedProps.description,
+        participants: info.event.extendedProps.participants,
       };
       const modal = new Modal(document.getElementById('eventModal'));
       modal.show();
@@ -150,5 +160,25 @@ export default {
 
 .modal-body {
   padding: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  :deep(.fc-header-toolbar) {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  :deep(.fc-toolbar-title) {
+    font-size: 1.2em;
+  }
+
+  :deep(.fc-button-group) {
+    margin-top: 10px;
+  }
+
+  .modal-dialog {
+    margin: 10px;
+  }
 }
 </style>
